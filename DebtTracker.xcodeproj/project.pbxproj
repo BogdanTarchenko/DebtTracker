@@ -14,7 +14,7 @@
 		8F66DFDC2D92DA4E0034C30F /* Exceptions for "DebtTracker" folder in "DebtTracker" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 8F66DFC92D92DA4D0034C30F /* DebtTracker */;
 		};
@@ -146,7 +146,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DebtTracker/Info.plist;
+				INFOPLIST_FILE = DebtTracker/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DebtTracker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -180,7 +180,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DebtTracker/Info.plist;
+				INFOPLIST_FILE = DebtTracker/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DebtTracker;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

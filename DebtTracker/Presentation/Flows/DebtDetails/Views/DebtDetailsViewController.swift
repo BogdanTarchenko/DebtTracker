@@ -38,16 +38,14 @@ class DebtDetailsViewController: UIViewController {
         config
             .titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
                 var outgoing = incoming
-                outgoing.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+                outgoing.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
                 return outgoing
             }
         config.baseForegroundColor = .white
         config.baseBackgroundColor = UIColor(named: "BlackCustomColor")
 
-        // Применяем конфигурацию
         button.configuration = config
 
-        // Скругление углов
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
 

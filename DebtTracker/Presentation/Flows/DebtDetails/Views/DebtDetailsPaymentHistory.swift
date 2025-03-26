@@ -32,12 +32,26 @@ class DebtDetailsPaymentHistory: UICollectionView {
         )
     ]
 
+    private enum Constants {
+        static let cellHeight: CGFloat = 64
+        static let headerHeight: CGFloat = 48
+        static let separatorHeight: CGFloat = 1
+        static let horizontalInset: CGFloat = 16
+        static let verticalInset: CGFloat = 8
+        static let interitemSpacing: CGFloat = 0
+    }
+
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = .zero
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: Constants.verticalInset,
+            right: 0
+        )
+        layout.minimumLineSpacing = Constants.separatorHeight
+        layout.minimumInteritemSpacing = Constants.interitemSpacing
         layout.sectionHeadersPinToVisibleBounds = true
 
         super.init(frame: .zero, collectionViewLayout: layout)
@@ -60,13 +74,18 @@ class DebtDetailsPaymentHistory: UICollectionView {
         scrollIndicatorInsets = .zero
         layer.cornerRadius = 10
         layer.masksToBounds = true
+        showsVerticalScrollIndicator = false
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+// MARK: UICollectionViewDataSource
+
+extension DebtDetailsPaymentHistory: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -79,11 +98,14 @@ class DebtDetailsPaymentHistory: UICollectionView {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let item = paymentHistoryItems[indexPath.row]
+
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: DebtDetailsPaymentHistoryCell.reuseIdentifier,
             for: indexPath
         ) as? DebtDetailsPaymentHistoryCell else { return UICollectionViewCell() }
+
         cell.configure(with: item)
+        cell.isLastCell = indexPath.row == paymentHistoryItems.count - 1
         return cell
     }
 
@@ -100,18 +122,23 @@ class DebtDetailsPaymentHistory: UICollectionView {
             ) as? HeaderView else {
                 return UICollectionReusableView()
             }
-            header.configure(title: "История")
+
+            header.configure(title: "История платежей")
             return header
         }
         return UICollectionReusableView()
     }
+}
 
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension DebtDetailsPaymentHistory: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 80)
+        CGSize(width: collectionView.frame.width, height: Constants.cellHeight)
     }
 
     func collectionView(
@@ -119,56 +146,49 @@ class DebtDetailsPaymentHistory: UICollectionView {
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
     ) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: 40)
-    }
-
-    // MARK: - Добавление дефолтных разделителей
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        1 // Отступ между строками (разделитель)
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        0 // Отступы между ячейками в строке
+        CGSize(width: collectionView.frame.width, height: Constants.headerHeight)
     }
 }
-
-// MARK: UICollectionViewDataSource
-
-extension DebtDetailsPaymentHistory: UICollectionViewDataSource {}
-
-// MARK: UICollectionViewDelegateFlowLayout
-
-extension DebtDetailsPaymentHistory: UICollectionViewDelegateFlowLayout {}
 
 // MARK: - HeaderView
 
 class HeaderView: UICollectionReusableView {
     static let reuseIdentifier = "HeaderView"
 
+    private enum Constants {
+        static let horizontalInset: CGFloat = 16
+        static let separatorHeight: CGFloat = 1
+    }
+
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .white
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
+    }()
+
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        return view
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(named: "BlackCustomColor")
         addSubview(titleLabel)
+        addSubview(separatorView)
 
         titleLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview().inset(Constants.horizontalInset)
+            make.top.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview().inset(12)
+        }
+
+        separatorView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(Constants.separatorHeight)
         }
     }
 

@@ -23,6 +23,35 @@ class DebtDetailsViewController: UIViewController {
     ))
     let debtProgressInfo: DebtDetailsProgressInfo = .init()
     let debtPaymentsHistory: DebtDetailsPaymentHistory = .init()
+    let addTransactionButton: UIButton = {
+        let button = UIButton(type: .system)
+
+        let symbolConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        var config = UIButton.Configuration.filled()
+        config.title = "Добавить транзакцию"
+        config.image = UIImage(systemName: "plus", withConfiguration: symbolConfig)
+
+        config.imagePadding = 8
+        config.imagePlacement = .leading
+
+        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            return outgoing
+        }
+        config.baseForegroundColor = .white
+        config.baseBackgroundColor = UIColor(named: "BlackCustomColor")
+
+        // Применяем конфигурацию
+        button.configuration = config
+
+        // Скругление углов
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+
+        return button
+    }()
 
     // MARK: Lifecycle
 
@@ -41,6 +70,7 @@ class DebtDetailsViewController: UIViewController {
         view.addSubview(debtDateInfo)
         view.addSubview(debtProgressInfo)
         view.addSubview(debtPaymentsHistory)
+        view.addSubview(addTransactionButton)
     }
 
     private func setupConstraints() {
@@ -64,10 +94,15 @@ class DebtDetailsViewController: UIViewController {
             make.top.equalTo(debtDateInfo.snp.bottom).offset(8)
         }
 
+        addTransactionButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
+        }
+
         debtPaymentsHistory.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(debtProgressInfo).inset(8)
-            make.height.equalTo(300)
+            make.bottom.equalTo(addTransactionButton.snp.top).inset(-8)
         }
     }
 }

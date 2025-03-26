@@ -255,6 +255,7 @@
 		84CD8A01DA7CE8275242D443 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C8392D94456200AB7EC0 /* New Group */,
 				8F24C8142D9421F700AB7EC0 /* Home */,
 				44405A29F770EEFCC9CE56BD /* AddDebt */,
 				79BFA373298F4D8431870EBE /* DebtDetails */,
@@ -322,6 +323,13 @@
 				8F24C8252D9435D200AB7EC0 /* MainViewControllerFactory.swift */,
 			);
 			path = Factory;
+			sourceTree = "<group>";
+		};
+		8F24C8392D94456200AB7EC0 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		8F868D638BC745B4B4AB17FD /* ViewModels */ = {

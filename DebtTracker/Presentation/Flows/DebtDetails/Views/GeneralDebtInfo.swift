@@ -22,6 +22,11 @@ class GeneralDebtInfo: UIView {
         setupView()
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+
     private func setupView() {
         backgroundColor = UIColor(named: "BlackCustomColor")
         layer.cornerRadius = 10

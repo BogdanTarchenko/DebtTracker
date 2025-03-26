@@ -18,6 +18,8 @@ struct LocalizedKey: RawRepresentable {
 
 extension LocalizedKey {
     enum Main {
-        static let homeViewControllerTitle = LocalizedKey(rawValue: "main_home_view_controller_title").localized
+        static let homeViewControllerTitle = LocalizedKey(
+            rawValue: "main_home_view_controller_title"
+        ).localized
     }
 }

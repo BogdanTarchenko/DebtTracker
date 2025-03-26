@@ -4,8 +4,8 @@ import UIKit
 class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
-    let generalDebtInfo: GeneralDebtInfo = .init()
-    let debtTermInfo: DebtDualDetailsBlock = .init(frame: .zero, .init(
+    let generalDebtInfo: DebtDetailsGeneralInfo = .init()
+    let debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .percent,
         rightImage: .clock,
         leftTitle: "Ставка",
@@ -13,7 +13,7 @@ class DebtDetailsViewController: UIViewController {
         leftAmount: "12.5%",
         rightAmount: "36 месяцев"
     ))
-    let debtDateInfo: DebtDualDetailsBlock = .init(frame: .zero, .init(
+    let debtDateInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .calendar,
         rightImage: .dollarsign,
         leftTitle: "Дата открытия",
@@ -21,7 +21,7 @@ class DebtDetailsViewController: UIViewController {
         leftAmount: "25.04.2025",
         rightAmount: "25.05.2025"
     ))
-    let debtProgressInfo: DebtProgressInfo = .init()
+    let debtProgressInfo: DebtDetailsProgressInfo = .init()
     let debtPaymentsHistory: DebtDetailsPaymentHistory = .init()
 
     // MARK: Lifecycle

@@ -3,10 +3,7 @@ import UIKit
 
 // MARK: - DebtDetailsPaymentHistory
 
-class DebtDetailsPaymentHistory: UICollectionView,
-    UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout
-{
+class DebtDetailsPaymentHistory: UICollectionView {
     private var paymentHistoryItems: [PaymentHistoryItem] = [
         PaymentHistoryItem(
             paymentType: "Ежемесячный платеж",
@@ -143,6 +140,14 @@ class DebtDetailsPaymentHistory: UICollectionView,
         0 // Отступы между ячейками в строке
     }
 }
+
+// MARK: UICollectionViewDataSource
+
+extension DebtDetailsPaymentHistory: UICollectionViewDataSource {}
+
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension DebtDetailsPaymentHistory: UICollectionViewDelegateFlowLayout {}
 
 // MARK: - HeaderView
 

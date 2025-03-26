@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Build iOS App
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Install XcodeGen
+      run: brew install xcodegen
+      
+    - name: Generate Xcode project
+      run: xcodegen generate
+      
+    - name: Build
+      run: |
+        set -o pipefail && xcodebuild clean build \
+          -scheme DebtTracker \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO | xcpretty

@@ -3,6 +3,8 @@ import SnapKit
 import SwiftUI
 import UIKit
 
+// MARK: - AddDebtViewController
+
 class AddDebtViewController: UIViewController {
     private let addDebtScrollView = UIScrollView()
     private let contentView = UIView()
@@ -62,7 +64,6 @@ class AddDebtViewController: UIViewController {
             named: "BlackCustomColor"
         )
         debtBorrowedButton.layer.cornerRadius = 10
-        
         debtLentButton.backgroundColor = .white
         debtLentButton.layer.cornerRadius = 10
 
@@ -242,7 +243,7 @@ class AddDebtViewController: UIViewController {
 
 extension AddDebtViewController {
     var standartFont16Bold: UIFont {
-        return UIFont.systemFont(ofSize: 16, weight: .bold)
+        UIFont.systemFont(ofSize: 16, weight: .bold)
     }
 }
 

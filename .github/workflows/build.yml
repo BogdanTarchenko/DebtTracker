@@ -7,21 +7,20 @@ on:
 jobs:
   build:
     name: Build iOS App
-    runs-on: macos-latest
+    runs-on: macos-15
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      
+    - name: Select Xcode
+      run: sudo xcode-select -s /Applications/Xcode_16.2.app
       
     - name: Install dependencies
       run: |
         brew install xcodegen
         brew install swiftlint
         brew install swiftformat
-      
-    - name: Modify project.yml for CI
-      run: |
-        sed -i '' 's/SWIFT_VERSION: 6.0/SWIFT_VERSION: 5.0/g' project.yml
       
     - name: Generate Xcode project
       run: xcodegen generate

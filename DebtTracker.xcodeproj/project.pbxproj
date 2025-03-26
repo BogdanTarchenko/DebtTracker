@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,8 @@
 		5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */; };
 		769C175F41E352192CB23234 /* DIContainerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD4E2612D8AD8862693EED /* DIContainerProtocol.swift */; };
 		800EEA184AD77CF964AFFC40 /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A4468515926A251347AA2 /* UIKit+Extensions.swift */; };
+		8F24C81B2D94222000AB7EC0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C81A2D94222000AB7EC0 /* HomeViewModel.swift */; };
+		8F24C81D2D94222600AB7EC0 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C81C2D94222600AB7EC0 /* HomeCoordinator.swift */; };
 		B12E2943D7757B746AEF4A5A /* DebtUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491F7766550E4917A980A8C5 /* DebtUseCase.swift */; };
 		C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5E699C945770908B7718C /* AppCoordinator.swift */; };
 		C60BCE75DC88346466D6DA4A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442D54BE85459D75F5A31A5A /* ReusableView.swift */; };
@@ -55,6 +57,8 @@
 		79A5E59568F71E9AB6E19C95 /* AddDebtCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtCoordinator.swift; sourceTree = "<group>"; };
 		7AA76265EF83B91B9ABD9BD2 /* AddDebtViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtViewController.swift; sourceTree = "<group>"; };
 		806A4468515926A251347AA2 /* UIKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extensions.swift"; sourceTree = "<group>"; };
+		8F24C81A2D94222000AB7EC0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8F24C81C2D94222600AB7EC0 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		9AF733A0FC0CD8ADFF853AEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9E06B4DD5BB1A4C0EA99722B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		B743675550640B2E814C1917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +72,10 @@
 		F144666C58DBAFA2CE574E5D /* Debt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debt.swift; sourceTree = "<group>"; };
 		FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8F24C8172D94220700AB7EC0 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		515B72097918EEDA166E577E /* Frameworks */ = {
@@ -241,6 +249,7 @@
 		84CD8A01DA7CE8275242D443 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C8142D9421F700AB7EC0 /* Home */,
 				44405A29F770EEFCC9CE56BD /* AddDebt */,
 				79BFA373298F4D8431870EBE /* DebtDetails */,
 				EA762A806DCECA8B11991A4D /* Main */,
@@ -265,6 +274,32 @@
 				C8302AA462C75778B5A76C84 /* Storage */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		8F24C8142D9421F700AB7EC0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8F24C8172D94220700AB7EC0 /* Views */,
+				8F24C8162D94220300AB7EC0 /* ViewModels */,
+				8F24C8152D9421FF00AB7EC0 /* Coordinator */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8F24C8152D9421FF00AB7EC0 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8F24C81C2D94222600AB7EC0 /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8F24C8162D94220300AB7EC0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8F24C81A2D94222000AB7EC0 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		8F868D638BC745B4B4AB17FD /* ViewModels */ = {
@@ -416,6 +451,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				8F24C8172D94220700AB7EC0 /* Views */,
+			);
 			name = DebtTracker;
 			packageProductDependencies = (
 				41EDA1306996B48A46F4E708 /* SnapKit */,
@@ -432,8 +470,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = F264BD93DDB441479E36B331 /* Build configuration list for PBXProject "DebtTracker" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -514,10 +550,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1A9520FF8B40C1A8EE06DF1 /* AddDebtCoordinator.swift in Sources */,
+				8F24C81D2D94222600AB7EC0 /* HomeCoordinator.swift in Sources */,
 				2B1FD3A47AA7D2F68E4B2600 /* AddDebtViewController.swift in Sources */,
 				5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */,
 				C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */,
 				37896BFD86B743E1776508D6 /* AppDelegate.swift in Sources */,
+				8F24C81B2D94222000AB7EC0 /* HomeViewModel.swift in Sources */,
 				1BFA0AC1F9A2EB8A1AE669C0 /* CoordinatorProtocol.swift in Sources */,
 				09F747A3BD07781BB923276A /* CoreDataStack.swift in Sources */,
 				38239F3D60CB3F70825B65B5 /* DIContainer.swift in Sources */,

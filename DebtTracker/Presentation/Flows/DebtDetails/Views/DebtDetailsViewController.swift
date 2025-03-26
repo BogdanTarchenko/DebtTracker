@@ -35,11 +35,12 @@ class DebtDetailsViewController: UIViewController {
         config.imagePlacement = .leading
 
         config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-            return outgoing
-        }
+        config
+            .titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+                return outgoing
+            }
         config.baseForegroundColor = .white
         config.baseBackgroundColor = UIColor(named: "BlackCustomColor")
 

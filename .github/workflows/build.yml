@@ -13,8 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       
-    - name: Install XcodeGen
-      run: brew install xcodegen
+    - name: Install dependencies
+      run: |
+        brew install xcodegen
+        brew install swiftlint
+        brew install swiftformat
       
     - name: Modify project.yml for CI
       run: |

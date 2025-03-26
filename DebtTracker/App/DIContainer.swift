@@ -5,4 +5,9 @@ final class DIContainer: DIContainerProtocol {
         let viewController = MainViewController()
         return viewController
     }
+
+    func makeDebtDetailsViewController() -> UIViewController {
+        let debtDetailsViewController = DebtDetailsViewController()
+        return debtDetailsViewController
+    }
 }

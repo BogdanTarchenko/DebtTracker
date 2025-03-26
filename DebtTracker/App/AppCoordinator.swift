@@ -11,7 +11,8 @@ final class AppCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = diContainer.makeMainViewController()
+//        let viewController = diContainer.makeMainViewController()
+        let viewController = diContainer.makeDebtDetailsViewController()
         navigationController.pushViewController(viewController, animated: false)
     }
 }

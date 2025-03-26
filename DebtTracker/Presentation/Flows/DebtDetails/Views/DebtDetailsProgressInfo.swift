@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-class DebtProgressInfo: UIView {
+class DebtDetailsProgressInfo: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Прогресс выплат"

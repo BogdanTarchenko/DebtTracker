@@ -4,8 +4,8 @@ import UIKit
 class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
-    let generalDebtInfo: GeneralDebtInfo = .init()
-    let debtTermInfo: DebtDualDetailsBlock = .init(frame: .zero, .init(
+    let generalDebtInfo: DebtDetailsGeneralInfo = .init()
+    let debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .percent,
         rightImage: .clock,
         leftTitle: "Ставка",
@@ -13,7 +13,7 @@ class DebtDetailsViewController: UIViewController {
         leftAmount: "12.5%",
         rightAmount: "36 месяцев"
     ))
-    let debtDateInfo: DebtDualDetailsBlock = .init(frame: .zero, .init(
+    let debtDateInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .calendar,
         rightImage: .dollarsign,
         leftTitle: "Дата открытия",
@@ -21,7 +21,38 @@ class DebtDetailsViewController: UIViewController {
         leftAmount: "25.04.2025",
         rightAmount: "25.05.2025"
     ))
-    let debtProgressInfo: DebtProgressInfo = .init()
+    let debtProgressInfo: DebtDetailsProgressInfo = .init()
+    let debtPaymentsHistory: DebtDetailsPaymentHistory = .init()
+    let addTransactionButton: UIButton = {
+        let button = UIButton(type: .system)
+
+        let symbolConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        var config = UIButton.Configuration.filled()
+        config.title = "Добавить транзакцию"
+        config.image = UIImage(systemName: "plus", withConfiguration: symbolConfig)
+
+        config.imagePadding = 8
+        config.imagePlacement = .leading
+
+        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        config
+            .titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+                return outgoing
+            }
+        config.baseForegroundColor = .white
+        config.baseBackgroundColor = UIColor(named: "BlackCustomColor")
+
+        // Применяем конфигурацию
+        button.configuration = config
+
+        // Скругление углов
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+
+        return button
+    }()
 
     // MARK: Lifecycle
 
@@ -39,6 +70,8 @@ class DebtDetailsViewController: UIViewController {
         view.addSubview(debtTermInfo)
         view.addSubview(debtDateInfo)
         view.addSubview(debtProgressInfo)
+        view.addSubview(debtPaymentsHistory)
+        view.addSubview(addTransactionButton)
     }
 
     private func setupConstraints() {
@@ -60,6 +93,17 @@ class DebtDetailsViewController: UIViewController {
         debtProgressInfo.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(debtDateInfo.snp.bottom).offset(8)
+        }
+
+        addTransactionButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
+        }
+
+        debtPaymentsHistory.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(debtProgressInfo).inset(8)
+            make.bottom.equalTo(addTransactionButton.snp.top).inset(-8)
         }
     }
 }

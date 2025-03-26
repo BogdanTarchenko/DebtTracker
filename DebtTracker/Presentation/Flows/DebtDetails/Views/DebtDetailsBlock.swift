@@ -1,17 +1,17 @@
 import SnapKit
 import UIKit
 
-class DebtDualDetailsBlock: UIView {
-    private let leftBlock: DebtInfoBlock
-    private let rightBlock: DebtInfoBlock
+class DebtDetailsBlock: UIView {
+    private let leftBlock: DebtDetailsInfoBlock
+    private let rightBlock: DebtDetailsInfoBlock
 
     init(frame: CGRect, _ model: DebtDetailsBlockModel) {
-        leftBlock = DebtInfoBlock(
+        leftBlock = DebtDetailsInfoBlock(
             title: model.leftTitle,
             amount: model.leftAmount,
             icon: model.leftImage
         )
-        rightBlock = DebtInfoBlock(
+        rightBlock = DebtDetailsInfoBlock(
             title: model.rightTitle,
             amount: model.rightAmount,
             icon: model.rightImage

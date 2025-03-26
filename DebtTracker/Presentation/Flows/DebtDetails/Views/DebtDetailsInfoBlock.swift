@@ -10,9 +10,9 @@ enum DebtInfoIcons: String {
     case dollarsign = "dollarsign.arrow.trianglehead.counterclockwise.rotate.90"
 }
 
-// MARK: - DebtInfoBlock
+// MARK: - DebtDetailsInfoBlock
 
-class DebtInfoBlock: UIView {
+class DebtDetailsInfoBlock: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

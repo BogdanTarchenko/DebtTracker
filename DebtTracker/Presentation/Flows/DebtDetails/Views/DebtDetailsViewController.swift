@@ -22,6 +22,7 @@ class DebtDetailsViewController: UIViewController {
         rightAmount: "25.05.2025"
     ))
     let debtProgressInfo: DebtProgressInfo = .init()
+    let debtPaymentsHistory: DebtDetailsPaymentHistory = .init()
 
     // MARK: Lifecycle
 
@@ -39,6 +40,7 @@ class DebtDetailsViewController: UIViewController {
         view.addSubview(debtTermInfo)
         view.addSubview(debtDateInfo)
         view.addSubview(debtProgressInfo)
+        view.addSubview(debtPaymentsHistory)
     }
 
     private func setupConstraints() {
@@ -60,6 +62,12 @@ class DebtDetailsViewController: UIViewController {
         debtProgressInfo.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(debtDateInfo.snp.bottom).offset(8)
+        }
+
+        debtPaymentsHistory.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(debtProgressInfo).inset(8)
+            make.height.equalTo(300)
         }
     }
 }

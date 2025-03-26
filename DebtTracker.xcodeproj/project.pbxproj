@@ -29,6 +29,9 @@
 		3CCBD7242D9439F900C19B8B /* DebtProgressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7232D9439F900C19B8B /* DebtProgressInfo.swift */; };
 		3CCBD7262D943EDC00C19B8B /* DebtDualDetailsBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7252D943EDC00C19B8B /* DebtDualDetailsBlock.swift */; };
 		3CCBD7282D943F2300C19B8B /* DebtDetailsBlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7272D943F2300C19B8B /* DebtDetailsBlockModel.swift */; };
+		3CCBD7322D94452100C19B8B /* DebtDetailsPaymentHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7312D94452100C19B8B /* DebtDetailsPaymentHistory.swift */; };
+		3CCBD7342D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7332D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift */; };
+		3CCBD7362D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7352D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift */; };
 		4C4ACE1FDFC4630C0F50F2F6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE70F5F84F0BD59A686BB354 /* MainViewController.swift */; };
 		5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */; };
 		769C175F41E352192CB23234 /* DIContainerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD4E2612D8AD8862693EED /* DIContainerProtocol.swift */; };
@@ -61,6 +64,9 @@
 		3CCBD7232D9439F900C19B8B /* DebtProgressInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtProgressInfo.swift; sourceTree = "<group>"; };
 		3CCBD7252D943EDC00C19B8B /* DebtDualDetailsBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDualDetailsBlock.swift; sourceTree = "<group>"; };
 		3CCBD7272D943F2300C19B8B /* DebtDetailsBlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsBlockModel.swift; sourceTree = "<group>"; };
+		3CCBD7312D94452100C19B8B /* DebtDetailsPaymentHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsPaymentHistory.swift; sourceTree = "<group>"; };
+		3CCBD7332D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsPaymentHistoryCell.swift; sourceTree = "<group>"; };
+		3CCBD7352D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsPaymentHistoryItem.swift; sourceTree = "<group>"; };
 		442D54BE85459D75F5A31A5A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		491F7766550E4917A980A8C5 /* DebtUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtUseCase.swift; sourceTree = "<group>"; };
 		57E9D19116F0B145F2963191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 				3CCBD7152D9430E600C19B8B /* DebtDateInfo.swift */,
 				3CCBD7232D9439F900C19B8B /* DebtProgressInfo.swift */,
 				3CCBD7252D943EDC00C19B8B /* DebtDualDetailsBlock.swift */,
+				3CCBD7312D94452100C19B8B /* DebtDetailsPaymentHistory.swift */,
+				3CCBD7332D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,6 +434,7 @@
 			children = (
 				F144666C58DBAFA2CE574E5D /* Debt.swift */,
 				3CCBD7272D943F2300C19B8B /* DebtDetailsBlockModel.swift */,
+				3CCBD7352D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -580,10 +589,12 @@
 				5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */,
 				C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */,
 				37896BFD86B743E1776508D6 /* AppDelegate.swift in Sources */,
+				3CCBD7362D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift in Sources */,
 				8F24C81B2D94222000AB7EC0 /* HomeViewModel.swift in Sources */,
 				1BFA0AC1F9A2EB8A1AE669C0 /* CoordinatorProtocol.swift in Sources */,
 				09F747A3BD07781BB923276A /* CoreDataStack.swift in Sources */,
 				38239F3D60CB3F70825B65B5 /* DIContainer.swift in Sources */,
+				3CCBD7342D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift in Sources */,
 				3CCBD7242D9439F900C19B8B /* DebtProgressInfo.swift in Sources */,
 				769C175F41E352192CB23234 /* DIContainerProtocol.swift in Sources */,
 				D6A8208C77CE03FE92A391B0 /* Debt.swift in Sources */,
@@ -600,6 +611,7 @@
 				4C4ACE1FDFC4630C0F50F2F6 /* MainViewController.swift in Sources */,
 				EC09ED8EC5F48E94B6406CBB /* MainViewModel.swift in Sources */,
 				3CCBD7142D94298B00C19B8B /* DebtInfoBlock.swift in Sources */,
+				3CCBD7322D94452100C19B8B /* DebtDetailsPaymentHistory.swift in Sources */,
 				C60BCE75DC88346466D6DA4A /* ReusableView.swift in Sources */,
 				E7F5906EE01851F539BA1C4F /* SceneDelegate.swift in Sources */,
 				2DD034935D69C27F2F06B187 /* StorageService.swift in Sources */,

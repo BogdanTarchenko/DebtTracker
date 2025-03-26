@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Проверяем наличие SwiftFormat и SwiftLint
+command -v swiftformat >/dev/null 2>&1 || { echo >&2 "error: SwiftFormat not installed. Please run: brew install swiftformat"; exit 1; }
+command -v swiftlint >/dev/null 2>&1 || { echo >&2 "error: SwiftLint not installed. Please run: brew install swiftlint"; exit 1; }
+
+# Получаем список измененных Swift файлов
+SWIFT_FILES=$(git diff --cached --name-only --diff-filter=d | grep -E '\.(swift)$')
+
+# Если нет измененных Swift файлов, выходим
+if [ -z "$SWIFT_FILES" ]; then
+    echo "No Swift files to check"
+    exit 0
+fi
+
+echo "🔍 Checking Swift files..."
+
+# Форматируем файлы с помощью SwiftFormat
+echo "Running SwiftFormat..."
+swiftformat $SWIFT_FILES
+if [ $? -ne 0 ]; then
+    echo "❌ SwiftFormat failed"
+    exit 1
+fi
+
+# Добавляем отформатированные файлы в индекс
+git add $SWIFT_FILES
+
+# Проверяем файлы с помощью SwiftLint
+echo "Running SwiftLint..."
+LINT_RESULT=0
+for file in $SWIFT_FILES; do
+    swiftlint lint --path "$file"
+    if [ $? -ne 0 ]; then
+        LINT_RESULT=1
+    fi
+done
+
+if [ $LINT_RESULT -ne 0 ]; then
+    echo "❌ SwiftLint found issues"
+    exit 1
+fi
+
+echo "✅ All checks passed!"
+exit 0

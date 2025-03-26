@@ -75,6 +75,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8F24C8172D94220700AB7EC0 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		8F24C8202D94298800AB7EC0 /* Factory */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Factory; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +428,7 @@
 		EA762A806DCECA8B11991A4D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C8202D94298800AB7EC0 /* Factory */,
 				C411582166A6B3BE33F746E8 /* Coordinator */,
 				B053505BB93DC61BB9D9C5A2 /* ViewModels */,
 				E881735FF355F1E537D461A9 /* Views */,
@@ -453,6 +455,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				8F24C8172D94220700AB7EC0 /* Views */,
+				8F24C8202D94298800AB7EC0 /* Factory */,
 			);
 			name = DebtTracker;
 			packageProductDependencies = (

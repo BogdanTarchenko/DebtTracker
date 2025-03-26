@@ -2,5 +2,11 @@ import UIKit
 
 @MainActor
 protocol DIContainerProtocol {
-    func makeMainViewController() -> UIViewController
+    // Координаторы
+    func makeAppCoordinator(navigationController: UINavigationController) -> AppCoordinator
+    func makeMainCoordinator(navigationController: UINavigationController) -> MainCoordinator
+
+    // Контроллеры
+    func makeMainViewController() -> MainViewController
+    func makeHomeViewController() -> HomeViewController
 }

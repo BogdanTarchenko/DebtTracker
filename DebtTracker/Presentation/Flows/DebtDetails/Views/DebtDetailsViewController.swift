@@ -6,6 +6,7 @@ class DebtDetailsViewController: UIViewController {
 
     let generalDebtInfo: GeneralDebtInfo = .init()
     let debtTermInfo: DebtTermInfo = .init()
+    let debtDateInfo: DebtDateInfo = .init()
 
     // MARK: Lifecycle
 
@@ -21,6 +22,7 @@ class DebtDetailsViewController: UIViewController {
     private func setupUI() {
         view.addSubview(generalDebtInfo)
         view.addSubview(debtTermInfo)
+        view.addSubview(debtDateInfo)
     }
 
     private func setupConstraints() {
@@ -32,6 +34,11 @@ class DebtDetailsViewController: UIViewController {
         debtTermInfo.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(generalDebtInfo.snp.bottom).offset(8)
+        }
+
+        debtDateInfo.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(debtTermInfo.snp.bottom).offset(8)
         }
     }
 }

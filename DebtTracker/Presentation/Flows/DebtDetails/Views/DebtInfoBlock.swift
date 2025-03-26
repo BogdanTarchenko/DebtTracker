@@ -5,6 +5,8 @@ class DebtInfoBlock: UIView {
     enum DebtInfoIcons: String {
         case percent
         case clock
+        case calendar
+        case dollarsign = "dollarsign.arrow.trianglehead.counterclockwise.rotate.90"
     }
 
     private let iconImageView: UIImageView = {

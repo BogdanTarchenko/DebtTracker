@@ -1,0 +1,25 @@
+--swiftversion 6.0             # Указываем версию Swift 6.0
+--allman false                 # Открывающая скобка на той же строке
+--elseposition same-line       # "else" на той же строке, что и закрывающая скобка
+--indent 4                     # Отступ 4 пробела
+--commas inline                # Запятые в конце строки
+--linebreaks lf                # Переносы строк в стиле Unix (LF)
+--wraparguments before-first   # Перенос аргументов - первый аргумент на новой строке
+--wrapcollections before-first # Перенос элементов коллекций - первый элемент на новой строке
+--semicolons never             # Убирать точки с запятой
+--maxwidth 120                 # Максимальная длина строки - 120 символов
+--stripunusedargs closure-only # Заменять неиспользуемые аргументы на _ только в замыканиях
+--header strip                 # Удалять стандартный заголовок Xcode
+--xcodeindentation enabled     # Совместимость с отступами Xcode
+
+# Дополнительные правила
+--enable blankLinesBetweenScopes    # Пустая строка между функциями, классами и т.д.
+--enable blankLinesAroundMark       # Пустые строки до и после MARK:
+--enable consecutiveSpaces          # Убирать лишние пробелы
+--enable duplicateImports           # Убирать дублирующие импорты
+--enable isEmpty                    # Использовать isEmpty вместо count == 0
+--enable markTypes                  # Добавлять MARK: для типов
+--enable spaceAroundBraces          # Пробелы вокруг { }
+--enable spaceAroundBrackets        # Пробелы вокруг [ ]
+--enable spaceAroundParens          # Пробелы вокруг ( )
+--enable spaceInsideBraces          # Пробелы внутри { }

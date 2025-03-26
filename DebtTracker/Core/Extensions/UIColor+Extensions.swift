@@ -8,6 +8,12 @@ extension UIColor {
             ) ?? .black
         }
 
+        static var white: UIColor {
+            UIColor(
+                named: "WhiteCustomColor"
+            ) ?? .black
+        }
+
         static var blue: UIColor {
             UIColor(
                 named: "BlueCustomColor"

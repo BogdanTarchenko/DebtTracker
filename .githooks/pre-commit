@@ -26,15 +26,17 @@ fi
 # Добавляем отформатированные файлы в индекс
 git add $SWIFT_FILES
 
-# Проверяем файлы с помощью SwiftLint
+# Проверяем все файлы с помощью SwiftLint
 echo "Running SwiftLint..."
+# Вместо проверки отдельных файлов, просто запускаем SwiftLint
+# на всем проекте с фильтрацией по измененным файлам
 LINT_RESULT=0
-for file in $SWIFT_FILES; do
-    swiftlint lint --path "$file"
-    if [ $? -ne 0 ]; then
-        LINT_RESULT=1
-    fi
-done
+
+# В текущей директории
+swiftlint
+if [ $? -ne 0 ]; then
+    LINT_RESULT=1
+fi
 
 if [ $LINT_RESULT -ne 0 ]; then
     echo "❌ SwiftLint found issues"

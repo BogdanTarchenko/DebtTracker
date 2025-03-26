@@ -7,11 +7,16 @@ on:
 jobs:
   build:
     name: Build iOS App
-    runs-on: macos-latest
+    runs-on: macos-14
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.3'
       
     - name: Install XcodeGen
       run: brew install xcodegen

@@ -7,19 +7,18 @@ on:
 jobs:
   build:
     name: Build iOS App
-    runs-on: macos-14
+    runs-on: macos-latest
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
       
-    - name: Setup Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '15.3'
-      
     - name: Install XcodeGen
       run: brew install xcodegen
+      
+    - name: Modify project.yml for CI
+      run: |
+        sed -i '' 's/SWIFT_VERSION: 6.0/SWIFT_VERSION: 5.0/g' project.yml
       
     - name: Generate Xcode project
       run: xcodegen generate

@@ -5,8 +5,23 @@ class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
     let generalDebtInfo: GeneralDebtInfo = .init()
-    let debtTermInfo: DebtTermInfo = .init()
-    let debtDateInfo: DebtDateInfo = .init()
+    let debtTermInfo: DebtDualDetailsBlock = .init(frame: .zero, .init(
+        leftImage: .percent,
+        rightImage: .clock,
+        leftTitle: "Ставка",
+        rightTitle: "Срок",
+        leftAmount: "12.5%",
+        rightAmount: "36 месяцев"
+    ))
+    let debtDateInfo: DebtDualDetailsBlock = .init(frame: .zero, .init(
+        leftImage: .calendar,
+        rightImage: .dollarsign,
+        leftTitle: "Дата открытия",
+        rightTitle: "Следующий платеж",
+        leftAmount: "25.04.2025",
+        rightAmount: "25.05.2025"
+    ))
+    let debtProgressInfo: DebtProgressInfo = .init()
 
     // MARK: Lifecycle
 
@@ -23,6 +38,7 @@ class DebtDetailsViewController: UIViewController {
         view.addSubview(generalDebtInfo)
         view.addSubview(debtTermInfo)
         view.addSubview(debtDateInfo)
+        view.addSubview(debtProgressInfo)
     }
 
     private func setupConstraints() {
@@ -39,6 +55,11 @@ class DebtDetailsViewController: UIViewController {
         debtDateInfo.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(debtTermInfo.snp.bottom).offset(8)
+        }
+
+        debtProgressInfo.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(debtDateInfo.snp.bottom).offset(8)
         }
     }
 }

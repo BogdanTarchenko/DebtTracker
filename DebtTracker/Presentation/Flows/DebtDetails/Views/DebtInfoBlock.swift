@@ -1,14 +1,18 @@
 import SnapKit
 import UIKit
 
-class DebtInfoBlock: UIView {
-    enum DebtInfoIcons: String {
-        case percent
-        case clock
-        case calendar
-        case dollarsign = "dollarsign.arrow.trianglehead.counterclockwise.rotate.90"
-    }
+// MARK: - DebtInfoIcons
 
+enum DebtInfoIcons: String {
+    case percent
+    case clock
+    case calendar
+    case dollarsign = "dollarsign.arrow.trianglehead.counterclockwise.rotate.90"
+}
+
+// MARK: - DebtInfoBlock
+
+class DebtInfoBlock: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -25,7 +29,7 @@ class DebtInfoBlock: UIView {
 
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .white
         return label
     }()

@@ -3,15 +3,18 @@ import UIKit
 final class AppCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    private let diContainer: DIContainer
+    private let container: DIContainerProtocol
 
-    init(navigationController: UINavigationController, diContainer: DIContainer) {
+    init(navigationController: UINavigationController, container: DIContainerProtocol) {
         self.navigationController = navigationController
-        self.diContainer = diContainer
+        self.container = container
     }
 
     func start() {
-        let viewController = diContainer.makeMainViewController()
-        navigationController.pushViewController(viewController, animated: false)
+        let mainCoordinator = container.makeMainCoordinator(
+            navigationController: navigationController
+        )
+        childCoordinators.append(mainCoordinator)
+        mainCoordinator.start()
     }
 }

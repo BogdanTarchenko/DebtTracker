@@ -16,7 +16,7 @@ final class SettingsViewController: UIViewController {
 
     private let passwordToggleLabel: UILabel = {
         let label = UILabel()
-        label.text = LocalizedKey.Settings.title
+        label.text = LocalizedKey.Settings.passwordTitle
         return label
     }()
 

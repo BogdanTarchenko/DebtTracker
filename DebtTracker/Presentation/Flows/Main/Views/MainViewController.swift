@@ -51,5 +51,5 @@ private extension MainView {
 }
 
 #Preview {
-    PasswordSetupViewController()
+    SettingsViewController()
 }

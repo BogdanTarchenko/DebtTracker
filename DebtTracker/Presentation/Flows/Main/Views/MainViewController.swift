@@ -56,12 +56,12 @@ private extension MainViewController {
     }
 
     func setupViewControllers() {
-        let homeViewController1 = factory.makeHomeViewController()
+        let homeViewController1 = factory.makeDebtDetailsViewController()
         let homeViewController2 = factory.makeHomeViewController()
         let homeViewController3 = factory.makeHomeViewController()
 
         homeViewController1.tabBarItem = UITabBarItem(
-            title: "Главная",
+            title: "Подробнее",
             image: UIImage(
                 systemName: "house.fill"
             ),

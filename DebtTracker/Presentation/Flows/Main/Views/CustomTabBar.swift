@@ -5,7 +5,8 @@ import SwiftUI
 struct CustomTabBar: View {
     // MARK: - Public Properties
 
-    @State var selectedTab: Tab
+    @Binding var selectedTab: Tab
+    @Binding var isAddDebtPresented: Bool
 
     var body: some View {
         ZStack {
@@ -63,7 +64,9 @@ private extension CustomTabBar {
 
     @ViewBuilder
     var centerButton: some View {
-        Button(action: {}) {
+        Button(action: {
+            isAddDebtPresented = true
+        }) {
             Image(systemName: ImageAssets.plus)
                 .renderingMode(.template)
                 .resizable()
@@ -89,8 +92,4 @@ private extension CustomTabBar {
         static let settings = "gearshape"
         static let plus = "plus.app"
     }
-}
-
-#Preview {
-    CustomTabBar(selectedTab: .home)
 }

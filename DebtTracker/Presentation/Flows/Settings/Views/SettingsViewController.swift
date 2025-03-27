@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {

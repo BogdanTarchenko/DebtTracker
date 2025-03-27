@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - DebtDetailsPaymentHistory
 
-class DebtDetailsPaymentHistory: UICollectionView {
+final class DebtDetailsPaymentHistory: UICollectionView {
     private var paymentHistoryItems: [PaymentHistoryItem] = [
         PaymentHistoryItem(
             paymentType: "Ежемесячный платеж",

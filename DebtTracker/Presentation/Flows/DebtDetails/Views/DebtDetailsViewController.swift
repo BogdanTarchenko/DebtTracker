@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-class DebtDetailsViewController: UIViewController {
+final class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
     let generalDebtInfo: DebtDetailsGeneralInfo = .init()

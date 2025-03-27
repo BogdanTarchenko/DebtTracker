@@ -1,6 +1,25 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld" : {
+
+    },
+    "$ %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "$ %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Calculate your monthly payments and total amount" : {
+
+    },
+    "Enter %@" : {
+
+    },
     "Key" : {
       "extractionState" : "manual"
     },
@@ -17,6 +36,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Главная"
+          }
+        }
+      }
+    },
+    "password_setup_confirmation_password_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat the password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторите пароль"
+          }
+        }
+      }
+    },
+    "password_setup_welcome_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set a 4-digit password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Установите 4-значный пароль"
+          }
+        }
+      }
+    },
+    "password_setup_wrong_password_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incorrect password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Неверный пароль"
           }
         }
       }
@@ -88,6 +158,18 @@
           }
         }
       }
+    },
+    "Активные займы" : {
+
+    },
+    "Кредиты" : {
+
+    },
+    "Общий долг" : {
+
+    },
+    "Следующий платёж" : {
+
     }
   },
   "version" : "1.0"

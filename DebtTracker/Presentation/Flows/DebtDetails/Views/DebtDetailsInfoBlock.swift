@@ -12,7 +12,7 @@ enum DebtInfoIcons: String {
 
 // MARK: - DebtDetailsInfoBlock
 
-class DebtDetailsInfoBlock: UIView {
+final class DebtDetailsInfoBlock: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

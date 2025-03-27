@@ -31,6 +31,10 @@ final class DIContainer: DIContainerProtocol {
     func makeSettingsViewController() -> SettingsViewController {
         SettingsViewController()
     }
+
+    func makePasswordSetupViewController() -> PasswordSetupViewController {
+        PasswordSetupViewController()
+    }
 }
 
 // MARK: - DefaultMainViewFactory
@@ -52,5 +56,9 @@ private final class DefaultMainViewFactory: MainViewFactory {
 
     func makeSettingsViewController() -> SettingsViewController {
         container.makeSettingsViewController()
+    }
+
+    func makePasswordSetupViewController() -> PasswordSetupViewController {
+        container.makePasswordSetupViewController()
     }
 }

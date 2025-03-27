@@ -9,11 +9,13 @@ class SettingsViewController: UIViewController {
         static let verticalInset: CGFloat = 16
         static let elementSpacing: CGFloat = 16
         static let animationDuration: TimeInterval = 0.3
+        static let buttonHeight: CGFloat = 44
     }
 
     private enum Localization {
         static let passwordTitle = "Защитить паролем"
         static let faceIDTitle = "Вход по FaceID"
+        static let changePassword = "Сменить пароль"
     }
 
     // MARK: - UI Elements
@@ -43,6 +45,18 @@ class SettingsViewController: UIViewController {
         return switchView
     }()
 
+    private let changePasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(Localization.changePassword, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
+        button.layer.cornerRadius = 8
+        button.alpha = 0
+        button.isHidden = true
+        return button
+    }()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -59,14 +73,20 @@ class SettingsViewController: UIViewController {
             guard let self else { return }
 
             faceIDToggleSwitch.isUserInteractionEnabled = isPasswordEnabled
-
             faceIDToggleSwitch.alpha = isPasswordEnabled ? 1.0 : 0.7
             faceIDToggleLabel.alpha = isPasswordEnabled ? 1.0 : 0.7
+
+            changePasswordButton.alpha = isPasswordEnabled ? 1.0 : 0
+            changePasswordButton.isHidden = !isPasswordEnabled
 
             if !isPasswordEnabled {
                 faceIDToggleSwitch.setOn(false, animated: true)
             }
         }
+    }
+
+    @objc private func changePasswordTapped() {
+        print("Кнопка 'Сменить пароль' нажата")
     }
 
     // MARK: - Setup Methods
@@ -78,13 +98,14 @@ class SettingsViewController: UIViewController {
             passwordToggleLabel,
             passwordToggleSwitch,
             faceIDToggleLabel,
-            faceIDToggleSwitch
+            faceIDToggleSwitch,
+            changePasswordButton
         ]
 
         views.forEach { view.addSubview($0) }
 
-        faceIDToggleSwitch.alpha = passwordToggleSwitch.isOn ? 1.0 : 0.7
-        faceIDToggleLabel.alpha = passwordToggleSwitch.isOn ? 1.0 : 0.7
+        faceIDToggleSwitch.alpha = 0.7
+        faceIDToggleLabel.alpha = 0.7
     }
 
     private func setupConstraints() {
@@ -107,6 +128,12 @@ class SettingsViewController: UIViewController {
             make.centerY.equalTo(faceIDToggleLabel)
             make.trailing.equalToSuperview().inset(Constants.horizontalInset)
         }
+
+        changePasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(faceIDToggleLabel.snp.bottom).offset(Constants.elementSpacing * 2)
+            make.leading.trailing.equalToSuperview().inset(Constants.horizontalInset)
+            make.height.equalTo(Constants.buttonHeight)
+        }
     }
 
     private func setupActions() {
@@ -114,6 +141,12 @@ class SettingsViewController: UIViewController {
             self,
             action: #selector(handlePasswordToggleSwitchValueChanged),
             for: .valueChanged
+        )
+
+        changePasswordButton.addTarget(
+            self,
+            action: #selector(changePasswordTapped),
+            for: .touchUpInside
         )
     }
 }

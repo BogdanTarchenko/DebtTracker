@@ -13,28 +13,44 @@ final class DIContainer: DIContainerProtocol {
         MainCoordinator(navigationController: navigationController, container: self)
     }
 
-    // MARK: - ViewControllers
+    // MARK: - Views
 
-    func makeMainViewController() -> MainViewController {
-        let factory = DefaultMainViewControllerFactory(container: self)
-        return MainViewController(factory: factory)
+    func makeMainView() -> MainView {
+        let factory = DefaultMainViewFactory(container: self)
+        return MainView(factory: factory)
     }
 
-    func makeHomeViewController() -> HomeViewController {
-        HomeViewController()
+    func makeHomeView() -> HomeView {
+        HomeView()
+    }
+
+    func makeDebtDetailsViewController() -> DebtDetailsViewController {
+        DebtDetailsViewController()
+    }
+
+    func makeSettingsViewController() -> SettingsViewController {
+        SettingsViewController()
     }
 }
 
-// MARK: - DefaultMainViewControllerFactory
+// MARK: - DefaultMainViewFactory
 
-private final class DefaultMainViewControllerFactory: MainViewControllerFactory {
+private final class DefaultMainViewFactory: MainViewFactory {
     private let container: DIContainerProtocol
 
     init(container: DIContainerProtocol) {
         self.container = container
     }
 
-    func makeHomeViewController() -> UIViewController {
-        container.makeHomeViewController()
+    func makeHomeView() -> HomeView {
+        container.makeHomeView()
+    }
+
+    func makeDebtDetailsViewController() -> DebtDetailsViewController {
+        container.makeDebtDetailsViewController()
+    }
+
+    func makeSettingsViewController() -> SettingsViewController {
+        container.makeSettingsViewController()
     }
 }

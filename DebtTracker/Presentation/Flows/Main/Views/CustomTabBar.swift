@@ -22,8 +22,6 @@ private extension CustomTabBar {
     @ViewBuilder
     var tabBarBackground: some View {
         HStack {
-            Spacer()
-
             tabButton(tab: .home, image: ImageAssets.home)
 
             Spacer()
@@ -41,14 +39,10 @@ private extension CustomTabBar {
             Spacer()
 
             tabButton(tab: .settings, image: ImageAssets.settings)
-
-            Spacer()
         }
         .frame(height: Metrics.backgroundHeight)
+        .padding(.horizontal, 24)
         .background(Color(UIColor.App.black))
-        .cornerRadius(Metrics.backgroundCornerRadius)
-        .padding(.horizontal)
-        .padding(.bottom, Metrics.backgroundBottomPadding)
     }
 
     @ViewBuilder
@@ -56,8 +50,10 @@ private extension CustomTabBar {
         Button(action: {
             selectedTab = tab
         }) {
-            Image(image)
-                .renderingMode(.template)
+            Image(systemName: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxHeight: 24)
                 .foregroundColor(
                     selectedTab == tab ? Color(UIColor.App.tabBarItemActive) :
                         Color(UIColor.App.tabBarItemInactive)
@@ -68,18 +64,12 @@ private extension CustomTabBar {
     @ViewBuilder
     var centerButton: some View {
         Button(action: {}) {
-            Circle()
-                .foregroundColor(Color(UIColor.App.tabBarItemActive))
-                .frame(width: Metrics.centerButtonWidth, height: Metrics.centerButtonWidth)
-                .overlay(
-                    Image(ImageAssets.plus)
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                        .foregroundColor(Color(UIColor.App.white))
-                )
+            Image(systemName: ImageAssets.plus)
+                .renderingMode(.template)
+                .resizable()
+                .frame(width: 24, height: 24)
+                .foregroundColor(Color(UIColor.App.tabBarItemInactive))
         }
-        .offset(y: Metrics.centerButtonOffset)
     }
 }
 
@@ -87,20 +77,17 @@ private extension CustomTabBar {
 
 private extension CustomTabBar {
     enum Metrics {
-        static let tabBarHeight: CGFloat = 80
+        static let tabBarHeight: CGFloat = 64
         static let backgroundHeight: CGFloat = 64
-        static let backgroundCornerRadius: CGFloat = 16
-        static let backgroundBottomPadding: CGFloat = 16
-        static let centerButtonWidth: CGFloat = 80
-        static let centerButtonOffset: CGFloat = -8
+        static let centerButtonWidth: CGFloat = 48
     }
 
     enum ImageAssets {
-        static let home = "Home"
-        static let calculator = "Calculator"
-        static let stats = "Stats"
-        static let settings = "Settings"
-        static let plus = "Plus"
+        static let home = "house"
+        static let calculator = "percent.ar"
+        static let stats = "chart.pie"
+        static let settings = "gearshape"
+        static let plus = "plus.app"
     }
 }
 

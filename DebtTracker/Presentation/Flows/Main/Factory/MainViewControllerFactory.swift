@@ -1,6 +1,9 @@
+import SwiftUI
 import UIKit
 
 @MainActor
-protocol MainViewControllerFactory {
-    func makeHomeViewController() -> UIViewController
+protocol MainViewFactory {
+    func makeHomeView() -> HomeView
+    func makeDebtDetailsViewController() -> DebtDetailsViewController
+    func makeSettingsViewController() -> SettingsViewController
 }

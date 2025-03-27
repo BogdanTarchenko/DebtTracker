@@ -1,8 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Hello, Home!" : {
+    "%lld" : {
 
+    },
+    "$ %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "$ %1$@ (%2$@)"
+          }
+        }
+      }
     },
     "main_home_view_controller_title" : {
       "extractionState" : "manual",
@@ -20,6 +30,18 @@
           }
         }
       }
+    },
+    "Активные займы" : {
+
+    },
+    "Кредиты" : {
+
+    },
+    "Общий долг" : {
+
+    },
+    "Следующий платёж" : {
+
     }
   },
   "version" : "1.0"

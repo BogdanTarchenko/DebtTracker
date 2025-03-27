@@ -12,17 +12,11 @@ class SettingsViewController: UIViewController {
         static let buttonHeight: CGFloat = 44
     }
 
-    private enum Localization {
-        static let passwordTitle = "Защитить паролем"
-        static let faceIDTitle = "Вход по FaceID"
-        static let changePassword = "Сменить пароль"
-    }
-
     // MARK: - UI Elements
 
     private let passwordToggleLabel: UILabel = {
         let label = UILabel()
-        label.text = Localization.passwordTitle
+        label.text = LocalizedKey.Settings.title
         return label
     }()
 
@@ -34,7 +28,7 @@ class SettingsViewController: UIViewController {
 
     private let faceIDToggleLabel: UILabel = {
         let label = UILabel()
-        label.text = Localization.faceIDTitle
+        label.text = LocalizedKey.Settings.faceIDTitle
         return label
     }()
 
@@ -47,7 +41,7 @@ class SettingsViewController: UIViewController {
 
     private let changePasswordButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(Localization.changePassword, for: .normal)
+        button.setTitle(LocalizedKey.Settings.changePassword, for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)

@@ -1,6 +1,5 @@
 import Foundation
 import SnapKit
-import SwiftUI
 import UIKit
 
 // MARK: - AddDebtViewController
@@ -245,8 +244,4 @@ extension AddDebtViewController {
     var standartFont16Bold: UIFont {
         UIFont.systemFont(ofSize: 16, weight: .bold)
     }
-}
-
-#Preview {
-    AddDebtViewController()
 }

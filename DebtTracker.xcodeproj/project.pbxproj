@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -86,6 +86,10 @@
 		F144666C58DBAFA2CE574E5D /* Debt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debt.swift; sourceTree = "<group>"; };
 		FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		72DA35E92D95706F003CC850 /* Calculator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calculator; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		515B72097918EEDA166E577E /* Frameworks */ = {
@@ -236,6 +240,29 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		72CD2D232D9589F700313D2D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				72CD2D272D958A1100313D2D /* PaymentModel */,
+				72CD2D262D958A0C00313D2D /* CreditModel */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		72CD2D262D958A0C00313D2D /* CreditModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreditModel;
+			sourceTree = "<group>";
+		};
+		72CD2D272D958A1100313D2D /* PaymentModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PaymentModel;
+			sourceTree = "<group>";
+		};
 		79BFA373298F4D8431870EBE /* DebtDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +286,7 @@
 		84CD8A01DA7CE8275242D443 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				72DA35E92D95706F003CC850 /* Calculator */,
 				8F24C8392D94456200AB7EC0 /* New Group */,
 				8F24C8142D9421F700AB7EC0 /* Home */,
 				44405A29F770EEFCC9CE56BD /* AddDebt */,
@@ -280,6 +308,7 @@
 		8AD4A7A8B0B3F6768CCE7658 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				72CD2D232D9589F700313D2D /* Models */,
 				3D2EE8B84BF33902DA10ED30 /* Repositories */,
 				1DD242313E5FF0CB8DD01611 /* Services */,
 				C8302AA462C75778B5A76C84 /* Storage */,
@@ -490,6 +519,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				72DA35E92D95706F003CC850 /* Calculator */,
 			);
 			name = DebtTracker;
 			packageProductDependencies = (

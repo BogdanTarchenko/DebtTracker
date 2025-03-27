@@ -6,7 +6,7 @@ struct CalculatorView: View {
     @State var inputTerm: Double = 0
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 12) {
                 Spacer()
                 Text("Calculate your monthly payments and total amount").lineLimit(10)
                     .fontWidth(.standard)

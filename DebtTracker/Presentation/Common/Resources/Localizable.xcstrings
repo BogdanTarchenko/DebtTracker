@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Hello, Home!" : {
+
+    },
     "main_home_view_controller_title" : {
       "extractionState" : "manual",
       "localizations" : {

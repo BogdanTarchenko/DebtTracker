@@ -56,7 +56,7 @@ class DebtDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        // navigationController?.setNavigationBarHidden(true, animated: false)
         setupUI()
         setupConstraints()
     }
@@ -64,12 +64,17 @@ class DebtDetailsViewController: UIViewController {
     // MARK: Private Methods
 
     private func setupUI() {
-        view.addSubview(generalDebtInfo)
-        view.addSubview(debtTermInfo)
-        view.addSubview(debtDateInfo)
-        view.addSubview(debtProgressInfo)
-        view.addSubview(debtPaymentsHistory)
-        view.addSubview(addTransactionButton)
+        let views = [
+            generalDebtInfo,
+            debtTermInfo,
+            debtDateInfo,
+            debtProgressInfo,
+            debtPaymentsHistory,
+            addTransactionButton
+        ]
+        for item in views {
+            view.addSubview(item)
+        }
     }
 
     private func setupConstraints() {

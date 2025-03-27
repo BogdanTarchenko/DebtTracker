@@ -27,6 +27,10 @@ final class DIContainer: DIContainerProtocol {
     func makeDebtDetailsViewController() -> DebtDetailsViewController {
         DebtDetailsViewController()
     }
+
+    func makeSettingsViewController() -> SettingsViewController {
+        SettingsViewController()
+    }
 }
 
 // MARK: - DefaultMainViewFactory
@@ -44,5 +48,9 @@ private final class DefaultMainViewFactory: MainViewFactory {
 
     func makeDebtDetailsViewController() -> DebtDetailsViewController {
         container.makeDebtDetailsViewController()
+    }
+
+    func makeSettingsViewController() -> SettingsViewController {
+        container.makeSettingsViewController()
     }
 }

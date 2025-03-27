@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		3CCBD7322D94452100C19B8B /* DebtDetailsPaymentHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7312D94452100C19B8B /* DebtDetailsPaymentHistory.swift */; };
 		3CCBD7342D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7332D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift */; };
 		3CCBD7362D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7352D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift */; };
+		3CCBD7A52D95753400C19B8B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7A42D95752D00C19B8B /* SettingsViewController.swift */; };
 		4C4ACE1FDFC4630C0F50F2F6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE70F5F84F0BD59A686BB354 /* MainViewController.swift */; };
 		5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */; };
 		769C175F41E352192CB23234 /* DIContainerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD4E2612D8AD8862693EED /* DIContainerProtocol.swift */; };
@@ -70,6 +71,7 @@
 		3CCBD7312D94452100C19B8B /* DebtDetailsPaymentHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsPaymentHistory.swift; sourceTree = "<group>"; };
 		3CCBD7332D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsPaymentHistoryCell.swift; sourceTree = "<group>"; };
 		3CCBD7352D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsPaymentHistoryItem.swift; sourceTree = "<group>"; };
+		3CCBD7A42D95752D00C19B8B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		442D54BE85459D75F5A31A5A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		491F7766550E4917A980A8C5 /* DebtUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtUseCase.swift; sourceTree = "<group>"; };
 		57E9D19116F0B145F2963191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -102,6 +104,10 @@
 		F144666C58DBAFA2CE574E5D /* Debt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debt.swift; sourceTree = "<group>"; };
 		FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		72DA35E92D95706F003CC850 /* Calculator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calculator; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		515B72097918EEDA166E577E /* Frameworks */ = {
@@ -169,6 +175,38 @@
 				E1E904928C67901931348936 /* Views */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		3CCBD7A02D95751100C19B8B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3CCBD7A32D95752200C19B8B /* Coordinator */,
+				3CCBD7A22D95751E00C19B8B /* ViewModels */,
+				3CCBD7A12D95751A00C19B8B /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3CCBD7A12D95751A00C19B8B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3CCBD7A42D95752D00C19B8B /* SettingsViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3CCBD7A22D95751E00C19B8B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3CCBD7A32D95752200C19B8B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		3D2EE8B84BF33902DA10ED30 /* Repositories */ = {
@@ -258,6 +296,29 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		72CD2D232D9589F700313D2D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				72CD2D272D958A1100313D2D /* PaymentModel */,
+				72CD2D262D958A0C00313D2D /* CreditModel */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		72CD2D262D958A0C00313D2D /* CreditModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreditModel;
+			sourceTree = "<group>";
+		};
+		72CD2D272D958A1100313D2D /* PaymentModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PaymentModel;
+			sourceTree = "<group>";
+		};
 		79BFA373298F4D8431870EBE /* DebtDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +342,9 @@
 		84CD8A01DA7CE8275242D443 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				72DA35E92D95706F003CC850 /* Calculator */,
+				8F24C8392D94456200AB7EC0 /* New Group */,
+				3CCBD7A02D95751100C19B8B /* Settings */,
 				8F24C8142D9421F700AB7EC0 /* Home */,
 				44405A29F770EEFCC9CE56BD /* AddDebt */,
 				79BFA373298F4D8431870EBE /* DebtDetails */,
@@ -301,6 +365,7 @@
 		8AD4A7A8B0B3F6768CCE7658 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				72CD2D232D9589F700313D2D /* Models */,
 				3D2EE8B84BF33902DA10ED30 /* Repositories */,
 				1DD242313E5FF0CB8DD01611 /* Services */,
 				C8302AA462C75778B5A76C84 /* Storage */,
@@ -515,6 +580,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				72DA35E92D95706F003CC850 /* Calculator */,
+			);
 			name = DebtTracker;
 			packageProductDependencies = (
 				41EDA1306996B48A46F4E708 /* SnapKit */,
@@ -636,6 +704,7 @@
 				3579D895E5F397E706969E27 /* DebtRepository.swift in Sources */,
 				11A181C3899B827AFD472BC6 /* DebtRepositoryProtocol.swift in Sources */,
 				B12E2943D7757B746AEF4A5A /* DebtUseCase.swift in Sources */,
+				3CCBD7A52D95753400C19B8B /* SettingsViewController.swift in Sources */,
 				26B9F1C1CD6F45778C935D6F /* MainCoordinator.swift in Sources */,
 				3CCBD7262D943EDC00C19B8B /* DebtDetailsBlock.swift in Sources */,
 				3CCBD7102D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift in Sources */,

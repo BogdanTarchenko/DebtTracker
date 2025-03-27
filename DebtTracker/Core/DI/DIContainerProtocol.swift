@@ -10,4 +10,5 @@ protocol DIContainerProtocol {
     func makeMainView() -> MainView
     func makeHomeView() -> HomeView
     func makeDebtDetailsViewController() -> DebtDetailsViewController
+    func makeSettingsViewController() -> SettingsViewController
 }

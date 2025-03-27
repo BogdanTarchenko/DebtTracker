@@ -5,4 +5,5 @@ import UIKit
 protocol MainViewFactory {
     func makeHomeView() -> HomeView
     func makeDebtDetailsViewController() -> DebtDetailsViewController
+    func makeSettingsViewController() -> SettingsViewController
 }

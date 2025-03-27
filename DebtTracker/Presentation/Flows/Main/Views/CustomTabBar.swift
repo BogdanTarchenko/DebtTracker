@@ -22,8 +22,6 @@ private extension CustomTabBar {
     @ViewBuilder
     var tabBarBackground: some View {
         HStack {
-            Spacer()
-
             tabButton(tab: .home, image: ImageAssets.home)
 
             Spacer()
@@ -41,10 +39,9 @@ private extension CustomTabBar {
             Spacer()
 
             tabButton(tab: .settings, image: ImageAssets.settings)
-
-            Spacer()
         }
         .frame(height: Metrics.backgroundHeight)
+        .padding(.horizontal, 24)
         .background(Color(UIColor.App.black))
     }
 

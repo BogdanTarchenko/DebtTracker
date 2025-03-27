@@ -1,3 +1,4 @@
+import SwiftUI
 import UIKit
 
 final class MainCoordinator: Coordinator {
@@ -11,9 +12,11 @@ final class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let mainViewController = container.makeMainViewController()
-        mainViewController.coordinator = self
-        navigationController.pushViewController(mainViewController, animated: false)
+        let mainView = container.makeMainView()
+
+        let hostingController = UIHostingController(rootView: mainView)
+
+        navigationController.pushViewController(hostingController, animated: false)
     }
 
     func childDidFinish(_ child: Coordinator?) {

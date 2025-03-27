@@ -1,6 +1,25 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld" : {
+
+    },
+    "$ %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "$ %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Calculate your monthly payments and total amount" : {
+
+    },
+    "Enter %@" : {
+
+    },
     "Key" : {
       "extractionState" : "manual"
     },
@@ -88,6 +107,18 @@
           }
         }
       }
+    },
+    "Активные займы" : {
+
+    },
+    "Кредиты" : {
+
+    },
+    "Общий долг" : {
+
+    },
+    "Следующий платёж" : {
+
     }
   },
   "version" : "1.0"

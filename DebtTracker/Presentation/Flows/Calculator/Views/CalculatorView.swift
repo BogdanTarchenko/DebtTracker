@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct CalculatorViewController: View {
-    @Binding var inputAmount: String
-    @Binding var inputRate: String
-    @Binding var inputTerm: String
+struct CalculatorView: View {
+    @State var inputAmount: String = ""
+    @State var inputRate: String = ""
+    @State var inputTerm: String = ""
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Spacer()
@@ -27,7 +27,7 @@ struct CalculatorViewController: View {
                     text: $inputTerm,
                     keyboardType: .decimalPad
                 )
-                PrimaryButton(title: "Calculate", action: fc)
+                PrimaryButton(title: "Calculate", action: {})
                     .padding(EdgeInsets(top: 16, leading: 16, bottom: 24, trailing: 16))
             }
             .padding(EdgeInsets(
@@ -64,9 +64,5 @@ struct CalculatorViewController: View {
         }
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
         .background(Color(.systemGray6))
-    }
-
-    func fc() {
-        print("hello")
     }
 }

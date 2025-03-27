@@ -1,68 +1,93 @@
 import SwiftUI
 
 struct CalculatorView: View {
-    @State var inputAmount: String = ""
-    @State var inputRate: String = ""
-    @State var inputTerm: String = ""
+    @State private var inputAmount: Double = 0
+    @State private var inputRate: Double = 0
+    @State private var inputTerm: Double = 0
+
+    private var monthlyPayment: Double {
+        0.0
+    }
+
+    private var totalInterest: Double {
+        0.0
+    }
+
+    private var totalPayment: Double {
+        0.0
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Spacer()
-            Text("Calculate your monthly payments and total amount").lineLimit(10)
-                .fontWidth(.standard)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(EdgeInsets(top: 0, leading: 24, bottom: 16, trailing: 24))
-            VStack(spacing: 16) {
-                InputField(
-                    title: "Loan amount",
-                    text: $inputAmount,
-                    keyboardType: .decimalPad
-                )
-                InputField(
-                    title: "Interest Rate",
-                    text: $inputRate,
-                    keyboardType: .decimalPad
-                )
-                InputField(
-                    title: "Loan term",
-                    text: $inputTerm,
-                    keyboardType: .decimalPad
-                )
-                PrimaryButton(title: "Calculate", action: {})
-                    .padding(EdgeInsets(top: 16, leading: 16, bottom: 24, trailing: 16))
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                Spacer()
+
+                Text("Calculate your monthly payments and total amount")
+                    .lineLimit(2)
+                    .font(.headline)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 16)
+
+                VStack(spacing: 16) {
+                    InputField(
+                        title: "Loan amount",
+                        value: $inputAmount,
+                        keyboardType: .decimalPad
+                    )
+
+                    InputField(
+                        title: "Interest Rate",
+                        value: $inputRate,
+                        keyboardType: .decimalPad
+                    )
+
+                    InputField(
+                        title: "Loan term (months)",
+                        value: $inputTerm,
+                        keyboardType: .numberPad
+                    )
+
+                    PrimaryButton(title: "Calculate", action: calculatePayments)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 24)
+                }
+                .padding(.horizontal, 24)
+                .background(Color(.systemBackground))
+                .cornerRadius(14)
+
+                VStack(spacing: 12) {
+                    InfoCard(
+                        title: "Monthly payment",
+                        value: String(format: "$%.2f", monthlyPayment),
+                        color: .red
+                    )
+
+                    InfoCard(
+                        title: "Total interest",
+                        value: String(format: "$%.2f", totalInterest),
+                        color: .blue
+                    )
+
+                    InfoCard(
+                        title: "Total payment",
+                        value: String(format: "$%.2f", totalPayment),
+                        color: .green
+                    )
+                }
+                .padding(.horizontal, 24)
+                .transition(.slide)
+
+                Spacer()
             }
-            .padding(EdgeInsets(
-                top: 16,
-                leading: 24,
-                bottom: 0,
-                trailing: 24
-            ))
-            .background(Color(UIColor.App.white))
-            .cornerRadius(14)
-            VStack {
-                InfoCard(
-                    title: "Monthly payment",
-                    value: "$301.80",
-                    color: Color(UIColor.App.red)
-                )
-
-                InfoCard(
-                    title: "Monthly payment",
-                    value: "$52.193",
-                    color: Color(UIColor.App.yellow)
-                )
-
-                InfoCard(
-                    title: "Monthly payment",
-                    value: "$140.5",
-                    color: Color(UIColor.App.blue)
-                )
-            }
-            .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
-            .frame(height: 353)
-
-            Spacer()
+            .padding(.horizontal, 10)
         }
-        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+        .navigationBarHidden(false)
         .background(Color(.systemGray6))
     }
+
+    private func calculatePayments() {}
+}
+
+#Preview {
+    CalculatorView()
 }

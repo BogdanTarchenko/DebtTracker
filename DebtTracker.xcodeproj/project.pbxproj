@@ -337,6 +337,7 @@
 		8F24C82B2D943AE400AB7EC0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C8402D957D3C00AB7EC0 /* Components */,
 				8F24C83E2D9576F900AB7EC0 /* HomeView.swift */,
 			);
 			path = Views;
@@ -348,6 +349,13 @@
 				8F24C8252D9435D200AB7EC0 /* MainViewControllerFactory.swift */,
 			);
 			path = Factory;
+			sourceTree = "<group>";
+		};
+		8F24C8402D957D3C00AB7EC0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		8F868D638BC745B4B4AB17FD /* ViewModels */ = {

@@ -40,24 +40,15 @@ private extension MainViewController {
         let appearance = UITabBarAppearance()
         appearance
             .configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(
-            named: "TabBarColor"
-        )
-        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(
-            named: "TabBarItemActiveColor"
-        )
-        appearance.stackedLayoutAppearance.normal.iconColor = UIColor(
-            named: "TabBarItemInactiveColor"
-        )
+        appearance.backgroundColor = UIColor.App.tabBar
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor.App.tabBarItemActive
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.App.tabBarItemInactive
+
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
-            .foregroundColor: UIColor(
-                named: "TabBarItemActiveColor"
-            )
+            .foregroundColor: UIColor.App.tabBarItemActive
         ]
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor(
-                named: "TabBarItemInactiveColor"
-            )
+            .foregroundColor: UIColor.App.tabBarItemInactive
         ]
 
         tabBar.standardAppearance = appearance

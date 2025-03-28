@@ -30,7 +30,7 @@ struct CalculatorView: View {
             .padding(.vertical)
             .padding(.bottom, Metrics.bottomPadding)
         }
-        .background(Color(UIColor.App.black))
+        .background(.black)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {

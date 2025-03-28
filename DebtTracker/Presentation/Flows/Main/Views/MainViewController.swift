@@ -4,6 +4,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab: CustomTabBar.Tab = .home
+    @State private var isDebtPresented: Bool = false
     private let factory: MainViewFactory
 
     init(factory: MainViewFactory) {
@@ -11,9 +12,13 @@ struct MainView: View {
     }
 
     var body: some View {
+        let addDebtView = AddDebtView(controller: factory.makeAddDebtViewController())
         ZStack {
             contentView
             tabBarView
+        }
+        .sheet(isPresented: $isDebtPresented) {
+            addDebtView
         }
     }
 }
@@ -29,15 +34,17 @@ private extension MainView {
     @ViewBuilder
     var tabContent: some View {
         let homeView = factory.makeHomeView()
+        let calculatorView = factory.makeCalculatorView()
+        let settingsView = SettingsView(controller: factory.makeSettingsViewController())
         switch selectedTab {
         case .home:
             homeView
         case .calculator:
-            homeView
+            calculatorView
         case .stats:
             homeView
         case .settings:
-            homeView
+            settingsView
         }
     }
 
@@ -45,7 +52,7 @@ private extension MainView {
     var tabBarView: some View {
         VStack {
             Spacer()
-            CustomTabBar(selectedTab: selectedTab)
+            CustomTabBar(selectedTab: $selectedTab, isAddDebtPresented: $isDebtPresented)
         }
     }
 }

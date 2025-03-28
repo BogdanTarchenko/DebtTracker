@@ -24,6 +24,10 @@ final class DIContainer: DIContainerProtocol {
         HomeView()
     }
 
+    func makeCalculatorView() -> CalculatorView {
+        CalculatorView()
+    }
+
     func makeDebtDetailsViewController() -> DebtDetailsViewController {
         DebtDetailsViewController()
     }
@@ -34,6 +38,10 @@ final class DIContainer: DIContainerProtocol {
 
     func makePasswordSetupViewController() -> PasswordSetupViewController {
         PasswordSetupViewController()
+    }
+
+    func makeAddDebtViewController() -> AddDebtViewController {
+        AddDebtViewController()
     }
 }
 
@@ -50,6 +58,10 @@ private final class DefaultMainViewFactory: MainViewFactory {
         container.makeHomeView()
     }
 
+    func makeCalculatorView() -> CalculatorView {
+        container.makeCalculatorView()
+    }
+
     func makeDebtDetailsViewController() -> DebtDetailsViewController {
         container.makeDebtDetailsViewController()
     }
@@ -60,5 +72,9 @@ private final class DefaultMainViewFactory: MainViewFactory {
 
     func makePasswordSetupViewController() -> PasswordSetupViewController {
         container.makePasswordSetupViewController()
+    }
+
+    func makeAddDebtViewController() -> AddDebtViewController {
+        container.makeAddDebtViewController()
     }
 }

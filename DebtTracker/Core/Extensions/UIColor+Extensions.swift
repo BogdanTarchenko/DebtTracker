@@ -11,7 +11,7 @@ extension UIColor {
         static var white: UIColor {
             UIColor(
                 named: "WhiteCustomColor"
-            ) ?? .black
+            ) ?? .white
         }
 
         static var blue: UIColor {
@@ -24,24 +24,6 @@ extension UIColor {
             UIColor(
                 named: "GreenCustomColor"
             ) ?? .systemGreen
-        }
-
-        static var lightBlue: UIColor {
-            UIColor(
-                named: "LightBlueCustomColor"
-            ) ?? .systemTeal
-        }
-
-        static var pink: UIColor {
-            UIColor(
-                named: "PinkCustomColor"
-            ) ?? .systemPink
-        }
-
-        static var red: UIColor {
-            UIColor(
-                named: "RedCustomColor"
-            ) ?? .systemRed
         }
 
         static var tabBar: UIColor {
@@ -62,16 +44,28 @@ extension UIColor {
             ) ?? .systemGray
         }
 
-        static var yellow: UIColor {
+        static var orange: UIColor {
             UIColor(
-                named: "YellowCustomColor"
-            ) ?? .systemYellow
+                named: "OrangeCustomColor"
+            ) ?? .orange
         }
 
         static var purple: UIColor {
             UIColor(
                 named: "PurpleCustomColor"
             ) ?? .systemPurple
+        }
+
+        static var gray: UIColor {
+            UIColor(
+                named: "GrayCustomColor"
+            ) ?? .systemGray6
+        }
+
+        static var red: UIColor {
+            UIColor(
+                named: "RedCustomColor"
+            ) ?? .systemRed
         }
     }
 }

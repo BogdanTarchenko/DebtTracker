@@ -210,7 +210,7 @@ private extension AddDebtView {
             TextField("", value: $interestRate, format: .number)
                 .keyboardType(.decimalPad)
                 .font(.system(size: Metrics.inputFontSize))
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
                 .padding()
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(Metrics.inputCornerRadius)
@@ -232,7 +232,7 @@ private extension AddDebtView {
             TextField("", value: $termMonths, format: .number)
                 .keyboardType(.numberPad)
                 .font(.system(size: Metrics.inputFontSize))
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
                 .padding()
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(Metrics.inputCornerRadius)
@@ -248,7 +248,7 @@ private extension AddDebtView {
                     .foregroundColor(Color(UIColor.App.purple))
                 Text(LocalizedKey.AddDebt.debtTakenDate)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(UIColor.App.white))
             }
 
             DatePicker("", selection: $startDate, displayedComponents: .date)
@@ -274,7 +274,7 @@ private extension AddDebtView {
         Button(action: addDebt) {
             Text(LocalizedKey.AddDebt.addDebtButtonTitle)
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
                 .frame(maxWidth: .infinity)
                 .frame(height: Metrics.buttonHeight)
                 .background(Color(UIColor.App.purple))

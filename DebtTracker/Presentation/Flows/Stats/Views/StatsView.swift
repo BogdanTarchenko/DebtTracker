@@ -8,9 +8,9 @@ struct StatsView: View {
 
     private let creditTypes = [
         (LocalizedKey.AddDebt.consumerLoan, 150_000, Color(UIColor.App.purple)),
-        (LocalizedKey.AddDebt.autoLoan, 250_000, Color.blue),
-        (LocalizedKey.AddDebt.mortgageLoan, 500_000, Color.green),
-        (LocalizedKey.AddDebt.microLoan, 50000, Color.orange)
+        (LocalizedKey.AddDebt.autoLoan, 250_000, Color(UIColor.App.blue)),
+        (LocalizedKey.AddDebt.mortgageLoan, 500_000, Color(UIColor.App.green)),
+        (LocalizedKey.AddDebt.microLoan, 50000, Color(UIColor.App.orange))
     ]
 
     private var totalAmount: Double {

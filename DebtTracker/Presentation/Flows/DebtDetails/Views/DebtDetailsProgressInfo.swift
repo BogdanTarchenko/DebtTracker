@@ -6,7 +6,7 @@ final class DebtDetailsProgressInfo: UIView {
         let label = UILabel()
         label.text = LocalizedKey.DebtDetails.paymentProgress
         label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 
@@ -14,7 +14,7 @@ final class DebtDetailsProgressInfo: UIView {
         let label = UILabel()
         label.text = "50%"
         label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         label.textAlignment = .right
         return label
     }()
@@ -22,8 +22,8 @@ final class DebtDetailsProgressInfo: UIView {
     private let progressBar: UIProgressView = {
         let progressView = UIProgressView()
         progressView.setProgress(0.5, animated: false)
-        progressView.trackTintColor = .gray
-        progressView.progressTintColor = .white
+        progressView.trackTintColor = UIColor.App.gray
+        progressView.progressTintColor = UIColor.App.white
         return progressView
     }()
 
@@ -31,7 +31,7 @@ final class DebtDetailsProgressInfo: UIView {
         let label = UILabel()
         label.text = LocalizedKey.DebtDetails.remain
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 
@@ -39,7 +39,7 @@ final class DebtDetailsProgressInfo: UIView {
         let label = UILabel()
         label.text = "137500.00 ₽"
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 
@@ -56,7 +56,7 @@ final class DebtDetailsProgressInfo: UIView {
         let label = UILabel()
         label.text = "112500.00 ₽"
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         label.textAlignment = .right
         return label
     }()
@@ -72,7 +72,7 @@ final class DebtDetailsProgressInfo: UIView {
     }
 
     private func setupView() {
-        backgroundColor = UIColor(named: "BlackCustomColor")
+        backgroundColor = UIColor.App.black
         layer.cornerRadius = 10
         layer.masksToBounds = true
 

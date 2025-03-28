@@ -16,21 +16,21 @@ final class DebtDetailsInfoBlock: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
+        imageView.tintColor = UIColor.App.white
         return imageView
     }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 
     private let amountLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 

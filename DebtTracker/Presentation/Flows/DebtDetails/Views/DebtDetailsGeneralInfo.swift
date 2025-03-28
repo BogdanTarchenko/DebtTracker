@@ -5,7 +5,7 @@ final class DebtDetailsGeneralInfo: UIView {
         let label = UILabel()
         label.text = LocalizedKey.DebtDetails.creditAmount
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 
@@ -13,7 +13,7 @@ final class DebtDetailsGeneralInfo: UIView {
         let label = UILabel()
         label.text = "2500000.00 ₽"
         label.font = .systemFont(ofSize: 32, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         return label
     }()
 
@@ -28,7 +28,7 @@ final class DebtDetailsGeneralInfo: UIView {
     }
 
     private func setupView() {
-        backgroundColor = UIColor(named: "BlackCustomColor")
+        backgroundColor = UIColor.App.black
         layer.cornerRadius = 10
         layer.masksToBounds = true
 

@@ -14,7 +14,7 @@ struct InfoCard: View {
                 Text(value)
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color(UIColor.App.white))
             }
             Spacer()
         }

@@ -1,4 +1,5 @@
 import SnapKit
+import SwiftUICore
 import UIKit
 
 final class DebtDetailsViewController: UIViewController {
@@ -41,8 +42,8 @@ final class DebtDetailsViewController: UIViewController {
                 outgoing.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
                 return outgoing
             }
-        config.baseForegroundColor = .white
-        config.baseBackgroundColor = UIColor(named: "BlackCustomColor")
+        config.baseForegroundColor = UIColor.App.white
+        config.baseBackgroundColor = UIColor.App.black
 
         button.configuration = config
 

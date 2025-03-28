@@ -10,10 +10,10 @@ struct PrimaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
                 .frame(maxWidth: 280)
                 .padding()
-                .background(Color.blue)
+                .background(Color(UIColor.App.blue))
                 .cornerRadius(14)
         }
     }

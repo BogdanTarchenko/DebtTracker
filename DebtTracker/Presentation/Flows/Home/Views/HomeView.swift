@@ -30,14 +30,14 @@ struct HomeView: View {
             .padding(.vertical)
             .padding(.bottom, Metrics.bottomPadding)
         }
-        .background(Color.black)
+        .background(.black)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(LocalizedKey.Home.homeTitle)
                     .font(.subheadline)
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(UIColor.App.white))
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -65,7 +65,7 @@ private extension HomeView {
             Text(LocalizedKey.Home.credits)
                 .font(.title2)
                 .bold()
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
             Spacer()
             categoryMenuView
         }
@@ -153,7 +153,7 @@ private extension HomeView {
                 VStack(alignment: .leading, spacing: Metrics.textSpacing) {
                     Text(LocalizedKey.Home.totalDebt)
                         .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.7))
+                        .foregroundColor(Color(UIColor.App.white).opacity(0.7))
 
                     Text(totalDebt)
                         .font(.system(size: Metrics.totalDebtSize, weight: .bold))
@@ -204,7 +204,7 @@ private extension HomeView {
                     .font(.subheadline)
                     .bold()
             }
-            .foregroundColor(.red)
+            .foregroundColor(Color(UIColor.App.red))
         }
     }
 
@@ -218,7 +218,7 @@ private extension HomeView {
                 Text("$ 17 000")
                     .font(.subheadline)
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(UIColor.App.white))
                 Text("•")
                     .font(.subheadline)
                     .foregroundColor(Color(UIColor.App.purple))
@@ -238,7 +238,7 @@ private extension HomeView {
         VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
             Text(LocalizedKey.Home.debts)
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
 
             HStack(spacing: Metrics.loanInfoSpacing) {
                 loanTypeView(
@@ -297,7 +297,7 @@ private extension HomeView {
             VStack(alignment: .leading, spacing: Metrics.textSpacing) {
                 Text("\(count)")
                     .font(.system(size: Metrics.loanCountSize, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(UIColor.App.white))
                 Text("$ \(amount)")
                     .font(.system(size: Metrics.loanAmountSize, weight: .medium))
                     .foregroundColor(.white.opacity(0.8))
@@ -320,7 +320,7 @@ private extension HomeView {
                 HStack {
                     Text(title)
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(UIColor.App.white))
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color(UIColor.App.purple))
@@ -330,7 +330,7 @@ private extension HomeView {
                     Text(amount)
                         .font(.title3)
                         .bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(UIColor.App.white))
 
                     Text("\(LocalizedKey.Home.paidAmout): \(paidAmount)")
                         .font(.caption)

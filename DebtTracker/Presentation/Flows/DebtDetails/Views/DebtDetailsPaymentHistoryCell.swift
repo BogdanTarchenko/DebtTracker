@@ -59,7 +59,7 @@ final class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
     }
 
     private func setupView() {
-        contentView.backgroundColor = UIColor(named: "BlackCustomColor")
+        contentView.backgroundColor = UIColor.App.black
 
         contentView.addSubview(paymentTypeLabel)
         contentView.addSubview(paymentDateLabel)

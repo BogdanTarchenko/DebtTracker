@@ -46,7 +46,7 @@ final class DebtDetailsViewController: UIViewController {
     // MARK: - Private Methods
 
     private func configureView() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .black
         configureAddTransactionButton()
 
         [
@@ -66,6 +66,7 @@ final class DebtDetailsViewController: UIViewController {
         var config = UIButton.Configuration.filled()
 
         config.title = LocalizedKey.DebtDetails.addTransaction
+        config.background.backgroundColor = UIColor.App.purple
         config.image = UIImage(systemName: "plus", withConfiguration: symbolConfig)
         config.imagePadding = Constants.imagePadding
         config.imagePlacement = .leading
@@ -77,7 +78,7 @@ final class DebtDetailsViewController: UIViewController {
                 return outgoing
             }
         config.baseForegroundColor = .white
-        config.baseBackgroundColor = UIColor(named: "BlackCustomColor")
+        config.baseBackgroundColor = UIColor.App.black
 
         addTransactionButton.configuration = config
         addTransactionButton.layer.cornerRadius = Constants.cornerRadius
@@ -107,6 +108,7 @@ final class DebtDetailsViewController: UIViewController {
 
         addTransactionButton.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.height.equalTo(Constants.buttonHeight)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.bottomInset)
         }
 
@@ -125,7 +127,8 @@ private extension DebtDetailsViewController {
         static let horizontalInset: CGFloat = 16
         static let topInset: CGFloat = 16
         static let bottomInset: CGFloat = 16
-        static let verticalSpacing: CGFloat = 8
+        static let verticalSpacing: CGFloat = 16
+        static let buttonHeight: CGFloat = 50
 
         static let imagePadding: CGFloat = 8
         static let cornerRadius: CGFloat = 10

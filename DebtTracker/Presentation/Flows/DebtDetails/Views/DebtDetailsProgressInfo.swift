@@ -72,7 +72,7 @@ final class DebtDetailsProgressInfo: UIView {
     }
 
     private func setupView() {
-        backgroundColor = UIColor(named: "BlackCustomColor")
+        backgroundColor = UIColor.App.black
         layer.cornerRadius = 10
         layer.masksToBounds = true
 

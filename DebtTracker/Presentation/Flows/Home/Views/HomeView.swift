@@ -10,10 +10,10 @@ struct HomeView: View {
     @State private var isDebtDetailsPresented: Bool = false
 
     private let creditCategories = [
-        "Потребительский кредит",
-        "Автокредит",
-        "Ипотека",
-        "Микрозайм"
+        LocalizedKey.AddDebt.consumerLoan,
+        LocalizedKey.AddDebt.autoLoan,
+        LocalizedKey.AddDebt.mortgageLoan,
+        LocalizedKey.AddDebt.microLoan
     ]
 
     // MARK: - Body

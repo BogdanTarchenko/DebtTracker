@@ -267,8 +267,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Авто кредит"
+            "state" : "translated",
+            "value" : "Автокредит"
           }
         }
       }
@@ -661,8 +661,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Микрокредит"
+            "state" : "translated",
+            "value" : "Микрозайм"
           }
         }
       }

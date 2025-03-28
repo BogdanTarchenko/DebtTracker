@@ -7,6 +7,7 @@ struct HomeView: View {
 
     @State private var selectedCategory: String?
     @State private var showingCategoryMenu = false
+    @State private var isDebtDetailsPresented: Bool = false
 
     private let creditCategories = [
         "Потребительский кредит",
@@ -49,6 +50,9 @@ struct HomeView: View {
         }
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
+        .sheet(isPresented: $isDebtDetailsPresented) {
+            DebtDetailsView()
+        }
     }
 }
 
@@ -309,38 +313,42 @@ private extension HomeView {
         paidAmount: String,
         progressColor: Color
     ) -> some View {
-        VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
-            HStack {
-                Text(title)
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(Color(UIColor.App.purple))
+        Button(action: {
+            isDebtDetailsPresented = true
+        }) {
+            VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
+                HStack {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(Color(UIColor.App.purple))
+                }
+
+                VStack(alignment: .leading, spacing: Metrics.textSpacing) {
+                    Text(amount)
+                        .font(.title3)
+                        .bold()
+                        .foregroundColor(.white)
+
+                    Text("\(LocalizedKey.Home.paidAmout): \(paidAmount)")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.7))
+                }
+
+                ProgressView(value: 0.5)
+                    .tint(progressColor)
+                    .frame(height: Metrics.progressHeight)
+                    .background(Color.white.opacity(0.2))
+                    .cornerRadius(Metrics.progressCornerRadius)
             }
-
-            VStack(alignment: .leading, spacing: Metrics.textSpacing) {
-                Text(amount)
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(.white)
-
-                Text("\(LocalizedKey.Home.paidAmout): \(paidAmount)")
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.7))
-            }
-
-            ProgressView(value: 0.5)
-                .tint(progressColor)
-                .frame(height: Metrics.progressHeight)
-                .background(Color.white.opacity(0.2))
-                .cornerRadius(Metrics.progressCornerRadius)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxHeight: Metrics.creditCardHeight)
+            .background(Color(UIColor.App.black))
+            .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(maxHeight: Metrics.creditCardHeight)
-        .background(Color(UIColor.App.black))
-        .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
     }
 }
 

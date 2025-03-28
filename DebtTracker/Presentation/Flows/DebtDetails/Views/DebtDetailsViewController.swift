@@ -3,6 +3,7 @@ import SwiftUICore
 import UIKit
 
 // MARK: - DebtDetailsViewController
+
 final class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
@@ -51,37 +52,8 @@ final class DebtDetailsViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
 
-final class DebtDetailsViewController: UIViewController {
-    // MARK: - UI Components
-
-    private let generalDebtInfo = DebtDetailsGeneralInfo()
-    private let debtTermInfo = DebtDetailsBlock(
-        frame: .zero,
-        .init(
-            leftImage: .percent,
-            rightImage: .clock,
-            leftTitle: LocalizedKey.DebtDetails.loanRate,
-            rightTitle: LocalizedKey.DebtDetails.loanTerm,
-            leftAmount: "12.5%",
-            rightAmount: "36 месяцев"
-        )
-    )
-
-    private let debtDateInfo = DebtDetailsBlock(
-        frame: .zero,
-        .init(
-            leftImage: .calendar,
-            rightImage: .dollarsign,
-            leftTitle: LocalizedKey.DebtDetails.openedDate,
-            rightTitle: LocalizedKey.DebtDetails.nextPayment,
-            leftAmount: "25.04.2025",
-            rightAmount: "25.05.2025"
-        )
-    )
-
-    private let debtProgressInfo = DebtDetailsProgressInfo()
-    private let debtPaymentsHistory = DebtDetailsPaymentHistory()
-    private let addTransactionButton = UIButton(type: .system)
+        return button
+    }()
 
     // MARK: - Lifecycle
 

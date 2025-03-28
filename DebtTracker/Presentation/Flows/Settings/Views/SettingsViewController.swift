@@ -23,6 +23,7 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barTintColor = UIColor.App.black
         setupUI()
         setupConstraints()
     }

@@ -55,6 +55,8 @@ class SettingsGroupView: UIView {
         return button
     }()
 
+    private var changePasswordButtonHeightConstraint: Constraint?
+
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -149,9 +151,27 @@ class SettingsGroupView: UIView {
         changePasswordButton.snp.makeConstraints { make in
             make.top.equalTo(faceIDToggleLabel.snp.bottom).offset(Constants.elementSpacing * 2)
             make.leading.trailing.equalToSuperview().inset(Constants.horizontalInset)
-            make.height.equalTo(Constants.buttonHeight)
-            make.bottom.equalToSuperview().inset(Constants.verticalInset)
+            changePasswordButtonHeightConstraint = make.height.equalTo(0).constraint
+            make.bottom.equalToSuperview().inset(Constants.verticalInset).priority(.low)
         }
+    }
+
+    @objc private func handlePasswordToggleSwitchValueChanged() {
+        let isPasswordEnabled = passwordToggleSwitch.isOn
+
+        UIView.animate(withDuration: Constants.animationDuration, animations: { [weak self] in
+            guard let self else { return }
+
+            faceIDToggleSwitch.isUserInteractionEnabled = isPasswordEnabled
+            faceIDToggleSwitch.alpha = isPasswordEnabled ? 1.0 : 0.7
+            faceIDToggleLabel.alpha = isPasswordEnabled ? 1.0 : 0.7
+
+            changePasswordButton.alpha = isPasswordEnabled ? 1.0 : 0
+            changePasswordButton.isHidden = !isPasswordEnabled
+            changePasswordButtonHeightConstraint?.update(offset: isPasswordEnabled ? Constants.buttonHeight : 0)
+
+            layoutIfNeeded()
+        })
     }
 
     private func setupActions() {
@@ -166,25 +186,6 @@ class SettingsGroupView: UIView {
             action: #selector(changePasswordTapped),
             for: .touchUpInside
         )
-    }
-
-    @objc private func handlePasswordToggleSwitchValueChanged() {
-        let isPasswordEnabled = passwordToggleSwitch.isOn
-
-        UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
-            guard let self else { return }
-
-            faceIDToggleSwitch.isUserInteractionEnabled = isPasswordEnabled
-            faceIDToggleSwitch.alpha = isPasswordEnabled ? 1.0 : 0.7
-            faceIDToggleLabel.alpha = isPasswordEnabled ? 1.0 : 0.7
-
-            changePasswordButton.alpha = isPasswordEnabled ? 1.0 : 0
-            changePasswordButton.isHidden = !isPasswordEnabled
-
-            if !isPasswordEnabled {
-                faceIDToggleSwitch.setOn(false, animated: true)
-            }
-        }
     }
 
     @objc private func changePasswordTapped() {

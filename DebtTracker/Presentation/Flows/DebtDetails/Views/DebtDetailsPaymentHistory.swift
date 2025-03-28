@@ -29,12 +29,42 @@ final class DebtDetailsPaymentHistory: UICollectionView {
             paymentType: "Погашение",
             paymentDate: "20.03.2025",
             amount: "-10000 ₽"
+        ),
+        PaymentHistoryItem(
+            paymentType: "Доп. погашение",
+            paymentDate: "15.03.2025",
+            amount: "-15000 ₽"
+        ),
+        PaymentHistoryItem(
+            paymentType: "Погашение",
+            paymentDate: "20.03.2025",
+            amount: "-10000 ₽"
+        ),
+        PaymentHistoryItem(
+            paymentType: "Доп. погашение",
+            paymentDate: "15.03.2025",
+            amount: "-15000 ₽"
+        ),
+        PaymentHistoryItem(
+            paymentType: "Погашение",
+            paymentDate: "20.03.2025",
+            amount: "-10000 ₽"
+        ),
+        PaymentHistoryItem(
+            paymentType: "Доп. погашение",
+            paymentDate: "15.03.2025",
+            amount: "-15000 ₽"
+        ),
+        PaymentHistoryItem(
+            paymentType: "Погашение",
+            paymentDate: "20.03.2025",
+            amount: "-10000 ₽"
         )
     ]
 
     private enum Constants {
         static let cellHeight: CGFloat = 64
-        static let headerHeight: CGFloat = 48
+        static let headerHeight: CGFloat = 32
         static let separatorHeight: CGFloat = 1
         static let horizontalInset: CGFloat = 16
         static let verticalInset: CGFloat = 8
@@ -44,15 +74,10 @@ final class DebtDetailsPaymentHistory: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: Constants.verticalInset,
-            right: 0
-        )
         layout.minimumLineSpacing = Constants.separatorHeight
         layout.minimumInteritemSpacing = Constants.interitemSpacing
         layout.sectionHeadersPinToVisibleBounds = true
+        layout.sectionInset = .zero
 
         super.init(frame: .zero, collectionViewLayout: layout)
 
@@ -71,6 +96,7 @@ final class DebtDetailsPaymentHistory: UICollectionView {
 
         backgroundColor = UIColor.App.black
         contentInset = .zero
+        contentInsetAdjustmentBehavior = .never
         scrollIndicatorInsets = .zero
         layer.cornerRadius = 10
         layer.masksToBounds = true
@@ -181,9 +207,8 @@ class HeaderView: UICollectionReusableView {
         addSubview(separatorView)
 
         titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.horizontalInset)
-            make.top.equalToSuperview().inset(12)
-            make.bottom.equalToSuperview().inset(12)
+            make.leading.equalToSuperview().inset(Constants.horizontalInset)
+            make.top.equalToSuperview()
         }
 
         separatorView.snp.makeConstraints { make in

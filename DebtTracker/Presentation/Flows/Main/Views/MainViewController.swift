@@ -68,7 +68,3 @@ private extension MainView {
         }
     }
 }
-
-#Preview {
-    SettingsViewController()
-}

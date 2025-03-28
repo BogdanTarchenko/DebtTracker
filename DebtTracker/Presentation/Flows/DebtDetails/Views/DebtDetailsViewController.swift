@@ -2,6 +2,8 @@ import SnapKit
 import SwiftUICore
 import UIKit
 
+// MARK: - DebtDetailsViewController
+
 final class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
@@ -53,61 +55,108 @@ final class DebtDetailsViewController: UIViewController {
         return button
     }()
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // navigationController?.setNavigationBarHidden(true, animated: false)
-        setupUI()
+        configureView()
         setupConstraints()
     }
 
-    // MARK: Private Methods
+    // MARK: - Private Methods
 
-    private func setupUI() {
-        let views = [
+    private func configureView() {
+        view.backgroundColor = .black
+        configureAddTransactionButton()
+
+        [
             generalDebtInfo,
             debtTermInfo,
             debtDateInfo,
             debtProgressInfo,
             debtPaymentsHistory,
             addTransactionButton
-        ]
-        for item in views {
-            view.addSubview(item)
+        ].forEach { customView in
+            view.addSubview(customView)
         }
     }
 
+    private func configureAddTransactionButton() {
+        let symbolConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        var config = UIButton.Configuration.filled()
+
+        config.title = LocalizedKey.DebtDetails.addTransaction
+        config.background.backgroundColor = UIColor.App.purple
+        config.image = UIImage(systemName: "plus", withConfiguration: symbolConfig)
+        config.imagePadding = Constants.imagePadding
+        config.imagePlacement = .leading
+        config.contentInsets = Constants.contentInsets
+        config
+            .titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+                return outgoing
+            }
+        config.baseForegroundColor = .white
+        config.baseBackgroundColor = UIColor.App.black
+
+        addTransactionButton.configuration = config
+        addTransactionButton.layer.cornerRadius = Constants.cornerRadius
+        addTransactionButton.layer.masksToBounds = true
+    }
+
     private func setupConstraints() {
-        generalDebtInfo.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+        generalDebtInfo.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.topInset)
         }
 
-        debtTermInfo.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(generalDebtInfo.snp.bottom).offset(8)
+        debtTermInfo.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.top.equalTo(generalDebtInfo.snp.bottom).offset(Constants.verticalSpacing)
         }
 
-        debtDateInfo.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(debtTermInfo.snp.bottom).offset(8)
+        debtDateInfo.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.top.equalTo(debtTermInfo.snp.bottom).offset(Constants.verticalSpacing)
         }
 
-        debtProgressInfo.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(debtDateInfo.snp.bottom).offset(8)
+        debtProgressInfo.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.top.equalTo(debtDateInfo.snp.bottom).offset(Constants.verticalSpacing)
         }
 
-        addTransactionButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
+        addTransactionButton.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.height.equalTo(Constants.buttonHeight)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.bottomInset)
         }
 
-        debtPaymentsHistory.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(debtProgressInfo).inset(8)
-            make.bottom.equalTo(addTransactionButton.snp.top).inset(-8)
+        debtPaymentsHistory.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
+            $0.top.equalTo(debtProgressInfo).inset(Constants.verticalSpacing)
+            $0.bottom.equalTo(addTransactionButton.snp.top).offset(-Constants.verticalSpacing)
         }
+    }
+}
+
+// MARK: DebtDetailsViewController.Constants
+
+private extension DebtDetailsViewController {
+    enum Constants {
+        static let horizontalInset: CGFloat = 16
+        static let topInset: CGFloat = 16
+        static let bottomInset: CGFloat = 16
+        static let verticalSpacing: CGFloat = 16
+        static let buttonHeight: CGFloat = 50
+
+        static let imagePadding: CGFloat = 8
+        static let cornerRadius: CGFloat = 10
+        static let contentInsets = NSDirectionalEdgeInsets(
+            top: 8,
+            leading: 16,
+            bottom: 8,
+            trailing: 16
+        )
     }
 }

@@ -85,6 +85,6 @@ extension SettingsViewController {
         static let verticalInset: CGFloat = 16
         static let elementSpacing: CGFloat = 16
         static let animationDuration: TimeInterval = 0.3
-        static let buttonHeight: CGFloat = 44
+        static let buttonHeight: CGFloat = 50
     }
 }

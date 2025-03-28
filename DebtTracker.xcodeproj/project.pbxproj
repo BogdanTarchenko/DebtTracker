@@ -158,7 +158,6 @@
 		1A3CAB58B21CD11193CFD649 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3CCBD8982D96DA8000C19B8B /* ButtonStateDelegate.swift */,
 				772A04E973B27F78FD1415CD /* DebtDetailsViewController.swift */,
 				3CCBD70F2D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift */,
 				3CCBD7132D94298B00C19B8B /* DebtDetailsInfoBlock.swift */,
@@ -213,6 +212,7 @@
 				8F24C84B2D95921F00AB7EC0 /* SettingsView.swift */,
 				3CCBD7A42D95752D00C19B8B /* SettingsViewController.swift */,
 				3CCBD8962D96C44600C19B8B /* SettingsGroupView.swift */,
+				3CCBD8982D96DA8000C19B8B /* ButtonStateDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

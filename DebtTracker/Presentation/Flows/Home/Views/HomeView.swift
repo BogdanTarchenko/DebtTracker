@@ -52,6 +52,7 @@ struct HomeView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .sheet(isPresented: $isDebtDetailsPresented) {
             DebtDetailsView()
+                .background(.black)
         }
     }
 }

@@ -28,6 +28,10 @@ final class DIContainer: DIContainerProtocol {
         CalculatorView()
     }
 
+    func makeStatsView() -> StatsView {
+        StatsView()
+    }
+
     func makeDebtDetailsViewController() -> DebtDetailsViewController {
         DebtDetailsViewController()
     }
@@ -56,6 +60,10 @@ private final class DefaultMainViewFactory: MainViewFactory {
 
     func makeCalculatorView() -> CalculatorView {
         container.makeCalculatorView()
+    }
+
+    func makeStatsView() -> StatsView {
+        container.makeStatsView()
     }
 
     func makeDebtDetailsViewController() -> DebtDetailsViewController {

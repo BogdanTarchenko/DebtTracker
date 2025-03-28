@@ -1,44 +1,39 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld" : {
+    "" : {
 
     },
-    "$ %@ (%@)" : {
+    "%@: %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "$ %1$@ (%2$@)"
+            "value" : "%1$@: %2$@"
           }
         }
       }
     },
-    "Calculate your monthly payments and total amount" : {
+    "%lld" : {
+
+    },
+    "•" : {
+
+    },
+    "+2.4%" : {
+
+    },
+    "$ %@" : {
+
+    },
+    "$ 17 000" : {
+
+    },
+    "27 марта" : {
 
     },
     "Enter %@" : {
 
-    },
-    "Key" : {
-      "extractionState" : "manual"
-    },
-    "main_home_view_controller_title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Home"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Главная"
-          }
-        }
-      }
     },
     "settings_change_password" : {
       "extractionState" : "manual",
@@ -108,16 +103,37 @@
         }
       }
     },
-    "Активные займы" : {
+    "Введите название" : {
 
     },
-    "Кредиты" : {
+    "Внесенная сумма" : {
 
     },
-    "Общий долг" : {
+    "Дата взятия кредита" : {
 
     },
-    "Следующий платёж" : {
+    "Добавить" : {
+
+    },
+    "Добавить кредит" : {
+
+    },
+    "Информация" : {
+
+    },
+    "Название кредита" : {
+
+    },
+    "Процентная ставка" : {
+
+    },
+    "Срок (месяцев)" : {
+
+    },
+    "Сумма кредита" : {
+
+    },
+    "Тип кредита" : {
 
     }
   },

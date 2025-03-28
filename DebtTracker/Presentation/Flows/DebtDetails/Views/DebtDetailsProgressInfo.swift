@@ -4,7 +4,7 @@ import UIKit
 final class DebtDetailsProgressInfo: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Прогресс выплат"
+        label.text = LocalizedKey.DebtDetails.paymentProgress
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .white
         return label
@@ -29,7 +29,7 @@ final class DebtDetailsProgressInfo: UIView {
 
     private let leftTitle: UILabel = {
         let label = UILabel()
-        label.text = "Осталось"
+        label.text = LocalizedKey.DebtDetails.remain
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .white
         return label
@@ -45,7 +45,7 @@ final class DebtDetailsProgressInfo: UIView {
 
     private let rightTitle: UILabel = {
         let label = UILabel()
-        label.text = "Выплачено"
+        label.text = LocalizedKey.DebtDetails.paid
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .right

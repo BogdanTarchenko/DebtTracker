@@ -3,7 +3,7 @@ import UIKit
 final class DebtDetailsGeneralInfo: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Сумма кредита"
+        label.text = LocalizedKey.DebtDetails.creditAmount
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .white
         return label

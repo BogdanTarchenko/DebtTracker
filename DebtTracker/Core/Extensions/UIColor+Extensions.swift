@@ -67,5 +67,11 @@ extension UIColor {
                 named: "YellowCustomColor"
             ) ?? .systemYellow
         }
+
+        static var purple: UIColor {
+            UIColor(
+                named: "PurpleCustomColor"
+            ) ?? .systemPurple
+        }
     }
 }

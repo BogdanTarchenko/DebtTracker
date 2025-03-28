@@ -1,117 +1,377 @@
 import SwiftUI
 
+// MARK: - HomeView
+
 struct HomeView: View {
+    // MARK: - Private Properties
+
+    @State private var selectedCategory: String?
+    @State private var showingCategoryMenu = false
+
+    private let creditCategories = [
+        "Потребительский кредит",
+        "Автокредит",
+        "Ипотека",
+        "Микрозайм"
+    ]
+
+    // MARK: - Body
+
     var body: some View {
         ScrollView {
-            VStack(spacing: 10) {
-                debtCardView(totalDebt: "25,000.40 $")
-                loanInfoView(activeLoans: 5, nextPayment: "17,000", paymentDate: "Март 25")
-
-                Text("Кредиты")
-                    .font(.title2)
-                    .bold()
-                    .padding(.top)
-
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-                    creditCardView(title: "Iphone 13 Mini", amount: "699$", progressColor: .red)
-                    creditCardView(title: "Macbook Pro M1", amount: "1,499$", progressColor: .pink)
-                    creditCardView(title: "Car", amount: "1,499$", progressColor: .pink)
-                    creditCardView(title: "House", amount: "1,499$", progressColor: .green)
-                    creditCardView(title: "Yandex", amount: "1,499$", progressColor: .yellow)
-                    creditCardView(title: "Watch", amount: "1,499$", progressColor: .brown)
-                    creditCardView(title: "Iphone 13 Mini", amount: "699$", progressColor: .red)
-                    creditCardView(title: "Macbook Pro M1", amount: "1,499$", progressColor: .pink)
-                    creditCardView(title: "Car", amount: "1,499$", progressColor: .pink)
-                    creditCardView(title: "House", amount: "1,499$", progressColor: .green)
-                    creditCardView(title: "Yandex", amount: "1,499$", progressColor: .yellow)
-                    creditCardView(title: "Watch", amount: "1,499$", progressColor: .brown)
-                }
+            VStack(spacing: Metrics.sectionSpacing) {
+                debtCardView(totalDebt: "$ 25 000")
+                loanInfoView(activeLoans: 5, nextPayment: "$ 17 000", paymentDate: "Март 27")
+                creditsHeaderView
+                creditsGridView
                 Spacer()
             }
-            .padding()
-            .padding(.bottom, 80)
+            .padding(.vertical)
+            .padding(.bottom, Metrics.bottomPadding)
         }
-        .background(Color(.systemGray6))
+        .background(Color.black)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(LocalizedKey.Home.homeTitle)
+                    .font(.subheadline)
+                    .bold()
+                    .foregroundColor(.white)
+            }
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}) {
+                    Image(systemName: "bell.fill")
+                        .font(.subheadline)
+                        .foregroundColor(Color(UIColor.App.purple))
+                }
+            }
+        }
+        .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
+}
 
+// MARK: - View Components
+
+private extension HomeView {
     @ViewBuilder
-    private func debtCardView(totalDebt: String) -> some View {
-        VStack {
-            Text("Общий долг")
-                .font(.headline)
-                .foregroundColor(.white)
-
-            Text(totalDebt)
-                .font(.largeTitle)
+    var creditsHeaderView: some View {
+        HStack {
+            Text(LocalizedKey.Home.credits)
+                .font(.title2)
                 .bold()
                 .foregroundColor(.white)
+            Spacer()
+            categoryMenuView
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 128)
-        .background(.black)
-        .clipShape(.rect(cornerRadius: 16))
+        .padding(.top)
         .padding(.horizontal)
     }
 
     @ViewBuilder
-    private func loanInfoView(
+    var categoryMenuView: some View {
+        Menu {
+            ForEach(creditCategories, id: \.self) { category in
+                Button(action: {
+                    selectedCategory = category
+                }) {
+                    HStack {
+                        Text(category)
+                        if selectedCategory == category {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        } label: {
+            HStack(spacing: Metrics.menuIconSpacing) {
+                Text(selectedCategory ?? LocalizedKey.Home.pickType)
+                    .font(.subheadline)
+                    .foregroundColor(Color(UIColor.App.purple))
+                Image(systemName: "chevron.down")
+                    .font(.system(size: Metrics.menuIconSize))
+                    .foregroundColor(Color(UIColor.App.purple))
+            }
+        }
+    }
+
+    @ViewBuilder
+    var creditsGridView: some View {
+        LazyVGrid(
+            columns: [GridItem(.flexible()), GridItem(.flexible())],
+            spacing: Metrics.gridSpacing
+        ) {
+            creditCardView(
+                title: "Iphone 13 Mini",
+                amount: "699$",
+                paidAmount: "350$",
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Macbook Pro M1",
+                amount: "1,499$",
+                paidAmount: "750$",
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Car",
+                amount: "1,499$",
+                paidAmount: "1,000$",
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "House",
+                amount: "1,499$",
+                paidAmount: "500$",
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Yandex",
+                amount: "1,499$",
+                paidAmount: "1,200$",
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Watch",
+                amount: "1,499$",
+                paidAmount: "800$",
+                progressColor: Color(UIColor.App.purple)
+            )
+        }
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func debtCardView(totalDebt: String) -> some View {
+        VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
+            HStack {
+                VStack(alignment: .leading, spacing: Metrics.textSpacing) {
+                    Text(LocalizedKey.Home.totalDebt)
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.7))
+
+                    Text(totalDebt)
+                        .font(.system(size: Metrics.totalDebtSize, weight: .bold))
+                        .foregroundColor(.white)
+                }
+
+                Spacer()
+
+                Image(systemName: "dollarsign.circle.fill")
+                    .font(.title)
+                    .foregroundColor(Color(UIColor.App.purple))
+                    .frame(width: Metrics.debtIconSize, height: Metrics.debtIconSize)
+                    .background(Color(UIColor.App.purple).opacity(0.2))
+                    .clipShape(Circle())
+            }
+
+            HStack(spacing: Metrics.debtInfoSpacing) {
+                debtChangeView
+                nextPaymentView
+            }
+        }
+        .padding(Metrics.cardPadding)
+        .frame(maxWidth: .infinity)
+        .background(
+            LinearGradient(
+                colors: [
+                    Color(UIColor.App.black),
+                    Color(UIColor.App.black).opacity(0.8)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    private var debtChangeView: some View {
+        VStack(alignment: .leading, spacing: Metrics.textSpacing) {
+            Text(LocalizedKey.Home.monthlyDifferent)
+                .font(.caption)
+                .foregroundColor(.white.opacity(0.7))
+            HStack(spacing: Metrics.textSpacing) {
+                Image(systemName: "arrow.up.right")
+                    .font(.caption)
+                Text("+2.4%")
+                    .font(.subheadline)
+                    .bold()
+            }
+            .foregroundColor(.red)
+        }
+    }
+
+    @ViewBuilder
+    private var nextPaymentView: some View {
+        VStack(alignment: .leading, spacing: Metrics.textSpacing) {
+            Text(LocalizedKey.Home.nextPaymentDate)
+                .font(.caption)
+                .foregroundColor(.white.opacity(0.7))
+            HStack(spacing: Metrics.textSpacing) {
+                Text("$ 17 000")
+                    .font(.subheadline)
+                    .bold()
+                    .foregroundColor(.white)
+                Text("•")
+                    .font(.subheadline)
+                    .foregroundColor(Color(UIColor.App.purple))
+                Text("27 марта")
+                    .font(.subheadline)
+                    .foregroundColor(Color(UIColor.App.purple))
+            }
+        }
+    }
+
+    @ViewBuilder
+    func loanInfoView(
         activeLoans: Int,
         nextPayment: String,
         paymentDate: String
     ) -> some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Активные займы")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Text("\(activeLoans)")
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(.white)
-            }
-            .padding()
+        VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
+            Text(LocalizedKey.Home.debts)
+                .font(.headline)
+                .foregroundColor(.white)
 
-            Spacer()
+            HStack(spacing: Metrics.loanInfoSpacing) {
+                loanTypeView(
+                    icon: "creditcard.fill",
+                    title: LocalizedKey.Home.takenLoans,
+                    count: activeLoans,
+                    amount: formatAmount(25000)
+                )
 
-            VStack(alignment: .trailing) {
-                Text("Следующий платёж")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Text("$ \(nextPayment) (\(paymentDate))")
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(.white)
+                Rectangle()
+                    .fill(Color.white.opacity(0.2))
+                    .frame(width: Metrics.dividerWidth, height: Metrics.dividerHeight)
+
+                loanTypeView(
+                    icon: "person.2.fill",
+                    title: LocalizedKey.Home.givenLoans,
+                    count: 3,
+                    amount: formatAmount(15000)
+                )
             }
-            .padding()
         }
-        .frame(maxWidth: .infinity, maxHeight: 64)
-        .background(.black)
-        .clipShape(.rect(cornerRadius: 16))
+        .padding(.horizontal, Metrics.loanInfoHorizontalPadding)
+        .padding(.vertical, Metrics.loanInfoVerticalPadding)
+        .frame(maxWidth: .infinity)
+        .background(
+            LinearGradient(
+                colors: [
+                    Color(UIColor.App.black),
+                    Color(UIColor.App.black).opacity(0.8)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         .padding(.horizontal)
     }
 
     @ViewBuilder
-    private func creditCardView(title: String, amount: String, progressColor: Color) -> some View {
-        VStack(alignment: .leading) {
+    private func loanTypeView(
+        icon: String,
+        title: String,
+        count: Int,
+        amount: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: Metrics.loanTypeSpacing) {
+            HStack(spacing: Metrics.iconSpacing) {
+                Image(systemName: icon)
+                    .font(.system(size: Metrics.loanIconSize))
+                    .foregroundColor(Color(UIColor.App.purple))
+                Text(title)
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.7))
+            }
+
+            VStack(alignment: .leading, spacing: Metrics.textSpacing) {
+                Text("\(count)")
+                    .font(.system(size: Metrics.loanCountSize, weight: .bold))
+                    .foregroundColor(.white)
+                Text("$ \(amount)")
+                    .font(.system(size: Metrics.loanAmountSize, weight: .medium))
+                    .foregroundColor(.white.opacity(0.8))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    @ViewBuilder
+    func creditCardView(
+        title: String,
+        amount: String,
+        paidAmount: String,
+        progressColor: Color
+    ) -> some View {
+        VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
             HStack {
                 Text(title)
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color(UIColor.App.purple))
             }
-            Text(amount)
-                .font(.title3)
-                .bold()
-                .foregroundColor(.black)
+
+            VStack(alignment: .leading, spacing: Metrics.textSpacing) {
+                Text(amount)
+                    .font(.title3)
+                    .bold()
+                    .foregroundColor(.white)
+
+                Text("\(LocalizedKey.Home.paidAmout): \(paidAmount)")
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.7))
+            }
+
             ProgressView(value: 0.5)
                 .tint(progressColor)
-                .frame(height: 5)
-                .background(.gray.opacity(0.3))
-                .cornerRadius(2.5)
+                .frame(height: Metrics.progressHeight)
+                .background(Color.white.opacity(0.2))
+                .cornerRadius(Metrics.progressCornerRadius)
         }
         .padding()
-        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxHeight: Metrics.creditCardHeight)
+        .background(Color(UIColor.App.black))
+        .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
+    }
+}
+
+// MARK: HomeView.Metrics
+
+private extension HomeView {
+    enum Metrics {
+        static let bottomPadding: CGFloat = 64
+        static let sectionSpacing: CGFloat = 16
+        static let gridSpacing: CGFloat = 16
+        static let cardContentSpacing: CGFloat = 12
+        static let textSpacing: CGFloat = 4
+        static let iconSpacing: CGFloat = 6
+        static let menuIconSpacing: CGFloat = 4
+        static let menuIconSize: CGFloat = 12
+        static let debtIconSize: CGFloat = 48
+        static let debtInfoSpacing: CGFloat = 16
+        static let loanInfoSpacing: CGFloat = 16
+        static let loanTypeSpacing: CGFloat = 6
+        static let loanIconSize: CGFloat = 14
+        static let loanCountSize: CGFloat = 22
+        static let loanAmountSize: CGFloat = 18
+        static let dividerWidth: CGFloat = 1
+        static let dividerHeight: CGFloat = 32
+        static let loanInfoHorizontalPadding: CGFloat = 16
+        static let loanInfoVerticalPadding: CGFloat = 12
+        static let totalDebtSize: CGFloat = 32
+        static let progressHeight: CGFloat = 4
+        static let progressCornerRadius: CGFloat = 2
+        static let creditCardHeight: CGFloat = 120
+        static let cardPadding: CGFloat = 20
+        static let cornerRadius: CGFloat = 16
     }
 }

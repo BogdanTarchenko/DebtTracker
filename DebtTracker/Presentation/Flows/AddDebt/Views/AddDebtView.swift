@@ -11,15 +11,15 @@ struct AddDebtView: View {
     @State private var creditName = ""
     @State private var interestRate: Double?
     @State private var paidAmount: Double?
-    @State private var selectedCreditType = "Потребительский кредит"
+    @State private var selectedCreditType = LocalizedKey.AddDebt.consumerLoan
     @State private var startDate = Date()
     @State private var termMonths: Double?
 
     private let creditTypes = [
-        "Потребительский кредит",
-        "Автокредит",
-        "Ипотека",
-        "Микрозайм"
+        LocalizedKey.AddDebt.consumerLoan,
+        LocalizedKey.AddDebt.autoLoan,
+        LocalizedKey.AddDebt.mortgageLoan,
+        LocalizedKey.AddDebt.microLoan
     ]
 
     var body: some View {

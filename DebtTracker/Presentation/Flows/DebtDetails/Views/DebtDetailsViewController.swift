@@ -8,16 +8,16 @@ final class DebtDetailsViewController: UIViewController {
     let debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .percent,
         rightImage: .clock,
-        leftTitle: "Ставка",
-        rightTitle: "Срок",
+        leftTitle: LocalizedKey.DebtDetails.loanRate,
+        rightTitle: LocalizedKey.DebtDetails.loanTerm,
         leftAmount: "12.5%",
         rightAmount: "36 месяцев"
     ))
     let debtDateInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .calendar,
         rightImage: .dollarsign,
-        leftTitle: "Дата открытия",
-        rightTitle: "Следующий платеж",
+        leftTitle: LocalizedKey.DebtDetails.openedDate,
+        rightTitle: LocalizedKey.DebtDetails.nextPayment,
         leftAmount: "25.04.2025",
         rightAmount: "25.05.2025"
     ))
@@ -28,7 +28,7 @@ final class DebtDetailsViewController: UIViewController {
 
         let symbolConfig = UIImage.SymbolConfiguration(weight: .semibold)
         var config = UIButton.Configuration.filled()
-        config.title = "Добавить транзакцию"
+        config.title = LocalizedKey.DebtDetails.addTransaction
         config.image = UIImage(systemName: "plus", withConfiguration: symbolConfig)
 
         config.imagePadding = 8

@@ -12,7 +12,7 @@ struct MainView: View {
     }
 
     var body: some View {
-        let addDebtView = AddDebtView(controller: factory.makeAddDebtViewController())
+        let addDebtView = AddDebtView()
         ZStack {
             contentView
             tabBarView
@@ -35,6 +35,7 @@ private extension MainView {
     var tabContent: some View {
         let homeView = factory.makeHomeView()
         let calculatorView = factory.makeCalculatorView()
+        let statsView = factory.makeStatsView()
         let settingsView = SettingsView(controller: factory.makeSettingsViewController())
         switch selectedTab {
         case .home:
@@ -42,7 +43,7 @@ private extension MainView {
         case .calculator:
             calculatorView
         case .stats:
-            homeView
+            statsView
         case .settings:
             settingsView
         }

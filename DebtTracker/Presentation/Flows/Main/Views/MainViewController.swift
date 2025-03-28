@@ -46,6 +46,17 @@ private extension MainView {
             statsView
         case .settings:
             settingsView
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(LocalizedKey.Settings.title)
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundColor(.white)
+                    }
+                }
+                .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 

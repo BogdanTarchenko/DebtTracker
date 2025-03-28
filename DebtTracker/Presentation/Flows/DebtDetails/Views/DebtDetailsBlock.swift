@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-class DebtDetailsBlock: UIView {
+final class DebtDetailsBlock: UIView {
     private let leftBlock: DebtDetailsInfoBlock
     private let rightBlock: DebtDetailsInfoBlock
 

@@ -1,6 +1,6 @@
 import UIKit
 
-class DebtDetailsGeneralInfo: UIView {
+final class DebtDetailsGeneralInfo: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Сумма кредита"

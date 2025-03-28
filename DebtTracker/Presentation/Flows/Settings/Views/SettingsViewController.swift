@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
 
     private let passwordToggleLabel: UILabel = {
         let label = UILabel()
-        label.text = LocalizedKey.Settings.title
+        label.text = LocalizedKey.Settings.passwordTitle
         return label
     }()
 

@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - DebtDetailsPaymentHistoryCell
 
-class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
+final class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
     static let reuseIdentifier = "DebtDetailsPaymentHistoryCell"
 
     private enum Constants {

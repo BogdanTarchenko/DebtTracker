@@ -13,5 +13,6 @@ protocol DIContainerProtocol {
     func makeStatsView() -> StatsView
     func makeDebtDetailsViewController() -> DebtDetailsViewController
     func makeSettingsViewController() -> SettingsViewController
+    func makePasswordSetupViewController() -> PasswordSetupViewController
     func makeAddDebtViewController() -> AddDebtViewController
 }

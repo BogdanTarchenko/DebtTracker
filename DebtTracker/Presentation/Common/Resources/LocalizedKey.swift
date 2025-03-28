@@ -204,4 +204,18 @@ extension LocalizedKey {
             rawValue: "settings_change_password"
         ).localized
     }
+
+    enum PasswordSetup {
+        static let welcomeTitle = LocalizedKey(
+            rawValue: "password_setup_welcome_title"
+        ).localized
+
+        static let confirmationPasswordTitle = LocalizedKey(
+            rawValue: "password_setup_confirmation_password_title"
+        ).localized
+
+        static let wrongPasswordTitle = LocalizedKey(
+            rawValue: "password_setup_wrong_password_title"
+        ).localized
+    }
 }

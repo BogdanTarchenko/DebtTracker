@@ -189,7 +189,7 @@ class HeaderView: UICollectionReusableView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         label.textAlignment = .left
         return label
     }()

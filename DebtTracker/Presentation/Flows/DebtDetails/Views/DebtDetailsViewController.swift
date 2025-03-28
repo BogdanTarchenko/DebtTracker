@@ -1,7 +1,55 @@
 import SnapKit
+import SwiftUICore
 import UIKit
 
 // MARK: - DebtDetailsViewController
+final class DebtDetailsViewController: UIViewController {
+    // MARK: UI Components
+
+    let generalDebtInfo: DebtDetailsGeneralInfo = .init()
+    let debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
+        leftImage: .percent,
+        rightImage: .clock,
+        leftTitle: LocalizedKey.DebtDetails.loanRate,
+        rightTitle: LocalizedKey.DebtDetails.loanTerm,
+        leftAmount: "12.5%",
+        rightAmount: "36 месяцев"
+    ))
+    let debtDateInfo: DebtDetailsBlock = .init(frame: .zero, .init(
+        leftImage: .calendar,
+        rightImage: .dollarsign,
+        leftTitle: LocalizedKey.DebtDetails.openedDate,
+        rightTitle: LocalizedKey.DebtDetails.nextPayment,
+        leftAmount: "25.04.2025",
+        rightAmount: "25.05.2025"
+    ))
+    let debtProgressInfo: DebtDetailsProgressInfo = .init()
+    let debtPaymentsHistory: DebtDetailsPaymentHistory = .init()
+    let addTransactionButton: UIButton = {
+        let button = UIButton(type: .system)
+
+        let symbolConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        var config = UIButton.Configuration.filled()
+        config.title = LocalizedKey.DebtDetails.addTransaction
+        config.image = UIImage(systemName: "plus", withConfiguration: symbolConfig)
+
+        config.imagePadding = 8
+        config.imagePlacement = .leading
+
+        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        config
+            .titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+                return outgoing
+            }
+        config.baseForegroundColor = UIColor.App.white
+        config.baseBackgroundColor = UIColor.App.black
+
+        button.configuration = config
+
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
 
 final class DebtDetailsViewController: UIViewController {
     // MARK: - UI Components

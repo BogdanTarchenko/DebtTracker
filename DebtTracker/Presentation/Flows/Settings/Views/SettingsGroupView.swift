@@ -9,8 +9,9 @@ class SettingsGroupView: UIView {
         static let verticalInset: CGFloat = 16
         static let elementSpacing: CGFloat = 16
         static let animationDuration: TimeInterval = 0.3
-        static let buttonHeight: CGFloat = 44
     }
+
+    weak var delegate: ButtonStateDelegate?
 
     // MARK: - UI Elements
 
@@ -43,20 +44,6 @@ class SettingsGroupView: UIView {
         return switchView
     }()
 
-    private let changePasswordButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(LocalizedKey.Settings.changePassword, for: .normal)
-        button.backgroundColor = UIColor.App.purple
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
-        button.layer.cornerRadius = 8
-        button.alpha = 0
-        button.isHidden = true
-        return button
-    }()
-
-    private var changePasswordButtonHeightConstraint: Constraint?
-
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -81,9 +68,7 @@ class SettingsGroupView: UIView {
         let bottomInset = Constants.verticalInset
         let contentHeight = passwordToggleLabel.intrinsicContentSize.height +
             Constants.elementSpacing +
-            faceIDToggleLabel.intrinsicContentSize.height +
-            Constants.elementSpacing * 2 +
-            Constants.buttonHeight
+            faceIDToggleLabel.intrinsicContentSize.height
 
         let totalHeight = topInset + contentHeight + bottomInset
         let width = UIView.noIntrinsicMetric
@@ -112,8 +97,7 @@ class SettingsGroupView: UIView {
             passwordToggleLabel,
             passwordToggleSwitch,
             faceIDToggleLabel,
-            faceIDToggleSwitch,
-            changePasswordButton
+            faceIDToggleSwitch
         ]
 
         for view in views {
@@ -147,13 +131,6 @@ class SettingsGroupView: UIView {
             make.centerY.equalTo(faceIDToggleLabel)
             make.trailing.equalToSuperview().inset(Constants.horizontalInset)
         }
-
-        changePasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(faceIDToggleLabel.snp.bottom).offset(Constants.elementSpacing * 2)
-            make.leading.trailing.equalToSuperview().inset(Constants.horizontalInset)
-            changePasswordButtonHeightConstraint = make.height.equalTo(0).constraint
-            make.bottom.equalToSuperview().inset(Constants.verticalInset).priority(.low)
-        }
     }
 
     @objc private func handlePasswordToggleSwitchValueChanged() {
@@ -166,9 +143,17 @@ class SettingsGroupView: UIView {
             faceIDToggleSwitch.alpha = isPasswordEnabled ? 1.0 : 0.7
             faceIDToggleLabel.alpha = isPasswordEnabled ? 1.0 : 0.7
 
-            changePasswordButton.alpha = isPasswordEnabled ? 1.0 : 0
-            changePasswordButton.isHidden = !isPasswordEnabled
-            changePasswordButtonHeightConstraint?.update(offset: isPasswordEnabled ? Constants.buttonHeight : 0)
+            if !isPasswordEnabled {
+                faceIDToggleSwitch.setOn(false, animated: true)
+            }
+
+            if isPasswordEnabled {
+                print("called showing button")
+                delegate?.showButton()
+            } else {
+                print("called hiding button")
+                delegate?.hideButton()
+            }
 
             layoutIfNeeded()
         })
@@ -180,15 +165,5 @@ class SettingsGroupView: UIView {
             action: #selector(handlePasswordToggleSwitchValueChanged),
             for: .valueChanged
         )
-
-        changePasswordButton.addTarget(
-            self,
-            action: #selector(changePasswordTapped),
-            for: .touchUpInside
-        )
-    }
-
-    @objc private func changePasswordTapped() {
-        print("Кнопка 'Сменить пароль' нажата")
     }
 }

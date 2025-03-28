@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+// MARK: - SettingsViewController
+
 final class SettingsViewController: UIViewController {
     // MARK: - Constants
 
@@ -14,9 +16,20 @@ final class SettingsViewController: UIViewController {
 
     // MARK: - UI Elements
 
-    private let settingsGroupView: UIView = {
+    private let settingsGroupView: SettingsGroupView = {
         let view = SettingsGroupView(frame: .zero)
         return view
+    }()
+
+    private let changePasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(LocalizedKey.Settings.changePassword, for: .normal)
+        button.backgroundColor = UIColor.App.purple
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
+        button.layer.cornerRadius = 8
+        button.isHidden = true
+        return button
     }()
 
     // MARK: - Lifecycle
@@ -24,6 +37,7 @@ final class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = UIColor.App.black
+        settingsGroupView.delegate = self
         setupUI()
         setupConstraints()
     }
@@ -31,6 +45,7 @@ final class SettingsViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .black
         view.addSubview(settingsGroupView)
+        view.addSubview(changePasswordButton)
     }
 
     private func setupConstraints() {
@@ -38,5 +53,36 @@ final class SettingsViewController: UIViewController {
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(Constants.horizontalInset)
             make.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.verticalInset)
         }
+
+        changePasswordButton.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(Constants.horizontalInset)
+            make.top.equalTo(settingsGroupView.snp.bottom).offset(Constants.elementSpacing)
+            make.height.equalTo(Constants.buttonHeight)
+        }
+    }
+
+    private func setupActions() {
+        changePasswordButton.addTarget(
+            self,
+            action: #selector(changePasswordButtonTapped),
+            for: .valueChanged
+        )
+    }
+
+    @objc
+    func changePasswordButtonTapped() {
+        print("Change password button tapped")
+    }
+}
+
+// MARK: ButtonStateDelegate
+
+extension SettingsViewController: ButtonStateDelegate {
+    func hideButton() {
+        changePasswordButton.isHidden = true
+    }
+
+    func showButton() {
+        changePasswordButton.isHidden = false
     }
 }

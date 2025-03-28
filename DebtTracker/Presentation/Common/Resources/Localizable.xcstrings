@@ -89,7 +89,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The date of taking the loan"
+            "value" : "Loan date"
           }
         },
         "ru" : {

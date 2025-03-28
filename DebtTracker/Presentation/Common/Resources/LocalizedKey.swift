@@ -230,7 +230,7 @@ extension LocalizedKey {
             rawValue: "password_setup_wrong_password_title"
         ).localized
     }
-    
+
     enum DebtDetails {
         static let loanRate = LocalizedKey(
             rawValue: "loan_rate"

@@ -28,6 +28,7 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupActions()
     }
 
     private func setupUI() {
@@ -55,13 +56,16 @@ final class SettingsViewController: UIViewController {
         changePasswordButton.addTarget(
             self,
             action: #selector(changePasswordButtonTapped),
-            for: .valueChanged
+            for: .touchUpInside
         )
     }
 
     @objc
     func changePasswordButtonTapped() {
-        // TODO: Логика нажатия на кнопку смены пароля
+        let passwordSetupViewController = PasswordSetupViewController()
+        navigationController?.present(passwordSetupViewController, animated: true, completion: {
+            print("setted up password")
+        })
     }
 }
 

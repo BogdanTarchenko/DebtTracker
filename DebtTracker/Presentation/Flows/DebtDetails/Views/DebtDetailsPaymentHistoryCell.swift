@@ -21,7 +21,7 @@ final class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
     private let paymentTypeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         label.numberOfLines = 1
         return label
     }()
@@ -37,7 +37,7 @@ final class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
     private let amountLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         label.textAlignment = .right
         return label
     }()
@@ -59,7 +59,7 @@ final class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
     }
 
     private func setupView() {
-        contentView.backgroundColor = UIColor(named: "BlackCustomColor")
+        contentView.backgroundColor = UIColor.App.black
 
         contentView.addSubview(paymentTypeLabel)
         contentView.addSubview(paymentDateLabel)

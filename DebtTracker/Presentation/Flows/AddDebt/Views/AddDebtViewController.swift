@@ -35,7 +35,7 @@ class AddDebtViewController: UIViewController {
     }
 
     private func setupUI() {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = UIColor.App.gray
 
         addDebtScrollView.addSubview(contentView)
         addDebtScrollView.isScrollEnabled = true
@@ -51,19 +51,17 @@ class AddDebtViewController: UIViewController {
     }
 
     fileprivate func setupDebtContainer() {
-        debtTypeView.backgroundColor = UIColor(named: "RedCustomColor")
+        debtTypeView.backgroundColor = UIColor.App.red
         debtTypeView.layer.cornerRadius = 10
         contentView.addSubview(debtTypeView)
 
         debtTypeTitleLabel.text = "Debt type"
         debtTypeTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        debtTypeTitleLabel.textColor = .white
+        debtTypeTitleLabel.textColor = UIColor.App.white
 
-        debtBorrowedButton.backgroundColor = UIColor(
-            named: "BlackCustomColor"
-        )
+        debtBorrowedButton.backgroundColor = UIColor.App.black
         debtBorrowedButton.layer.cornerRadius = 10
-        debtLentButton.backgroundColor = .white
+        debtLentButton.backgroundColor = UIColor.App.white
         debtLentButton.layer.cornerRadius = 10
 
         debtTypeView.addSubViews(debtTypeTitleLabel, debtBorrowedButton, debtLentButton)
@@ -93,12 +91,12 @@ class AddDebtViewController: UIViewController {
         infoDebtView.addSubview(creditNameTextField)
 
         creditNameLabel.text = "Credit name"
-        creditNameLabel.textColor = UIColor(named: "BlackCustomColor")
+        creditNameLabel.textColor = UIColor.App.black
         creditNameLabel.font = standartFont16Bold
         infoDebtView.addSubview(creditNameLabel)
 
         purposeTextLabel.text = "Purpose / Description"
-        purposeTextLabel.textColor = UIColor(named: "BlackCustomColor")
+        purposeTextLabel.textColor = UIColor.App.black
         purposeTextLabel.font = standartFont16Bold
         infoDebtView.addSubview(purposeTextLabel)
 
@@ -108,13 +106,13 @@ class AddDebtViewController: UIViewController {
     }
 
     fileprivate func setupDateContainer() {
-        dateContainerView.backgroundColor = .white
+        dateContainerView.backgroundColor = UIColor.App.white
         dateContainerView.layer.cornerRadius = 12
         contentView.addSubview(dateContainerView)
 
         dateTitleLabel.text = "Due date"
         dateTitleLabel.font = standartFont16Bold
-        dateTitleLabel.textColor = UIColor(named: "BlackCustomColor")
+        dateTitleLabel.textColor = UIColor.App.black
         dateContainerView.addSubview(dateTitleLabel)
 
         dateTextField.layer.cornerRadius = 14
@@ -129,8 +127,8 @@ class AddDebtViewController: UIViewController {
 
         let attributedTitle = NSAttributedString(string: title, attributes: attributes)
         addDebtButton.setAttributedTitle(attributedTitle, for: .normal)
-        addDebtButton.backgroundColor = .systemBlue
-        addDebtButton.setTitleColor(UIColor(named: "BlackCustomColor"), for: .normal)
+        addDebtButton.backgroundColor = UIColor.App.blue
+        addDebtButton.setTitleColor(UIColor.App.black, for: .normal)
         addDebtButton.layer.cornerRadius = 8
         contentView.addSubview(addDebtButton)
     }

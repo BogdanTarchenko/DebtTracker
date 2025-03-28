@@ -42,8 +42,8 @@ final class SettingsViewController: UIViewController {
     private let changePasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(LocalizedKey.Settings.changePassword, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor.App.blue
+        button.setTitleColor(UIColor.App.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         button.layer.cornerRadius = 8
         button.alpha = 0

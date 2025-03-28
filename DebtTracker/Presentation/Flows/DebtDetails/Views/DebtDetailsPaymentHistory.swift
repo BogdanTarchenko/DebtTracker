@@ -69,7 +69,7 @@ final class DebtDetailsPaymentHistory: UICollectionView {
         dataSource = self
         delegate = self
 
-        backgroundColor = UIColor(named: "BlackCustomColor")
+        backgroundColor = UIColor.App.black
         contentInset = .zero
         scrollIndicatorInsets = .zero
         layer.cornerRadius = 10
@@ -163,7 +163,7 @@ class HeaderView: UICollectionReusableView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .white
+        label.textColor = UIColor.App.white
         label.textAlignment = .left
         return label
     }()
@@ -176,7 +176,7 @@ class HeaderView: UICollectionReusableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(named: "BlackCustomColor")
+        backgroundColor = UIColor.App.black
         addSubview(titleLabel)
         addSubview(separatorView)
 

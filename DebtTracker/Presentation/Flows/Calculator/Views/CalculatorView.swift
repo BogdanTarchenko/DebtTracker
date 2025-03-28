@@ -30,14 +30,14 @@ struct CalculatorView: View {
             .padding(.vertical)
             .padding(.bottom, Metrics.bottomPadding)
         }
-        .background(Color.black)
+        .background(Color(UIColor.App.black))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(LocalizedKey.Calculator.title)
                     .font(.subheadline)
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(UIColor.App.white))
             }
         }
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
@@ -94,7 +94,7 @@ private extension CalculatorView {
         Button(action: calculatePayments) {
             Text(LocalizedKey.Calculator.calculateButtonTitle)
                 .font(.headline)
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
                 .frame(maxWidth: .infinity)
                 .frame(height: Metrics.buttonHeight)
                 .background(Color(UIColor.App.purple))
@@ -140,15 +140,15 @@ private extension CalculatorView {
                     .foregroundColor(Color(UIColor.App.purple))
                 Text(title)
                     .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.7))
+                    .foregroundColor(Color(UIColor.App.white).opacity(0.7))
             }
 
             TextField("", value: value, format: .number)
                 .keyboardType(keyboardType)
                 .font(.system(size: Metrics.inputFontSize, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.App.white))
                 .padding()
-                .background(Color.white.opacity(0.1))
+                .background(Color(UIColor.App.white).opacity(0.1))
                 .cornerRadius(Metrics.inputCornerRadius)
         }
     }
@@ -174,7 +174,7 @@ private extension CalculatorView {
                         .foregroundColor(.white.opacity(0.7))
                     Text(value)
                         .font(.system(size: Metrics.resultFontSize, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(UIColor.App.white))
                 }
             }
             Spacer()

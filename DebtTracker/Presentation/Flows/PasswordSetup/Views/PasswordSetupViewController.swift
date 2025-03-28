@@ -117,8 +117,8 @@ final class PasswordSetupViewController: UIViewController {
                 let button = UIButton(type: .system)
                 button.setTitle(title, for: .normal)
                 button.titleLabel?.font = .systemFont(ofSize: 24, weight: .medium)
-                button.backgroundColor = .white
-                button.setTitleColor(.black, for: .normal)
+                button.backgroundColor = UIColor.App.white
+                button.setTitleColor(UIColor.App.black, for: .normal)
                 button.addTarget(self, action: #selector(keyPressed(_:)), for: .touchUpInside)
                 rowStack.addArrangedSubview(button)
             }
@@ -180,7 +180,7 @@ final class PasswordSetupViewController: UIViewController {
     private func updateDots() {
         let activeDigits = isConfirming ? confirmationDigits : passwordDigits
         for (index, dot) in dotViews.enumerated() {
-            dot.backgroundColor = (index < activeDigits.count) ? .systemBlue : .systemGray4
+            dot.backgroundColor = (index < activeDigits.count) ? UIColor.App.blue : .systemGray4
         }
     }
 

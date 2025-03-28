@@ -123,7 +123,7 @@ extension DebtDetailsPaymentHistory: UICollectionViewDataSource {
                 return UICollectionReusableView()
             }
 
-            header.configure(title: "История платежей")
+            header.configure(title: LocalizedKey.DebtDetails.paymentHistory)
             return header
         }
         return UICollectionReusableView()

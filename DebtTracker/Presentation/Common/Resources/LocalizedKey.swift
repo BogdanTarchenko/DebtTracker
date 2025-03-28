@@ -134,6 +134,18 @@ extension LocalizedKey {
     }
 
     enum AddDebt {
+        static let consumerLoan = LocalizedKey(
+            rawValue: "consumer_loan"
+        ).localized
+        static let autoLoan = LocalizedKey(
+            rawValue: "auto_loan"
+        ).localized
+        static let mortgageLoan = LocalizedKey(
+            rawValue: "mortgage_loan"
+        ).localized
+        static let microLoan = LocalizedKey(
+            rawValue: "micro_loan"
+        ).localized
         static let title = LocalizedKey(
             rawValue: "add_debt_title"
         ).localized
@@ -216,6 +228,39 @@ extension LocalizedKey {
 
         static let wrongPasswordTitle = LocalizedKey(
             rawValue: "password_setup_wrong_password_title"
+        ).localized
+    }
+
+    enum DebtDetails {
+        static let loanRate = LocalizedKey(
+            rawValue: "loan_rate"
+        ).localized
+        static let loanTerm = LocalizedKey(
+            rawValue: "loan_term"
+        ).localized
+        static let openedDate = LocalizedKey(
+            rawValue: "opened_date"
+        ).localized
+        static let nextPayment = LocalizedKey(
+            rawValue: "next_payment"
+        ).localized
+        static let addTransaction = LocalizedKey(
+            rawValue: "add_transaction"
+        ).localized
+        static let creditAmount = LocalizedKey(
+            rawValue: "credit_amount"
+        ).localized
+        static let paymentProgress = LocalizedKey(
+            rawValue: "payment_progress"
+        ).localized
+        static let remain = LocalizedKey(
+            rawValue: "remain"
+        ).localized
+        static let paid = LocalizedKey(
+            rawValue: "paid"
+        ).localized
+        static let paymentHistory = LocalizedKey(
+            rawValue: "payment_history"
         ).localized
     }
 }

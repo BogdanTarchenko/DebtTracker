@@ -4,16 +4,6 @@ import UIKit
 // MARK: - SettingsViewController
 
 final class SettingsViewController: UIViewController {
-    // MARK: - Constants
-
-    private enum Constants {
-        static let horizontalInset: CGFloat = 16
-        static let verticalInset: CGFloat = 16
-        static let elementSpacing: CGFloat = 16
-        static let animationDuration: TimeInterval = 0.3
-        static let buttonHeight: CGFloat = 44
-    }
-
     // MARK: - UI Elements
 
     private let settingsGroupView: SettingsGroupView = {
@@ -36,13 +26,13 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = UIColor.App.black
-        settingsGroupView.delegate = self
         setupUI()
         setupConstraints()
     }
 
     private func setupUI() {
+        navigationController?.navigationBar.barTintColor = UIColor.App.black
+        settingsGroupView.delegate = self
         view.backgroundColor = .black
         view.addSubview(settingsGroupView)
         view.addSubview(changePasswordButton)
@@ -71,7 +61,7 @@ final class SettingsViewController: UIViewController {
 
     @objc
     func changePasswordButtonTapped() {
-        print("Change password button tapped")
+        // TODO: Логика нажатия на кнопку смены пароля
     }
 }
 
@@ -84,5 +74,17 @@ extension SettingsViewController: ButtonStateDelegate {
 
     func showButton() {
         changePasswordButton.isHidden = false
+    }
+}
+
+// MARK: SettingsViewController.Constants
+
+extension SettingsViewController {
+    private enum Constants {
+        static let horizontalInset: CGFloat = 16
+        static let verticalInset: CGFloat = 16
+        static let elementSpacing: CGFloat = 16
+        static let animationDuration: TimeInterval = 0.3
+        static let buttonHeight: CGFloat = 44
     }
 }

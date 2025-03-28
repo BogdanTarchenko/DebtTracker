@@ -1,15 +1,10 @@
 import SnapKit
 import UIKit
 
+// MARK: - SettingsGroupView
+
 class SettingsGroupView: UIView {
     // MARK: - Constants
-
-    private enum Constants {
-        static let horizontalInset: CGFloat = 16
-        static let verticalInset: CGFloat = 16
-        static let elementSpacing: CGFloat = 16
-        static let animationDuration: TimeInterval = 0.3
-    }
 
     weak var delegate: ButtonStateDelegate?
 
@@ -63,22 +58,6 @@ class SettingsGroupView: UIView {
         gradientLayer.frame = bounds
     }
 
-    override var intrinsicContentSize: CGSize {
-        let topInset = Constants.verticalInset
-        let bottomInset = Constants.verticalInset
-        let contentHeight = passwordToggleLabel.intrinsicContentSize.height +
-            Constants.elementSpacing +
-            faceIDToggleLabel.intrinsicContentSize.height
-
-        let totalHeight = topInset + contentHeight + bottomInset
-        let width = UIView.noIntrinsicMetric
-
-        return CGSize(
-            width: width,
-            height: totalHeight
-        )
-    }
-
     // MARK: - Private Methods
 
     private func setupUI() {
@@ -105,8 +84,8 @@ class SettingsGroupView: UIView {
             view.isUserInteractionEnabled = true
         }
 
-        faceIDToggleSwitch.alpha = 0.7
-        faceIDToggleLabel.alpha = 0.7
+        faceIDToggleSwitch.alpha = Constants.lowAlpha
+        faceIDToggleLabel.alpha = Constants.lowAlpha
 
         isUserInteractionEnabled = true
     }
@@ -131,27 +110,26 @@ class SettingsGroupView: UIView {
             make.centerY.equalTo(faceIDToggleLabel)
             make.trailing.equalToSuperview().inset(Constants.horizontalInset)
         }
+
+        snp.makeConstraints { make in
+            make.bottom.equalTo(faceIDToggleLabel.snp.bottom).offset(Constants.verticalInset)
+        }
     }
 
     @objc private func handlePasswordToggleSwitchValueChanged() {
         let isPasswordEnabled = passwordToggleSwitch.isOn
 
-        UIView.animate(withDuration: Constants.animationDuration, animations: { [weak self] in
-            guard let self else { return }
-
+        UIView.animate(withDuration: Constants.animationDuration, animations: { [self] in
             faceIDToggleSwitch.isUserInteractionEnabled = isPasswordEnabled
-            faceIDToggleSwitch.alpha = isPasswordEnabled ? 1.0 : 0.7
-            faceIDToggleLabel.alpha = isPasswordEnabled ? 1.0 : 0.7
-
-            if !isPasswordEnabled {
-                faceIDToggleSwitch.setOn(false, animated: true)
-            }
 
             if isPasswordEnabled {
-                print("called showing button")
+                faceIDToggleSwitch.alpha = Constants.highAlpha
+                faceIDToggleLabel.alpha = Constants.highAlpha
                 delegate?.showButton()
             } else {
-                print("called hiding button")
+                faceIDToggleSwitch.alpha = Constants.lowAlpha
+                faceIDToggleLabel.alpha = Constants.lowAlpha
+                faceIDToggleSwitch.setOn(false, animated: true)
                 delegate?.hideButton()
             }
 
@@ -165,5 +143,18 @@ class SettingsGroupView: UIView {
             action: #selector(handlePasswordToggleSwitchValueChanged),
             for: .valueChanged
         )
+    }
+}
+
+// MARK: SettingsGroupView.Constants
+
+extension SettingsGroupView {
+    private enum Constants {
+        static let horizontalInset: CGFloat = 16
+        static let verticalInset: CGFloat = 16
+        static let elementSpacing: CGFloat = 16
+        static let animationDuration: TimeInterval = 0.3
+        static let lowAlpha = 0.7
+        static let highAlpha = 1.0
     }
 }

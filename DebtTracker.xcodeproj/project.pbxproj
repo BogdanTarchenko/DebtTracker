@@ -344,29 +344,6 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		72CD2D232D9589F700313D2D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				72CD2D272D958A1100313D2D /* PaymentModel */,
-				72CD2D262D958A0C00313D2D /* CreditModel */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		72CD2D262D958A0C00313D2D /* CreditModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CreditModel;
-			sourceTree = "<group>";
-		};
-		72CD2D272D958A1100313D2D /* PaymentModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PaymentModel;
-			sourceTree = "<group>";
-		};
 		79BFA373298F4D8431870EBE /* DebtDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,7 +391,6 @@
 		8AD4A7A8B0B3F6768CCE7658 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				72CD2D232D9589F700313D2D /* Models */,
 				3D2EE8B84BF33902DA10ED30 /* Repositories */,
 				1DD242313E5FF0CB8DD01611 /* Services */,
 				C8302AA462C75778B5A76C84 /* Storage */,

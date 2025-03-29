@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - SettingsGroupView
 
-class SettingsGroupView: UIView {
+final class SettingsGroupView: UIView {
     // MARK: - Constants
 
     weak var delegate: SettingsGroupDelegate?
@@ -120,13 +120,9 @@ class SettingsGroupView: UIView {
         let isPasswordEnabled = passwordToggleSwitch.isOn
 
         if !isPasswordEnabled {
-            delegate?.turnOffPassword(completion: {
-                self.delegate?.hideButton()
-            })
+            delegate?.turnOffPassword()
         } else {
-            delegate?.createPassword(completion: {
-                self.delegate?.showButton()
-            })
+            delegate?.createPassword()
         }
 
         UIView.animate(withDuration: Constants.animationDuration, animations: { [self] in
@@ -135,10 +131,16 @@ class SettingsGroupView: UIView {
             if isPasswordEnabled {
                 faceIDToggleSwitch.alpha = Constants.highAlpha
                 faceIDToggleLabel.alpha = Constants.highAlpha
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.delegate?.showButton()
+                }
             } else {
                 faceIDToggleSwitch.alpha = Constants.lowAlpha
                 faceIDToggleLabel.alpha = Constants.lowAlpha
                 faceIDToggleSwitch.setOn(false, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.delegate?.hideButton()
+                }
             }
 
             layoutIfNeeded()

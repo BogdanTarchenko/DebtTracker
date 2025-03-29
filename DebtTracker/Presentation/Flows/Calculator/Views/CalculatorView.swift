@@ -9,6 +9,14 @@ struct CalculatorView: View {
     @State private var inputRate: Double?
     @State private var inputTerm: Double?
 
+    @State private var amountText: String = ""
+    @State private var rateText: String = ""
+    @State private var termText: String = ""
+
+    @State private var amountError: Bool = false
+    @State private var rateError: Bool = false
+    @State private var termError: Bool = false
+
     private var monthlyPayment: Double {
         0.0
     }
@@ -53,23 +61,26 @@ private extension CalculatorView {
         VStack(spacing: Metrics.contentSpacing) {
             calculatorInputView(
                 title: LocalizedKey.Calculator.creditSum,
+                text: $amountText,
                 value: $inputAmount,
-                icon: "dollarsign.circle.fill",
-                keyboardType: .decimalPad
+                error: $amountError,
+                icon: "dollarsign.circle.fill"
             )
 
             calculatorInputView(
                 title: LocalizedKey.Calculator.loanPercentage,
+                text: $rateText,
                 value: $inputRate,
-                icon: "percent",
-                keyboardType: .decimalPad
+                error: $rateError,
+                icon: "percent"
             )
 
             calculatorInputView(
                 title: LocalizedKey.Calculator.periodInMonths,
+                text: $termText,
                 value: $inputTerm,
-                icon: "calendar",
-                keyboardType: .numberPad
+                error: $termError,
+                icon: "calendar"
             )
 
             calculateButton
@@ -129,10 +140,12 @@ private extension CalculatorView {
     @ViewBuilder
     func calculatorInputView(
         title: String,
+        text: Binding<String>,
         value: Binding<Double?>,
-        icon: String,
-        keyboardType: UIKeyboardType
+        error: Binding<Bool>,
+        icon: String
     ) -> some View {
+        let keyboardType: UIKeyboardType = .decimalPad
         VStack(alignment: .leading, spacing: Metrics.inputSpacing) {
             HStack(spacing: Metrics.iconSpacing) {
                 Image(systemName: icon)
@@ -143,13 +156,36 @@ private extension CalculatorView {
                     .foregroundColor(Color(UIColor.App.white).opacity(0.7))
             }
 
-            TextField("", value: value, format: .number)
-                .keyboardType(keyboardType)
-                .font(.system(size: Metrics.inputFontSize, weight: .bold))
-                .foregroundColor(Color(UIColor.App.white))
-                .padding()
-                .background(Color(UIColor.App.white).opacity(0.1))
-                .cornerRadius(Metrics.inputCornerRadius)
+            let validateUsecase = UsecaseValidateImpl()
+
+            ZStack(alignment: .trailing) {
+                TextField("", text: text)
+                    .keyboardType(keyboardType)
+                    .font(.system(size: Metrics.inputFontSize, weight: .bold))
+                    .foregroundColor(Color(UIColor.App.white))
+                    .padding()
+                    .background(Color(UIColor.App.white).opacity(0.1))
+                    .cornerRadius(Metrics.inputCornerRadius)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Metrics.inputCornerRadius)
+                            .stroke(error.wrappedValue ? Color.red : Color.clear, lineWidth: 1)
+                    )
+                    .onChange(of: text.wrappedValue) { _, newValue in
+                        validateUsecase.execute(text: newValue, value: value, error: error)
+                    }
+
+                if error.wrappedValue {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .foregroundColor(.red)
+                        .padding(.trailing, 8)
+                        .onTapGesture {
+                            showErrorAlert(
+                                title: "Error",
+                                message: LocalizedKey.Calculator.validateText
+                            )
+                        }
+                }
+            }
         }
     }
 
@@ -199,6 +235,17 @@ private extension CalculatorView {
 
 private extension CalculatorView {
     func calculatePayments() {}
+    func showErrorAlert(title: String, message: String) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController
+        else {
+            return
+        }
+
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        rootViewController.present(alert, animated: true)
+    }
 }
 
 // MARK: CalculatorView.Metrics

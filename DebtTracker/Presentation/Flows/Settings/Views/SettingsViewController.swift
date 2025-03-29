@@ -62,22 +62,34 @@ final class SettingsViewController: UIViewController {
 
     @objc
     func changePasswordButtonTapped() {
-        let passwordSetupViewController = PasswordSetupViewController()
-        navigationController?.present(passwordSetupViewController, animated: true, completion: {
-            print("setted up password")
-        })
+        let passwordSetupViewController = PasswordSetupViewController(mode: .changePassword)
+        navigationController?.present(passwordSetupViewController, animated: true)
     }
 }
 
-// MARK: ButtonStateDelegate
+// MARK: SettingsGroupDelegate
 
-extension SettingsViewController: ButtonStateDelegate {
+extension SettingsViewController: SettingsGroupDelegate {
     func hideButton() {
         changePasswordButton.isHidden = true
     }
 
     func showButton() {
         changePasswordButton.isHidden = false
+    }
+
+    func turnOffPassword(completion: @escaping () -> Void) {
+        let passwordSetupVC = PasswordSetupViewController(mode: .verifyPassword)
+        navigationController?.present(passwordSetupVC, animated: true, completion: {
+            completion()
+        })
+    }
+
+    func createPassword(completion: @escaping () -> Void) {
+        let passwordSetupVC = PasswordSetupViewController(mode: .createPassword)
+        navigationController?.present(passwordSetupVC, animated: true, completion: {
+            completion()
+        })
     }
 }
 

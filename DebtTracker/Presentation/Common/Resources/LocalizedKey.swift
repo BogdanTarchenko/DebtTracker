@@ -131,6 +131,10 @@ extension LocalizedKey {
         static let totalDebtAmount = LocalizedKey(
             rawValue: "calculator_total_debt_amount"
         ).localized
+
+        static let validateText = LocalizedKey(
+            rawValue: "validate_text"
+        ).localized
     }
 
     enum AddDebt {

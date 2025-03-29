@@ -1027,6 +1027,23 @@
           }
         }
       }
+    },
+    "validate_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only valid numbers are supported"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Только числа доступны для ввода"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

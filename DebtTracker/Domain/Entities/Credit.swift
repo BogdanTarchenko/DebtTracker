@@ -1,7 +1,6 @@
 import Foundation
 
-struct CreditDTO: Codable {
-    let id: String
+struct Credit {
     let name: String
     let amount: Double
     let depositedAmount: Double
@@ -10,5 +9,4 @@ struct CreditDTO: Codable {
     let creditTarget: CreditTargetDTO
     let startDate: Date
     let period: Int
-    let payments: [PaymentDTO]
 }

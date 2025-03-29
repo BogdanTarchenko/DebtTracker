@@ -28,6 +28,7 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupActions()
     }
 
     private func setupUI() {
@@ -55,25 +56,39 @@ final class SettingsViewController: UIViewController {
         changePasswordButton.addTarget(
             self,
             action: #selector(changePasswordButtonTapped),
-            for: .valueChanged
+            for: .touchUpInside
         )
     }
 
     @objc
     func changePasswordButtonTapped() {
-        // TODO: Логика нажатия на кнопку смены пароля
+        let passwordSetupViewController = PasswordSetupViewController(mode: .changePassword)
+        passwordSetupViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(passwordSetupViewController, animated: true)
     }
 }
 
-// MARK: ButtonStateDelegate
+// MARK: SettingsGroupDelegate
 
-extension SettingsViewController: ButtonStateDelegate {
+extension SettingsViewController: SettingsGroupDelegate {
     func hideButton() {
         changePasswordButton.isHidden = true
     }
 
     func showButton() {
         changePasswordButton.isHidden = false
+    }
+
+    func turnOffPassword() {
+        let passwordSetupViewController = PasswordSetupViewController(mode: .verifyPassword)
+        passwordSetupViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(passwordSetupViewController, animated: true)
+    }
+
+    func createPassword() {
+        let passwordSetupViewController = PasswordSetupViewController(mode: .createPassword)
+        passwordSetupViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(passwordSetupViewController, animated: true)
     }
 }
 

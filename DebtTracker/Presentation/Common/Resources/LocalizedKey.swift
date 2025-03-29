@@ -218,16 +218,32 @@ extension LocalizedKey {
     }
 
     enum PasswordSetup {
+        static let enterExistingPassword = LocalizedKey(
+            rawValue: "password_setup.enter_existing_password"
+        ).localized
+
         static let welcomeTitle = LocalizedKey(
-            rawValue: "password_setup_welcome_title"
+            rawValue: "password_setup.welcome_title"
         ).localized
 
-        static let confirmationPasswordTitle = LocalizedKey(
-            rawValue: "password_setup_confirmation_password_title"
+        static let confirmationTitle = LocalizedKey(
+            rawValue: "password_setup.confirmation_title"
         ).localized
 
-        static let wrongPasswordTitle = LocalizedKey(
-            rawValue: "password_setup_wrong_password_title"
+        static let passwordsDontMatch = LocalizedKey(
+            rawValue: "password_setup.passwords_dont_match"
+        ).localized
+
+        static let saveError = LocalizedKey(
+            rawValue: "password_setup.save_error"
+        ).localized
+
+        static let wrongPassword = LocalizedKey(
+            rawValue: "password_setup.wrong_password"
+        ).localized
+
+        static let enterPassword = LocalizedKey(
+            rawValue: "password_setup.enter_password"
         ).localized
     }
 

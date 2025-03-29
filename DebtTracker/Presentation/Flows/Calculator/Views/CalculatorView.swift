@@ -64,8 +64,7 @@ private extension CalculatorView {
                 text: $amountText,
                 value: $inputAmount,
                 error: $amountError,
-                icon: "dollarsign.circle.fill",
-                keyboardType: .decimalPad
+                icon: "dollarsign.circle.fill"
             )
 
             calculatorInputView(
@@ -73,8 +72,7 @@ private extension CalculatorView {
                 text: $rateText,
                 value: $inputRate,
                 error: $rateError,
-                icon: "percent",
-                keyboardType: .decimalPad
+                icon: "percent"
             )
 
             calculatorInputView(
@@ -82,8 +80,7 @@ private extension CalculatorView {
                 text: $termText,
                 value: $inputTerm,
                 error: $termError,
-                icon: "calendar",
-                keyboardType: .numberPad
+                icon: "calendar"
             )
 
             calculateButton
@@ -146,9 +143,9 @@ private extension CalculatorView {
         text: Binding<String>,
         value: Binding<Double?>,
         error: Binding<Bool>,
-        icon: String,
-        keyboardType: UIKeyboardType
+        icon: String
     ) -> some View {
+        let keyboardType: UIKeyboardType = .decimalPad
         VStack(alignment: .leading, spacing: Metrics.inputSpacing) {
             HStack(spacing: Metrics.iconSpacing) {
                 Image(systemName: icon)

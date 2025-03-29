@@ -56,10 +56,21 @@
 		8F24C8702D95EDAA00AB7EC0 /* StatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C86F2D95EDAA00AB7EC0 /* StatRow.swift */; };
 		8F24C8722D968D8500AB7EC0 /* FormatNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C8712D968D8500AB7EC0 /* FormatNumber.swift */; };
 		8F24C8A62D96D5F400AB7EC0 /* DebtDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C8A52D96D5F400AB7EC0 /* DebtDetailsView.swift */; };
+		8F24C9022D981A3E00AB7EC0 /* PaymentTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9012D981A3E00AB7EC0 /* PaymentTypeDTO.swift */; };
+		8F24C9042D981BC900AB7EC0 /* CreditTargetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9032D981BC900AB7EC0 /* CreditTargetDTO.swift */; };
+		8F24C9062D981C2D00AB7EC0 /* CreditTypeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9052D981C2D00AB7EC0 /* CreditTypeDTO.swift */; };
+		8F24C9082D981CB200AB7EC0 /* NotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9072D981CB200AB7EC0 /* NotificationDTO.swift */; };
+		8F24C90A2D981CF500AB7EC0 /* PaymentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9092D981CF500AB7EC0 /* PaymentDTO.swift */; };
+		8F24C90C2D981D3100AB7EC0 /* CreditDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C90B2D981D3100AB7EC0 /* CreditDTO.swift */; };
+		8F24C9222D98249500AB7EC0 /* CreditType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9212D98249500AB7EC0 /* CreditType.swift */; };
+		8F24C9242D9824B800AB7EC0 /* CreditCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9232D9824B800AB7EC0 /* CreditCardInfo.swift */; };
+		8F24C9262D98264100AB7EC0 /* CalculatorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9252D98264100AB7EC0 /* CalculatorInfo.swift */; };
+		8F24C9282D98268F00AB7EC0 /* StatsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9272D98268F00AB7EC0 /* StatsInfo.swift */; };
+		8F24C92C2D9827B000AB7EC0 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C92B2D9827B000AB7EC0 /* Credit.swift */; };
 		B12E2943D7757B746AEF4A5A /* DebtUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491F7766550E4917A980A8C5 /* DebtUseCase.swift */; };
 		C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5E699C945770908B7718C /* AppCoordinator.swift */; };
 		C60BCE75DC88346466D6DA4A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442D54BE85459D75F5A31A5A /* ReusableView.swift */; };
-		D6A8208C77CE03FE92A391B0 /* Debt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F144666C58DBAFA2CE574E5D /* Debt.swift */; };
+		D6A8208C77CE03FE92A391B0 /* GeneralCreditInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F144666C58DBAFA2CE574E5D /* GeneralCreditInfo.swift */; };
 		DCB95428F1A0B3948F222C3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00E66FAD34BBDCE4989462A5 /* LaunchScreen.storyboard */; };
 		E1A9520FF8B40C1A8EE06DF1 /* AddDebtCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5E59568F71E9AB6E19C95 /* AddDebtCoordinator.swift */; };
 		E51B1705F631B7298874B3D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B743675550640B2E814C1917 /* Assets.xcassets */; };
@@ -115,6 +126,17 @@
 		8F24C86F2D95EDAA00AB7EC0 /* StatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatRow.swift; sourceTree = "<group>"; };
 		8F24C8712D968D8500AB7EC0 /* FormatNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatNumber.swift; sourceTree = "<group>"; };
 		8F24C8A52D96D5F400AB7EC0 /* DebtDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsView.swift; sourceTree = "<group>"; };
+		8F24C9012D981A3E00AB7EC0 /* PaymentTypeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeDTO.swift; sourceTree = "<group>"; };
+		8F24C9032D981BC900AB7EC0 /* CreditTargetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTargetDTO.swift; sourceTree = "<group>"; };
+		8F24C9052D981C2D00AB7EC0 /* CreditTypeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTypeDTO.swift; sourceTree = "<group>"; };
+		8F24C9072D981CB200AB7EC0 /* NotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDTO.swift; sourceTree = "<group>"; };
+		8F24C9092D981CF500AB7EC0 /* PaymentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDTO.swift; sourceTree = "<group>"; };
+		8F24C90B2D981D3100AB7EC0 /* CreditDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDTO.swift; sourceTree = "<group>"; };
+		8F24C9212D98249500AB7EC0 /* CreditType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditType.swift; sourceTree = "<group>"; };
+		8F24C9232D9824B800AB7EC0 /* CreditCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardInfo.swift; sourceTree = "<group>"; };
+		8F24C9252D98264100AB7EC0 /* CalculatorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorInfo.swift; sourceTree = "<group>"; };
+		8F24C9272D98268F00AB7EC0 /* StatsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsInfo.swift; sourceTree = "<group>"; };
+		8F24C92B2D9827B000AB7EC0 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		9AF733A0FC0CD8ADFF853AEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9E06B4DD5BB1A4C0EA99722B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		B743675550640B2E814C1917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,7 +147,7 @@
 		DE70F5F84F0BD59A686BB354 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E0C5E699C945770908B7718C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		EBAD4E2612D8AD8862693EED /* DIContainerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainerProtocol.swift; sourceTree = "<group>"; };
-		F144666C58DBAFA2CE574E5D /* Debt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debt.swift; sourceTree = "<group>"; };
+		F144666C58DBAFA2CE574E5D /* GeneralCreditInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCreditInfo.swift; sourceTree = "<group>"; };
 		FDB3FFD1069A69D552EA6A21 /* AddDebtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDebtViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -406,6 +428,7 @@
 		8AD4A7A8B0B3F6768CCE7658 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C9002D981A2D00AB7EC0 /* DTO */,
 				3D2EE8B84BF33902DA10ED30 /* Repositories */,
 				1DD242313E5FF0CB8DD01611 /* Services */,
 				C8302AA462C75778B5A76C84 /* Storage */,
@@ -478,6 +501,19 @@
 				8F24C86D2D95D66A00AB7EC0 /* StatsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8F24C9002D981A2D00AB7EC0 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				8F24C9012D981A3E00AB7EC0 /* PaymentTypeDTO.swift */,
+				8F24C9032D981BC900AB7EC0 /* CreditTargetDTO.swift */,
+				8F24C9052D981C2D00AB7EC0 /* CreditTypeDTO.swift */,
+				8F24C9072D981CB200AB7EC0 /* NotificationDTO.swift */,
+				8F24C9092D981CF500AB7EC0 /* PaymentDTO.swift */,
+				8F24C90B2D981D3100AB7EC0 /* CreditDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		8F868D638BC745B4B4AB17FD /* ViewModels */ = {
@@ -586,10 +622,15 @@
 		DEF16D8408E5E3389E8CE437 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				F144666C58DBAFA2CE574E5D /* Debt.swift */,
+				F144666C58DBAFA2CE574E5D /* GeneralCreditInfo.swift */,
 				3CCBD7272D943F2300C19B8B /* DebtDetailsBlockModel.swift */,
 				3CCBD7352D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift */,
 				8F24C83C2D945D7A00AB7EC0 /* Tab.swift */,
+				8F24C9212D98249500AB7EC0 /* CreditType.swift */,
+				8F24C9232D9824B800AB7EC0 /* CreditCardInfo.swift */,
+				8F24C9252D98264100AB7EC0 /* CalculatorInfo.swift */,
+				8F24C9272D98268F00AB7EC0 /* StatsInfo.swift */,
+				8F24C92B2D9827B000AB7EC0 /* Credit.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -744,20 +785,23 @@
 				8F24C81D2D94222600AB7EC0 /* HomeCoordinator.swift in Sources */,
 				3CCBD7282D943F2300C19B8B /* DebtDetailsBlockModel.swift in Sources */,
 				2B1FD3A47AA7D2F68E4B2600 /* AddDebtViewController.swift in Sources */,
+				8F24C9262D98264100AB7EC0 /* CalculatorInfo.swift in Sources */,
 				5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */,
 				C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */,
 				37896BFD86B743E1776508D6 /* AppDelegate.swift in Sources */,
 				3CCBD7362D94461600C19B8B /* DebtDetailsPaymentHistoryItem.swift in Sources */,
 				8F24C81B2D94222000AB7EC0 /* HomeViewModel.swift in Sources */,
+				8F24C9222D98249500AB7EC0 /* CreditType.swift in Sources */,
 				1BFA0AC1F9A2EB8A1AE669C0 /* CoordinatorProtocol.swift in Sources */,
 				09F747A3BD07781BB923276A /* CoreDataStack.swift in Sources */,
+				8F24C9022D981A3E00AB7EC0 /* PaymentTypeDTO.swift in Sources */,
 				38239F3D60CB3F70825B65B5 /* DIContainer.swift in Sources */,
 				3CCBD7342D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift in Sources */,
 				3CCBD7242D9439F900C19B8B /* DebtDetailsProgressInfo.swift in Sources */,
 				8F24C8722D968D8500AB7EC0 /* FormatNumber.swift in Sources */,
 				8F24C83F2D9576F900AB7EC0 /* HomeView.swift in Sources */,
 				769C175F41E352192CB23234 /* DIContainerProtocol.swift in Sources */,
-				D6A8208C77CE03FE92A391B0 /* Debt.swift in Sources */,
+				D6A8208C77CE03FE92A391B0 /* GeneralCreditInfo.swift in Sources */,
 				3A3FE69E414D63A1A3802A1B /* DebtDetailsCoordinator.swift in Sources */,
 				3CCBD8972D96C44600C19B8B /* SettingsGroupView.swift in Sources */,
 				8F24C8A62D96D5F400AB7EC0 /* DebtDetailsView.swift in Sources */,
@@ -768,11 +812,14 @@
 				8F24C84C2D95921F00AB7EC0 /* SettingsView.swift in Sources */,
 				3CCBD8D32D981BE500C19B8B /* KeyboardView.swift in Sources */,
 				B12E2943D7757B746AEF4A5A /* DebtUseCase.swift in Sources */,
+				8F24C9242D9824B800AB7EC0 /* CreditCardInfo.swift in Sources */,
 				3CCBD7A52D95753400C19B8B /* SettingsViewController.swift in Sources */,
 				26B9F1C1CD6F45778C935D6F /* MainCoordinator.swift in Sources */,
 				3CCBD7262D943EDC00C19B8B /* DebtDetailsBlock.swift in Sources */,
 				8F24C84E2D95949300AB7EC0 /* AddDebtView.swift in Sources */,
 				8F24C86E2D95D66A00AB7EC0 /* StatsView.swift in Sources */,
+				8F24C90C2D981D3100AB7EC0 /* CreditDTO.swift in Sources */,
+				8F24C90A2D981CF500AB7EC0 /* PaymentDTO.swift in Sources */,
 				8F24C8702D95EDAA00AB7EC0 /* StatRow.swift in Sources */,
 				3CCBD7102D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift in Sources */,
 				8F24C83B2D945D5E00AB7EC0 /* CustomTabBar.swift in Sources */,
@@ -781,14 +828,19 @@
 				EC09ED8EC5F48E94B6406CBB /* MainViewModel.swift in Sources */,
 				3CCBD7142D94298B00C19B8B /* DebtDetailsInfoBlock.swift in Sources */,
 				3CCBD8D12D98103300C19B8B /* PasswordDotsView.swift in Sources */,
+				8F24C9062D981C2D00AB7EC0 /* CreditTypeDTO.swift in Sources */,
+				8F24C9042D981BC900AB7EC0 /* CreditTargetDTO.swift in Sources */,
 				3CCBD7B52D95957600C19B8B /* PasswordSetupViewController.swift in Sources */,
 				3CCBD7322D94452100C19B8B /* DebtDetailsPaymentHistory.swift in Sources */,
+				8F24C92C2D9827B000AB7EC0 /* Credit.swift in Sources */,
 				C60BCE75DC88346466D6DA4A /* ReusableView.swift in Sources */,
+				8F24C9082D981CB200AB7EC0 /* NotificationDTO.swift in Sources */,
 				8F24C82E2D943B1000AB7EC0 /* LocalizedKey.swift in Sources */,
 				8F24C83D2D945D7A00AB7EC0 /* Tab.swift in Sources */,
 				3CCBD8992D96DA8500C19B8B /* SettingsGroupDelegate.swift in Sources */,
 				E7F5906EE01851F539BA1C4F /* SceneDelegate.swift in Sources */,
 				2DD034935D69C27F2F06B187 /* StorageService.swift in Sources */,
+				8F24C9282D98268F00AB7EC0 /* StatsInfo.swift in Sources */,
 				06A0FF1355AE27CB453B950A /* UIClass+Extensions.swift in Sources */,
 				3CCBD8CF2D980E0B00C19B8B /* KeychainService.swift in Sources */,
 				800EEA184AD77CF964AFFC40 /* UIKit+Extensions.swift in Sources */,

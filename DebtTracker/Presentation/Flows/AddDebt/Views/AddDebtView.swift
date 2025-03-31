@@ -23,35 +23,46 @@ struct AddDebtView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: Metrics.sectionSpacing) {
-                debtTypeSelectorView
-                amountInputView
-                paidAmountView
-                creditInfoView
-                datePickerView
-                addButton
+        VStack(spacing: 0) {
+            headerView
+            ScrollView {
+                VStack(spacing: Metrics.sectionSpacing) {
+                    debtTypeSelectorView
+                    amountInputView
+                    paidAmountView
+                    creditInfoView
+                    datePickerView
+                    addButton
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .background(Color.black)
         }
         .background(Color.black)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(LocalizedKey.AddDebt.title)
-                    .font(.subheadline)
-                    .bold()
-                    .foregroundColor(.white)
-            }
-        }
-        .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 
 // MARK: - View Components
 
 private extension AddDebtView {
+    @ViewBuilder
+    var headerView: some View {
+        HStack {
+            Spacer()
+
+            Text(LocalizedKey.AddDebt.title)
+                .font(.subheadline)
+                .bold()
+                .foregroundColor(.white)
+
+            Spacer()
+        }
+        .padding(.horizontal)
+        .padding(.top, 16)
+        .padding(.bottom, 8)
+        .background(.black)
+    }
+
     @ViewBuilder
     var debtTypeSelectorView: some View {
         HStack(spacing: Metrics.contentSpacing) {

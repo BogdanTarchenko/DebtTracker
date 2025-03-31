@@ -311,6 +311,30 @@ private extension AddDebtView {
 
 private extension AddDebtView {
     func addDebt() {
+        guard !creditName.isEmpty,
+              let amount, amount > 0
+        else {
+            return
+        }
+
+        let credit = CreditDTO(
+            id: UUID().uuidString,
+            name: creditName,
+            amount: amount,
+            depositedAmount: paidAmount ?? 0.0,
+            percentage: interestRate ?? 0.0,
+            creditType: .consumer,
+            creditTarget: isBorrowed ? .taken : .given,
+            startDate: startDate,
+            period: Int(termMonths ?? 0),
+            payments: []
+        )
+
+        let storage = CreditStorage()
+        storage.saveCredit(credit)
+
+        print(storage.loadCredits())
+
         dismiss()
     }
 }

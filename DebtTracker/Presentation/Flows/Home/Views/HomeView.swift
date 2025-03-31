@@ -25,6 +25,8 @@ struct HomeView: View {
                 loanInfoView(activeLoans: 5, nextPayment: "$ 17 000", paymentDate: "Март 27")
                 creditsHeaderView
                 creditsGridView
+                loansHeaderView
+                loansGridView
                 Spacer()
             }
             .padding(.vertical)
@@ -109,38 +111,86 @@ private extension HomeView {
         ) {
             creditCardView(
                 title: "Iphone 13 Mini",
-                amount: "699$",
-                paidAmount: "350$",
+                amount: 699,
+                paidAmount: 350,
                 progressColor: Color(UIColor.App.purple)
             )
             creditCardView(
                 title: "Macbook Pro M1",
-                amount: "1,499$",
-                paidAmount: "750$",
+                amount: 1499,
+                paidAmount: 750,
                 progressColor: Color(UIColor.App.purple)
             )
             creditCardView(
                 title: "Car",
-                amount: "1,499$",
-                paidAmount: "1,000$",
+                amount: 1499,
+                paidAmount: 1000,
                 progressColor: Color(UIColor.App.purple)
             )
             creditCardView(
                 title: "House",
-                amount: "1,499$",
-                paidAmount: "500$",
+                amount: 1499,
+                paidAmount: 500,
                 progressColor: Color(UIColor.App.purple)
             )
             creditCardView(
                 title: "Yandex",
-                amount: "1,499$",
-                paidAmount: "1,200$",
+                amount: 1499,
+                paidAmount: 1200,
                 progressColor: Color(UIColor.App.purple)
             )
             creditCardView(
                 title: "Watch",
-                amount: "1,499$",
-                paidAmount: "800$",
+                amount: 1499,
+                paidAmount: 800,
+                progressColor: Color(UIColor.App.purple)
+            )
+        }
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    var loansHeaderView: some View {
+        HStack {
+            Text(LocalizedKey.Home.loans)
+                .font(.title2)
+                .bold()
+                .foregroundColor(Color(UIColor.App.white))
+            Spacer()
+            categoryMenuView
+        }
+        .padding(.top)
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    var loansGridView: some View {
+        LazyVGrid(
+            columns: [GridItem(.flexible()), GridItem(.flexible())],
+            spacing: Metrics.gridSpacing
+        ) {
+            creditCardView(
+                title: "Саня",
+                amount: 500,
+                paidAmount: 100,
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Коллега",
+                amount: 500,
+                paidAmount: 200,
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Брат",
+                amount: 500,
+                paidAmount: 50,
+                progressColor: Color(UIColor.App.purple)
+            )
+            creditCardView(
+                title: "Игорь",
+                amount: 3000,
+                paidAmount: 100,
                 progressColor: Color(UIColor.App.purple)
             )
         }
@@ -310,8 +360,8 @@ private extension HomeView {
     @ViewBuilder
     func creditCardView(
         title: String,
-        amount: String,
-        paidAmount: String,
+        amount: Double,
+        paidAmount: Double,
         progressColor: Color
     ) -> some View {
         Button(action: {
@@ -328,17 +378,17 @@ private extension HomeView {
                 }
 
                 VStack(alignment: .leading, spacing: Metrics.textSpacing) {
-                    Text(amount)
+                    Text("\(String(format: "%.2f", amount)) $")
                         .font(.title3)
                         .bold()
                         .foregroundColor(Color(UIColor.App.white))
 
-                    Text("\(LocalizedKey.Home.paidAmout): \(paidAmount)")
+                    Text("\(LocalizedKey.Home.paidAmout): \(String(format: "%.2f", paidAmount))")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.7))
                 }
 
-                ProgressView(value: 0.5)
+                ProgressView(value: paidAmount / amount)
                     .tint(progressColor)
                     .frame(height: Metrics.progressHeight)
                     .background(Color.white.opacity(0.2))

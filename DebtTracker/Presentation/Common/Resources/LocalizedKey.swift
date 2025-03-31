@@ -32,6 +32,10 @@ extension LocalizedKey {
             rawValue: "home_credits"
         ).localized
 
+        static let loans = LocalizedKey(
+            rawValue: "home_loans"
+        ).localized
+
         static let pickType = LocalizedKey(
             rawValue: "home_pick_type"
         ).localized

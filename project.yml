@@ -57,6 +57,21 @@ targets:
         UILaunchStoryboardName: LaunchScreen
     dependencies:
       - package: SnapKit
+    scheme:
+      testTargets:
+        - DebtTrackerTests
+        
+  DebtTrackerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: DebtTrackerTests
+    dependencies:
+      - target: DebtTracker
+    settings:
+      base:
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/DebtTracker.app/DebtTracker
         
 packages:
   SnapKit:

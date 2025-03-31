@@ -25,7 +25,11 @@ final class DIContainer: DIContainerProtocol {
     }
 
     func makeCalculatorView() -> CalculatorView {
-        CalculatorView()
+        let repository = CalculatorRepository()
+        let useCase = CalculatorUseCase(repository: repository)
+        let viewModel = CalculatorViewModel(useCase: useCase)
+
+        return CalculatorView(viewModel: viewModel)
     }
 
     func makeStatsView() -> StatsView {

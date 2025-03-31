@@ -68,6 +68,10 @@
 		8F24C9262D98264100AB7EC0 /* CalculatorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9252D98264100AB7EC0 /* CalculatorInfo.swift */; };
 		8F24C9282D98268F00AB7EC0 /* StatsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9272D98268F00AB7EC0 /* StatsInfo.swift */; };
 		8F24C92C2D9827B000AB7EC0 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C92B2D9827B000AB7EC0 /* Credit.swift */; };
+		8F24C95B2D9AD52900AB7EC0 /* DebtCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C95A2D9AD52900AB7EC0 /* DebtCalculation.swift */; };
+		8F24C95F2D9AD58200AB7EC0 /* CalculatorUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C95E2D9AD58200AB7EC0 /* CalculatorUseCase.swift */; };
+		8F24C9612D9AD5D100AB7EC0 /* CalculatorRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9602D9AD5D100AB7EC0 /* CalculatorRepositoryProtocol.swift */; };
+		8F24C9632D9AD5DE00AB7EC0 /* CalculatorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F24C9622D9AD5DE00AB7EC0 /* CalculatorRepository.swift */; };
 		B12E2943D7757B746AEF4A5A /* DebtUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491F7766550E4917A980A8C5 /* DebtUseCase.swift */; };
 		C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5E699C945770908B7718C /* AppCoordinator.swift */; };
 		C60BCE75DC88346466D6DA4A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442D54BE85459D75F5A31A5A /* ReusableView.swift */; };
@@ -78,6 +82,16 @@
 		E7F5906EE01851F539BA1C4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15925311908E8645F24F712F /* SceneDelegate.swift */; };
 		EC09ED8EC5F48E94B6406CBB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CB12BC6216AFB7C01318AE /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F24C9552D9AD39800AB7EC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 753A841B3674B4A57EDB401A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A4AF9350DF99EDF0E9A7880;
+			remoteInfo = DebtTracker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		00128B49FFA2D986A612A72C /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
@@ -139,6 +153,11 @@
 		8F24C9252D98264100AB7EC0 /* CalculatorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorInfo.swift; sourceTree = "<group>"; };
 		8F24C9272D98268F00AB7EC0 /* StatsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsInfo.swift; sourceTree = "<group>"; };
 		8F24C92B2D9827B000AB7EC0 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
+		8F24C9512D9AD39800AB7EC0 /* DebtTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DebtTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F24C95A2D9AD52900AB7EC0 /* DebtCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtCalculation.swift; sourceTree = "<group>"; };
+		8F24C95E2D9AD58200AB7EC0 /* CalculatorUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUseCase.swift; sourceTree = "<group>"; };
+		8F24C9602D9AD5D100AB7EC0 /* CalculatorRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorRepositoryProtocol.swift; sourceTree = "<group>"; };
+		8F24C9622D9AD5DE00AB7EC0 /* CalculatorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorRepository.swift; sourceTree = "<group>"; };
 		9AF733A0FC0CD8ADFF853AEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9E06B4DD5BB1A4C0EA99722B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		B743675550640B2E814C1917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,6 +174,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		72DA35E92D95706F003CC850 /* Calculator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Calculator; sourceTree = "<group>"; };
+		8F24C9522D9AD39800AB7EC0 /* DebtTrackerTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DebtTrackerTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +183,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				220E64C2F51122A3A9034B2D /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F24C94E2D9AD39800AB7EC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +327,7 @@
 		3D2EE8B84BF33902DA10ED30 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C9622D9AD5DE00AB7EC0 /* CalculatorRepository.swift */,
 				BE8D32994D3E11EAF61C1294 /* DebtRepository.swift */,
 			);
 			path = Repositories;
@@ -327,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				5DDD07B9379F318418E114AC /* DebtTracker.app */,
+				8F24C9512D9AD39800AB7EC0 /* DebtTrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,6 +400,7 @@
 		6B7D8AB0574630A14E78D305 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C95E2D9AD58200AB7EC0 /* CalculatorUseCase.swift */,
 				491F7766550E4917A980A8C5 /* DebtUseCase.swift */,
 			);
 			path = UseCases;
@@ -569,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				99E2479452886BD0FF6E38C4 /* DebtTracker */,
+				8F24C9522D9AD39800AB7EC0 /* DebtTrackerTests */,
 				4F43DECEECCF3AE7A6081361 /* Products */,
 			);
 			indentWidth = 4;
@@ -600,6 +631,7 @@
 		CDB5B87E338229941CF4B3CA /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				8F24C9602D9AD5D100AB7EC0 /* CalculatorRepositoryProtocol.swift */,
 				232C033B9138CB3FFA525F6D /* DebtRepositoryProtocol.swift */,
 			);
 			path = Repositories;
@@ -634,6 +666,7 @@
 				8F24C9252D98264100AB7EC0 /* CalculatorInfo.swift */,
 				8F24C9272D98268F00AB7EC0 /* StatsInfo.swift */,
 				8F24C92B2D9827B000AB7EC0 /* Credit.swift */,
+				8F24C95A2D9AD52900AB7EC0 /* DebtCalculation.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -694,6 +727,29 @@
 			productReference = 5DDD07B9379F318418E114AC /* DebtTracker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8F24C9502D9AD39800AB7EC0 /* DebtTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F24C9592D9AD39800AB7EC0 /* Build configuration list for PBXNativeTarget "DebtTrackerTests" */;
+			buildPhases = (
+				8F24C94D2D9AD39800AB7EC0 /* Sources */,
+				8F24C94E2D9AD39800AB7EC0 /* Frameworks */,
+				8F24C94F2D9AD39800AB7EC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F24C9562D9AD39800AB7EC0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8F24C9522D9AD39800AB7EC0 /* DebtTrackerTests */,
+			);
+			name = DebtTrackerTests;
+			packageProductDependencies = (
+			);
+			productName = DebtTrackerTests;
+			productReference = 8F24C9512D9AD39800AB7EC0 /* DebtTrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -701,7 +757,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					8F24C9502D9AD39800AB7EC0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 2A4AF9350DF99EDF0E9A7880;
+					};
+				};
 			};
 			buildConfigurationList = F264BD93DDB441479E36B331 /* Build configuration list for PBXProject "DebtTracker" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -720,6 +783,7 @@
 			projectRoot = "";
 			targets = (
 				2A4AF9350DF99EDF0E9A7880 /* DebtTracker */,
+				8F24C9502D9AD39800AB7EC0 /* DebtTrackerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -732,6 +796,13 @@
 				E51B1705F631B7298874B3D6 /* Assets.xcassets in Resources */,
 				DCB95428F1A0B3948F222C3A /* LaunchScreen.storyboard in Resources */,
 				8F24C8302D943CB200AB7EC0 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F24C94F2D9AD39800AB7EC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -779,6 +850,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8F24C94D2D9AD39800AB7EC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E73BD8C3F2641A85BEEEC551 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -789,6 +867,7 @@
 				3CCBD7282D943F2300C19B8B /* DebtDetailsBlockModel.swift in Sources */,
 				2B1FD3A47AA7D2F68E4B2600 /* AddDebtViewController.swift in Sources */,
 				8F24C9262D98264100AB7EC0 /* CalculatorInfo.swift in Sources */,
+				8F24C95B2D9AD52900AB7EC0 /* DebtCalculation.swift in Sources */,
 				5C3728BB87351973E6D808A1 /* AddDebtViewModel.swift in Sources */,
 				C5C6688749B73A1C0A181234 /* AppCoordinator.swift in Sources */,
 				37896BFD86B743E1776508D6 /* AppDelegate.swift in Sources */,
@@ -801,6 +880,7 @@
 				38239F3D60CB3F70825B65B5 /* DIContainer.swift in Sources */,
 				3CCBD91A2D9A789500C19B8B /* DebtCalculationService.swift in Sources */,
 				3CCBD7342D94454000C19B8B /* DebtDetailsPaymentHistoryCell.swift in Sources */,
+				8F24C9612D9AD5D100AB7EC0 /* CalculatorRepositoryProtocol.swift in Sources */,
 				3CCBD7242D9439F900C19B8B /* DebtDetailsProgressInfo.swift in Sources */,
 				8F24C8722D968D8500AB7EC0 /* FormatNumber.swift in Sources */,
 				8F24C83F2D9576F900AB7EC0 /* HomeView.swift in Sources */,
@@ -825,6 +905,7 @@
 				8F24C90C2D981D3100AB7EC0 /* CreditDTO.swift in Sources */,
 				8F24C90A2D981CF500AB7EC0 /* PaymentDTO.swift in Sources */,
 				8F24C8702D95EDAA00AB7EC0 /* StatRow.swift in Sources */,
+				8F24C95F2D9AD58200AB7EC0 /* CalculatorUseCase.swift in Sources */,
 				3CCBD7102D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift in Sources */,
 				8F24C83B2D945D5E00AB7EC0 /* CustomTabBar.swift in Sources */,
 				8F24C8262D9435D200AB7EC0 /* MainViewControllerFactory.swift in Sources */,
@@ -839,6 +920,7 @@
 				8F24C92C2D9827B000AB7EC0 /* Credit.swift in Sources */,
 				C60BCE75DC88346466D6DA4A /* ReusableView.swift in Sources */,
 				8F24C9082D981CB200AB7EC0 /* NotificationDTO.swift in Sources */,
+				8F24C9632D9AD5DE00AB7EC0 /* CalculatorRepository.swift in Sources */,
 				8F24C82E2D943B1000AB7EC0 /* LocalizedKey.swift in Sources */,
 				8F24C83D2D945D7A00AB7EC0 /* Tab.swift in Sources */,
 				3CCBD8992D96DA8500C19B8B /* SettingsGroupDelegate.swift in Sources */,
@@ -853,6 +935,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F24C9562D9AD39800AB7EC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A4AF9350DF99EDF0E9A7880 /* DebtTracker */;
+			targetProxy = 8F24C9552D9AD39800AB7EC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		00E66FAD34BBDCE4989462A5 /* LaunchScreen.storyboard */ = {
@@ -1007,6 +1097,58 @@
 			};
 			name = Release;
 		};
+		8F24C9572D9AD39800AB7EC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tarchenko.DebtTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DebtTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DebtTracker";
+			};
+			name = Debug;
+		};
+		8F24C9582D9AD39800AB7EC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tarchenko.DebtTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DebtTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DebtTracker";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		B2DD349A0BC96071B9765968 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1035,6 +1177,15 @@
 			buildConfigurations = (
 				B2DD349A0BC96071B9765968 /* Debug */,
 				127DABA5550BE03492485C4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8F24C9592D9AD39800AB7EC0 /* Build configuration list for PBXNativeTarget "DebtTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F24C9572D9AD39800AB7EC0 /* Debug */,
+				8F24C9582D9AD39800AB7EC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

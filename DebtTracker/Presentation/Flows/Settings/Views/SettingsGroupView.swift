@@ -16,6 +16,7 @@ final class SettingsGroupView: UIView {
         static let lowAlpha: CGFloat = 0.7
         static let highAlpha: CGFloat = 1.0
         static let faceIDKey = "isFaceIDEnabled"
+        static let faceIDTitle = "Включите Face ID для входа в приложение"
     }
 
     // MARK: - Properties
@@ -184,20 +185,15 @@ final class SettingsGroupView: UIView {
 
         guard isEnabled else {
             UserDefaults.standard.set(false, forKey: Constants.faceIDKey)
-            delegate?.faceIDToggleChanged(isEnabled: isEnabled)
             return
         }
 
         Task {
             let biometricService = BiometricService()
-            switch await biometricService
-                .authenticate(reason: "Включите Face ID для входа в приложение")
-            {
+            switch await biometricService.authenticate(reason: Constants.faceIDTitle) {
             case .success:
                 faceIDToggleSwitch.setOn(true, animated: true)
                 UserDefaults.standard.set(true, forKey: Constants.faceIDKey)
-                delegate?.faceIDToggleChanged(isEnabled: true)
-
             case let .failure(error):
                 faceIDToggleSwitch.setOn(false, animated: true)
                 delegate?.showFaceIDError(message: error.localizedDescription)

@@ -7,5 +7,4 @@ protocol SettingsGroupDelegate: AnyObject {
     func showButton()
     func hideButton()
     func showFaceIDError(message: String)
-    func faceIDToggleChanged(isEnabled: Bool)
 }

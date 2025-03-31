@@ -94,14 +94,6 @@ extension SettingsViewController: SettingsGroupDelegate {
         navigationController?.present(passwordInputViewController, animated: true)
     }
 
-    func faceIDToggleChanged(isEnabled: Bool) {
-        if isEnabled {
-            print("Face ID успешно включен")
-        } else {
-            print("Face ID выключен")
-        }
-    }
-
     func showFaceIDError(message: String) {
         let alert = UIAlertController(
             title: "Ошибка Face ID",

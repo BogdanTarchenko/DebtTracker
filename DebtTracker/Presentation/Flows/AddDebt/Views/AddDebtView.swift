@@ -317,7 +317,7 @@ private extension AddDebtView {
             return
         }
 
-        let credit = CreditDTO(
+        let credit = CreditModel(
             id: UUID().uuidString,
             name: creditName,
             amount: amount,
@@ -334,7 +334,6 @@ private extension AddDebtView {
         storage.saveCredit(credit)
 
         print(storage.loadCredits())
-
         dismiss()
     }
 }

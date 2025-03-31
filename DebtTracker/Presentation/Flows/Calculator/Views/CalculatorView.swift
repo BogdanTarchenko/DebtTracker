@@ -17,17 +17,23 @@ struct CalculatorView: View {
     @State private var rateError: Bool = false
     @State private var termError: Bool = false
 
+    @State private var calculatedMonthlyPayment: Double = 0.0
+    @State private var calculatedTotalInterest: Double = 0.0
+    @State private var calculatedTotalPayment: Double = 0.0
+
     private var monthlyPayment: Double {
-        0.0
+        calculatedMonthlyPayment
     }
 
     private var totalInterest: Double {
-        0.0
+        calculatedTotalInterest
     }
 
     private var totalPayment: Double {
-        0.0
+        calculatedTotalPayment
     }
+
+    private let calculationService: DebtCalculationProvidable = DebtCalculationService()
 
     var body: some View {
         ScrollView {
@@ -234,7 +240,21 @@ private extension CalculatorView {
 // MARK: - Private Methods
 
 private extension CalculatorView {
-    func calculatePayments() {}
+    func calculatePayments() {
+        guard let inputAmount,
+              let inputTerm,
+              let inputRate else { return }
+        calculationService.setup(totalTaken: inputAmount, term: inputTerm, interestRate: inputRate)
+
+        let monthlyPayment = calculationService.calculateMonthlyPayment()
+        let overpayment = calculationService.calculateOverpayment()
+        let totalPaid = calculationService.calculateTotalPaid()
+
+        calculatedMonthlyPayment = monthlyPayment
+        calculatedTotalInterest = overpayment
+        calculatedTotalPayment = totalPaid
+    }
+
     func showErrorAlert(title: String, message: String) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootViewController = windowScene.windows.first?.rootViewController

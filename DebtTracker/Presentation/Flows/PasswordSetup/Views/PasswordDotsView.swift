@@ -83,6 +83,6 @@ extension PasswordDotsView {
     private enum Constants {
         static let dotSize: CGFloat = 20
         static let dotsSpacing: CGFloat = 20
-        static let animationDuration: TimeInterval = 0.3
+        static let animationDuration: TimeInterval = 0.2
     }
 }

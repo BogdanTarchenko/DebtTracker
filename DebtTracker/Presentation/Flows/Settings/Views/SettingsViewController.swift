@@ -18,7 +18,7 @@ final class SettingsViewController: UIViewController {
         button.setTitleColor(UIColor.App.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         button.layer.cornerRadius = 8
-        button.isHidden = true
+        button.isHidden = !KeychainService.hasPassword()
         return button
     }()
 
@@ -62,7 +62,8 @@ final class SettingsViewController: UIViewController {
 
     @objc
     func changePasswordButtonTapped() {
-        let passwordInputViewController = PasswordInputViewController(mode: .changePassword)
+        let passwordInputViewController =
+            PasswordInputViewController(viewModel: PasswordInputViewModel(mode: .changePassword))
         passwordInputViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(passwordInputViewController, animated: true)
     }
@@ -80,15 +81,35 @@ extension SettingsViewController: SettingsGroupDelegate {
     }
 
     func turnOffPassword() {
-        let passwordInputViewController = PasswordInputViewController(mode: .verifyPassword)
+        let passwordInputViewController =
+            PasswordInputViewController(viewModel: PasswordInputViewModel(mode: .disablePassword))
         passwordInputViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(passwordInputViewController, animated: true)
     }
 
     func createPassword() {
-        let passwordInputViewController = PasswordInputViewController(mode: .createPassword)
+        let passwordInputViewController =
+            PasswordInputViewController(viewModel: PasswordInputViewModel(mode: .createPassword))
         passwordInputViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(passwordInputViewController, animated: true)
+    }
+
+    func faceIDToggleChanged(isEnabled: Bool) {
+        if isEnabled {
+            print("Face ID успешно включен")
+        } else {
+            print("Face ID выключен")
+        }
+    }
+
+    func showFaceIDError(message: String) {
+        let alert = UIAlertController(
+            title: "Ошибка Face ID",
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(.init(title: "Ок", style: .cancel))
+        present(alert, animated: true)
     }
 }
 

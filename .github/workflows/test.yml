@@ -30,6 +30,7 @@ jobs:
           -scheme DebtTracker \
           -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
           -enableCodeCoverage YES \
+          -resultBundlePath TestResults \
           | xcpretty && exit ${PIPESTATUS[0]}
           
     - name: Upload test results
@@ -37,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: build/reports/
+        path: TestResults.xcresult

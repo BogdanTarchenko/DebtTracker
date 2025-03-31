@@ -221,7 +221,7 @@ extension LocalizedKey {
         ).localized
     }
 
-    enum PasswordSetup {
+    enum PasswordInput {
         static let enterExistingPassword = LocalizedKey(
             rawValue: "password_setup.enter_existing_password"
         ).localized

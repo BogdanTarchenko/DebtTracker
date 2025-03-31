@@ -62,9 +62,9 @@ final class SettingsViewController: UIViewController {
 
     @objc
     func changePasswordButtonTapped() {
-        let passwordSetupViewController = PasswordSetupViewController(mode: .changePassword)
-        passwordSetupViewController.modalPresentationStyle = .fullScreen
-        navigationController?.present(passwordSetupViewController, animated: true)
+        let passwordInputViewController = PasswordInputViewController(mode: .changePassword)
+        passwordInputViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(passwordInputViewController, animated: true)
     }
 }
 
@@ -80,15 +80,15 @@ extension SettingsViewController: SettingsGroupDelegate {
     }
 
     func turnOffPassword() {
-        let passwordSetupViewController = PasswordSetupViewController(mode: .verifyPassword)
-        passwordSetupViewController.modalPresentationStyle = .fullScreen
-        navigationController?.present(passwordSetupViewController, animated: true)
+        let passwordInputViewController = PasswordInputViewController(mode: .verifyPassword)
+        passwordInputViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(passwordInputViewController, animated: true)
     }
 
     func createPassword() {
-        let passwordSetupViewController = PasswordSetupViewController(mode: .createPassword)
-        passwordSetupViewController.modalPresentationStyle = .fullScreen
-        navigationController?.present(passwordSetupViewController, animated: true)
+        let passwordInputViewController = PasswordInputViewController(mode: .createPassword)
+        passwordInputViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(passwordInputViewController, animated: true)
     }
 }
 

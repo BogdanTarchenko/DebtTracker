@@ -1,9 +1,9 @@
 import SnapKit
 import UIKit
 
-// MARK: - PasswordSetupViewController
+// MARK: - PasswordInputViewController
 
-final class PasswordSetupViewController: UIViewController {
+final class PasswordInputViewController: UIViewController {
     // MARK: - Properties
 
     private let mode: Mode
@@ -42,7 +42,7 @@ final class PasswordSetupViewController: UIViewController {
 
 // MARK: - Setup & UI Configuration
 
-extension PasswordSetupViewController {
+extension PasswordInputViewController {
     private func setupUI() {
         view.backgroundColor = .black
         setupTitleLabel()
@@ -98,25 +98,25 @@ extension PasswordSetupViewController {
 
 // MARK: - Password Management
 
-extension PasswordSetupViewController {
+extension PasswordInputViewController {
     private func checkExistingPassword() {
         switch mode {
         case .createPassword:
-            titleLabel.text = LocalizedKey.PasswordSetup.welcomeTitle
+            titleLabel.text = LocalizedKey.PasswordInput.welcomeTitle
             isCheckingExistingPassword = false
 
         case .changePassword:
             if KeychainService.hasPassword() {
                 isCheckingExistingPassword = true
-                titleLabel.text = LocalizedKey.PasswordSetup.enterExistingPassword
+                titleLabel.text = LocalizedKey.PasswordInput.enterExistingPassword
             } else {
-                titleLabel.text = LocalizedKey.PasswordSetup.welcomeTitle
+                titleLabel.text = LocalizedKey.PasswordInput.welcomeTitle
             }
 
         case .verifyPassword:
             if KeychainService.hasPassword() {
                 isCheckingExistingPassword = true
-                titleLabel.text = LocalizedKey.PasswordSetup.enterExistingPassword
+                titleLabel.text = LocalizedKey.PasswordInput.enterExistingPassword
             } else {
                 showError(message: "Пароль не существует")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -185,7 +185,7 @@ extension PasswordSetupViewController {
                 }
             }
         } else {
-            showError(message: LocalizedKey.PasswordSetup.wrongPassword)
+            showError(message: LocalizedKey.PasswordInput.wrongPassword)
             highlightDots(color: UIColor.App.red)
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.successDelay) {
                 self.resetPasswordInput()
@@ -204,14 +204,14 @@ extension PasswordSetupViewController {
                     self.passwordSetupCompleted()
                 }
             } else {
-                showError(message: LocalizedKey.PasswordSetup.saveError)
+                showError(message: LocalizedKey.PasswordInput.saveError)
                 highlightDots(color: UIColor.App.red)
                 DispatchQueue.main.asyncAfter(deadline: .now() + Constants.successDelay) {
                     self.resetPasswordInput()
                 }
             }
         } else {
-            showError(message: LocalizedKey.PasswordSetup.passwordsDontMatch)
+            showError(message: LocalizedKey.PasswordInput.passwordsDontMatch)
             highlightDots(color: UIColor.App.red)
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.successDelay) {
                 self.resetPasswordInput()
@@ -222,7 +222,7 @@ extension PasswordSetupViewController {
 
 // MARK: - UI Updates & Animations
 
-extension PasswordSetupViewController {
+extension PasswordInputViewController {
     private func updateDots() {
         let activeDigits = isConfirming ? confirmationDigits : passwordDigits
         passwordDotsView.filledDotsCount = activeDigits.count
@@ -254,18 +254,18 @@ extension PasswordSetupViewController {
 
 // MARK: - Flow Control
 
-extension PasswordSetupViewController {
+extension PasswordInputViewController {
     private func proceedWithNewPasswordSetup() {
         isCheckingExistingPassword = false
         passwordDigits = []
-        titleLabel.text = LocalizedKey.PasswordSetup.welcomeTitle
+        titleLabel.text = LocalizedKey.PasswordInput.welcomeTitle
         updateDots()
         hideError()
     }
 
     private func startConfirmation() {
         isConfirming = true
-        titleLabel.text = LocalizedKey.PasswordSetup.confirmationTitle
+        titleLabel.text = LocalizedKey.PasswordInput.confirmationTitle
         hideError()
         passwordDotsView.reset()
     }
@@ -278,11 +278,11 @@ extension PasswordSetupViewController {
         hideError()
 
         if isCheckingExistingPassword {
-            titleLabel.text = LocalizedKey.PasswordSetup.enterExistingPassword
+            titleLabel.text = LocalizedKey.PasswordInput.enterExistingPassword
         } else {
             titleLabel.text = mode == .createPassword ?
-                LocalizedKey.PasswordSetup.welcomeTitle :
-                LocalizedKey.PasswordSetup.enterPassword
+                LocalizedKey.PasswordInput.welcomeTitle :
+                LocalizedKey.PasswordInput.enterPassword
         }
         passwordDotsView.reset()
     }
@@ -298,7 +298,7 @@ extension PasswordSetupViewController {
 
 // MARK: KeyboardViewDelegate
 
-extension PasswordSetupViewController: KeyboardViewDelegate {
+extension PasswordInputViewController: KeyboardViewDelegate {
     func keyPressed(_ key: String) {
         if key == "⌫" {
             handleBackspace()
@@ -329,7 +329,7 @@ extension PasswordSetupViewController: KeyboardViewDelegate {
 
 // MARK: - Mode & Constants
 
-extension PasswordSetupViewController {
+extension PasswordInputViewController {
     enum Mode {
         case createPassword // Первоначальная установка пароля
         case changePassword // Смена существующего пароля
@@ -354,7 +354,7 @@ extension PasswordSetupViewController {
 
 // MARK: - Mode Extension
 
-extension PasswordSetupViewController.Mode {
+extension PasswordInputViewController.Mode {
     var allowsPasswordChange: Bool {
         switch self {
         case .createPassword, .changePassword: true

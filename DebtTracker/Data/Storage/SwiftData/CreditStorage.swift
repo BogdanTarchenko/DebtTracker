@@ -36,7 +36,7 @@ final class CreditStorage {
             return []
         }
     }
-    
+
     func loadCredit(by id: String) -> CreditModel? {
         do {
             let descriptor = FetchDescriptor<CreditModel>(

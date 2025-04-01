@@ -257,8 +257,9 @@ private extension HomeView {
                 .foregroundColor(Color(UIColor.App.white))
 
             HStack(spacing: Metrics.loanInfoSpacing) {
+                let creditsList = creditStorage.loadCredits()
                 var takenAmount: Double {
-                    creditStorage.loadCredits().filter { $0.creditTarget == .taken }.reduce(0) { $0 + $1.amount }
+                    creditsList.filter { $0.creditTarget == .taken }.reduce(0) { $0 + $1.amount }
                 }
                 loanTypeView(
                     icon: "creditcard.fill",
@@ -272,7 +273,7 @@ private extension HomeView {
                     .frame(width: Metrics.dividerWidth, height: Metrics.dividerHeight)
 
                 var givenAmount: Double {
-                    creditStorage.loadCredits().filter { $0.creditTarget == .given }.reduce(0) { $0 + $1.amount }
+                    creditsList.filter { $0.creditTarget == .given }.reduce(0) { $0 + $1.amount }
                 }
                 loanTypeView(
                     icon: "person.2.fill",

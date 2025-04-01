@@ -1,7 +1,10 @@
+// MARK: - SettingsGroupDelegate
+
 @MainActor
 protocol SettingsGroupDelegate: AnyObject {
-    func hideButton()
-    func showButton()
     func turnOffPassword()
     func createPassword()
+    func showButton()
+    func hideButton()
+    func showFaceIDError(message: String)
 }

@@ -755,7 +755,7 @@
         }
       }
     },
-    "password_setup.confirmation_title" : {
+    "password_input.confirmation_title" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -772,75 +772,7 @@
         }
       }
     },
-    "password_setup.enter_existing_password" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter existing password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Введите существующий пароль"
-          }
-        }
-      }
-    },
-    "password_setup.enter_password" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Введите пароль"
-          }
-        }
-      }
-    },
-    "password_setup.passwords_dont_match" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passwords don't match"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Введенные пароли не совпадают"
-          }
-        }
-      }
-    },
-    "password_setup.save_error" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error saving password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ошибка сохранения пароля"
-          }
-        }
-      }
-    },
-    "password_setup.welcome_title" : {
+    "password_input.create_title" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -857,7 +789,75 @@
         }
       }
     },
-    "password_setup.wrong_password" : {
+    "password_input.dont_match" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passwords don't match"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введенные пароли не совпадают"
+          }
+        }
+      }
+    },
+    "password_input.enter_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите пароль"
+          }
+        }
+      }
+    },
+    "password_input.save_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error saving password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка сохранения пароля"
+          }
+        }
+      }
+    },
+    "password_input.verify_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter existing password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите существующий пароль"
+          }
+        }
+      }
+    },
+    "password_input.wrong_password" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

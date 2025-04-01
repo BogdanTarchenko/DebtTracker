@@ -2,105 +2,93 @@ import Foundation
 import Security
 
 class KeychainService {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let passwordKey = "com.debttracker.password"
+    }
+
     // MARK: - Public Methods
 
-    /// Сохраняет данные в Keychain
     static func save(key: String, data: Data) -> Bool {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
             kSecValueData as String: data
-        ] as [String: Any]
+        ]
 
         SecItemDelete(query as CFDictionary)
-
         let status = SecItemAdd(query as CFDictionary, nil)
         return status == errSecSuccess
     }
 
-    /// Загружает данные из Keychain
     static func load(key: String) -> Data? {
+        guard let kCFBooleanTrue else { return nil }
         let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword as String,
+            kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
-            kSecReturnData as String: kCFBooleanTrue as Any,
-            kSecMatchLimit as String: kSecMatchLimitOne as String
+            kSecReturnData as String: kCFBooleanTrue,
+            kSecMatchLimit as String: kSecMatchLimitOne
         ]
 
         var dataTypeRef: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-
-        if status == errSecSuccess {
-            return dataTypeRef as? Data
-        }
-        return nil
+        return status == errSecSuccess ? dataTypeRef as? Data : nil
     }
 
-    /// Удаляет данные из Keychain
     static func delete(key: String) -> Bool {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key
-        ] as [String: Any]
+        ]
 
-        let status = SecItemDelete(query as CFDictionary)
-        return status == errSecSuccess
+        return SecItemDelete(query as CFDictionary) == errSecSuccess
     }
 
-    /// Обновляет данные в Keychain
     static func update(key: String, data: Data) -> Bool {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key
-        ] as [String: Any]
+        ]
 
-        let attributes = [
+        let attributes: [String: Any] = [
             kSecValueData as String: data
-        ] as [String: Any]
+        ]
 
-        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
-        return status == errSecSuccess
+        return SecItemUpdate(query as CFDictionary, attributes as CFDictionary) == errSecSuccess
     }
 
     // MARK: - Convenience Methods
 
-    /// Сохраняет строку в Keychain
     static func saveString(key: String, value: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
         return save(key: key, data: data)
     }
 
-    /// Загружает строку из Keychain
     static func loadString(key: String) -> String? {
         guard let data = load(key: key) else { return nil }
         return String(data: data, encoding: .utf8)
     }
 
+    // MARK: - Password Methods
+
     static func hasPassword() -> Bool {
-        if loadString(key: "com.debttracker.password") != nil {
-            true
-        } else {
-            false
-        }
+        loadString(key: Constants.passwordKey) != nil
     }
 
     static func verifyPassword(_ password: String) -> Bool {
-        if let pass = loadString(key: "com.debttracker.password") {
-            if password == pass {
-                true
-            } else {
-                false
-            }
-        } else {
-            false
-        }
+        loadString(key: Constants.passwordKey) == password
     }
 
     static func savePassword(_ password: String) -> Bool {
-        if saveString(key: "com.debttracker.password", value: password) {
-            true
-        } else {
-            false
-        }
+        saveString(key: Constants.passwordKey, value: password)
+    }
+
+    static func getPassword() -> String {
+        loadString(key: Constants.passwordKey) ?? "No pass in keychain"
+    }
+
+    static func disablePassword() -> Bool {
+        delete(key: Constants.passwordKey)
     }
 }

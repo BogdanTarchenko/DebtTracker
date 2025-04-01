@@ -36,6 +36,18 @@ final class CreditStorage {
             return []
         }
     }
+    
+    func loadCredit(by id: String) -> CreditModel? {
+        do {
+            let descriptor = FetchDescriptor<CreditModel>(
+                predicate: #Predicate { $0.id == id }
+            )
+            return try modelContext.fetch(descriptor).first
+        } catch {
+            print("Error loading credit by ID: \(error.localizedDescription)")
+            return nil
+        }
+    }
 
     func clearAllCredits() {
         do {

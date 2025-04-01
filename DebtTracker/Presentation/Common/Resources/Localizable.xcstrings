@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%@ $" : {
+
+    },
     "%@: %@" : {
       "localizations" : {
         "en" : {
@@ -493,6 +496,23 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Выданные"
+          }
+        }
+      }
+    },
+    "home_loans" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loans"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Займы"
           }
         }
       }

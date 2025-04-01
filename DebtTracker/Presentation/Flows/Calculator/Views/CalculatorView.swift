@@ -3,37 +3,11 @@ import SwiftUI
 // MARK: - CalculatorView
 
 struct CalculatorView: View {
-    // MARK: - Private Properties
+    @StateObject private var viewModel: CalculatorViewModel
 
-    @State private var inputAmount: Double?
-    @State private var inputRate: Double?
-    @State private var inputTerm: Double?
-
-    @State private var amountText: String = ""
-    @State private var rateText: String = ""
-    @State private var termText: String = ""
-
-    @State private var amountError: Bool = false
-    @State private var rateError: Bool = false
-    @State private var termError: Bool = false
-
-    @State private var calculatedMonthlyPayment: Double = 0.0
-    @State private var calculatedTotalInterest: Double = 0.0
-    @State private var calculatedTotalPayment: Double = 0.0
-
-    private var monthlyPayment: Double {
-        calculatedMonthlyPayment
+    init(viewModel: CalculatorViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
-
-    private var totalInterest: Double {
-        calculatedTotalInterest
-    }
-
-    private var totalPayment: Double {
-        calculatedTotalPayment
-    }
-
-    private let calculationService: DebtCalculationProvidable = DebtCalculationService()
 
     var body: some View {
         ScrollView {
@@ -67,48 +41,63 @@ private extension CalculatorView {
         VStack(spacing: Metrics.contentSpacing) {
             calculatorInputView(
                 title: LocalizedKey.Calculator.creditSum,
-                text: $amountText,
-                value: $inputAmount,
-                error: $amountError,
-                icon: "dollarsign.circle.fill"
+                text: $viewModel.amountText,
+                error: viewModel.amountError,
+                icon: "dollarsign.circle.fill",
+                onTextChange: viewModel.validateAmount
             )
 
             calculatorInputView(
                 title: LocalizedKey.Calculator.loanPercentage,
-                text: $rateText,
-                value: $inputRate,
-                error: $rateError,
-                icon: "percent"
+                text: $viewModel.rateText,
+                error: viewModel.rateError,
+                icon: "percent",
+                onTextChange: viewModel.validateRate
             )
 
             calculatorInputView(
                 title: LocalizedKey.Calculator.periodInMonths,
-                text: $termText,
-                value: $inputTerm,
-                error: $termError,
-                icon: "calendar"
+                text: $viewModel.termText,
+                error: viewModel.termError,
+                icon: "calendar",
+                onTextChange: viewModel.validateTerm
             )
 
             calculateButton
         }
         .padding(Metrics.cardPadding)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(UIColor.App.black),
-                    Color(UIColor.App.black).opacity(0.8)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .background(gradientBackground)
         .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         .padding(.horizontal)
     }
 
     @ViewBuilder
+    var calculatorResultsView: some View {
+        VStack(spacing: Metrics.resultSpacing) {
+            calculatorResultView(
+                title: LocalizedKey.Calculator.monthlyPayment,
+                value: String(format: "$%.2f", viewModel.monthlyPayment),
+                icon: "creditcard.fill"
+            )
+
+            calculatorResultView(
+                title: LocalizedKey.Calculator.overPayment,
+                value: String(format: "$%.2f", viewModel.overpayment),
+                icon: "chart.line.uptrend.xyaxis"
+            )
+
+            calculatorResultView(
+                title: LocalizedKey.Calculator.totalDebtAmount,
+                value: String(format: "$%.2f", viewModel.totalPaid),
+                icon: "dollarsign.circle.fill"
+            )
+        }
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
     var calculateButton: some View {
-        Button(action: calculatePayments) {
+        Button(action: viewModel.calculate) {
             Text(LocalizedKey.Calculator.calculateButtonTitle)
                 .font(.headline)
                 .foregroundColor(Color(UIColor.App.white))
@@ -120,38 +109,13 @@ private extension CalculatorView {
     }
 
     @ViewBuilder
-    var calculatorResultsView: some View {
-        VStack(spacing: Metrics.resultSpacing) {
-            calculatorResultView(
-                title: LocalizedKey.Calculator.monthlyPayment,
-                value: String(format: "$%.2f", monthlyPayment),
-                icon: "creditcard.fill"
-            )
-
-            calculatorResultView(
-                title: LocalizedKey.Calculator.overPayment,
-                value: String(format: "$%.2f", totalInterest),
-                icon: "chart.line.uptrend.xyaxis"
-            )
-
-            calculatorResultView(
-                title: LocalizedKey.Calculator.totalDebtAmount,
-                value: String(format: "$%.2f", totalPayment),
-                icon: "dollarsign.circle.fill"
-            )
-        }
-        .padding(.horizontal)
-    }
-
-    @ViewBuilder
     func calculatorInputView(
         title: String,
         text: Binding<String>,
-        value: Binding<Double?>,
-        error: Binding<Bool>,
-        icon: String
+        error: Bool,
+        icon: String,
+        onTextChange: @escaping (String) -> Void
     ) -> some View {
-        let keyboardType: UIKeyboardType = .decimalPad
         VStack(alignment: .leading, spacing: Metrics.inputSpacing) {
             HStack(spacing: Metrics.iconSpacing) {
                 Image(systemName: icon)
@@ -162,11 +126,9 @@ private extension CalculatorView {
                     .foregroundColor(Color(UIColor.App.white).opacity(0.7))
             }
 
-            let validateUsecase = UsecaseValidateImpl()
-
             ZStack(alignment: .trailing) {
                 TextField("", text: text)
-                    .keyboardType(keyboardType)
+                    .keyboardType(.decimalPad)
                     .font(.system(size: Metrics.inputFontSize, weight: .bold))
                     .foregroundColor(Color(UIColor.App.white))
                     .padding()
@@ -174,22 +136,16 @@ private extension CalculatorView {
                     .cornerRadius(Metrics.inputCornerRadius)
                     .overlay(
                         RoundedRectangle(cornerRadius: Metrics.inputCornerRadius)
-                            .stroke(error.wrappedValue ? Color.red : Color.clear, lineWidth: 1)
+                            .stroke(error ? Color.red : Color.clear, lineWidth: 1)
                     )
                     .onChange(of: text.wrappedValue) { _, newValue in
-                        validateUsecase.execute(text: newValue, value: value, error: error)
+                        onTextChange(newValue)
                     }
 
-                if error.wrappedValue {
+                if error {
                     Image(systemName: "exclamationmark.circle.fill")
                         .foregroundColor(.red)
                         .padding(.trailing, 8)
-                        .onTapGesture {
-                            showErrorAlert(
-                                title: "Error",
-                                message: LocalizedKey.Calculator.validateText
-                            )
-                        }
                 }
             }
         }
@@ -223,48 +179,20 @@ private extension CalculatorView {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(UIColor.App.black),
-                    Color(UIColor.App.black).opacity(0.8)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .background(gradientBackground)
         .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
     }
-}
 
-// MARK: - Private Methods
-
-private extension CalculatorView {
-    func calculatePayments() {
-        guard let inputAmount,
-              let inputTerm,
-              let inputRate else { return }
-        calculationService.setup(totalTaken: inputAmount, term: inputTerm, interestRate: inputRate)
-
-        let monthlyPayment = calculationService.calculateMonthlyPayment()
-        let overpayment = calculationService.calculateOverpayment()
-        let totalPaid = calculationService.calculateTotalPaid()
-
-        calculatedMonthlyPayment = monthlyPayment
-        calculatedTotalInterest = overpayment
-        calculatedTotalPayment = totalPaid
-    }
-
-    func showErrorAlert(title: String, message: String) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let rootViewController = windowScene.windows.first?.rootViewController
-        else {
-            return
-        }
-
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        rootViewController.present(alert, animated: true)
+    @ViewBuilder
+    var gradientBackground: some View {
+        LinearGradient(
+            colors: [
+                Color(UIColor.App.black),
+                Color(UIColor.App.black).opacity(0.8)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 }
 

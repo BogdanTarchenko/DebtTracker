@@ -32,6 +32,10 @@ extension LocalizedKey {
             rawValue: "home_credits"
         ).localized
 
+        static let loans = LocalizedKey(
+            rawValue: "home_loans"
+        ).localized
+
         static let pickType = LocalizedKey(
             rawValue: "home_pick_type"
         ).localized
@@ -252,6 +256,9 @@ extension LocalizedKey {
     }
 
     enum DebtDetails {
+        static let title = LocalizedKey(
+            rawValue: "debt_details_title"
+        ).localized
         static let loanRate = LocalizedKey(
             rawValue: "loan_rate"
         ).localized

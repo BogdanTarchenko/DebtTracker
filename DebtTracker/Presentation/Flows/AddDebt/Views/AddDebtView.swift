@@ -23,35 +23,46 @@ struct AddDebtView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: Metrics.sectionSpacing) {
-                debtTypeSelectorView
-                amountInputView
-                paidAmountView
-                creditInfoView
-                datePickerView
-                addButton
+        VStack(spacing: 0) {
+            headerView
+            ScrollView {
+                VStack(spacing: Metrics.sectionSpacing) {
+                    debtTypeSelectorView
+                    amountInputView
+                    paidAmountView
+                    creditInfoView
+                    datePickerView
+                    addButton
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .background(Color.black)
         }
         .background(Color.black)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(LocalizedKey.AddDebt.title)
-                    .font(.subheadline)
-                    .bold()
-                    .foregroundColor(.white)
-            }
-        }
-        .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 
 // MARK: - View Components
 
 private extension AddDebtView {
+    @ViewBuilder
+    var headerView: some View {
+        HStack {
+            Spacer()
+
+            Text(LocalizedKey.AddDebt.title)
+                .font(.subheadline)
+                .bold()
+                .foregroundColor(.white)
+
+            Spacer()
+        }
+        .padding(.horizontal)
+        .padding(.top, 16)
+        .padding(.bottom, 8)
+        .background(.black)
+    }
+
     @ViewBuilder
     var debtTypeSelectorView: some View {
         HStack(spacing: Metrics.contentSpacing) {
@@ -311,6 +322,29 @@ private extension AddDebtView {
 
 private extension AddDebtView {
     func addDebt() {
+        guard !creditName.isEmpty,
+              let amount, amount > 0
+        else {
+            return
+        }
+
+        let credit = CreditModel(
+            id: UUID().uuidString,
+            name: creditName,
+            amount: amount,
+            depositedAmount: paidAmount ?? 0.0,
+            percentage: interestRate ?? 0.0,
+            creditType: .consumer,
+            creditTarget: isBorrowed ? .taken : .given,
+            startDate: startDate,
+            period: Int(termMonths ?? 0),
+            payments: []
+        )
+
+        let storage = CreditStorage()
+        storage.saveCredit(credit)
+
+        print(storage.loadCredits())
         dismiss()
     }
 }

@@ -57,6 +57,25 @@ targets:
         UILaunchStoryboardName: LaunchScreen
     dependencies:
       - package: SnapKit
+    scheme:
+      testTargets:
+        - DebtTrackerTests
+        
+  DebtTrackerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: DebtTrackerTests
+    dependencies:
+      - target: DebtTracker
+    settings:
+      base:
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/DebtTracker.app/DebtTracker
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: tarchenko.DebtTrackerTests
+        MARKETING_VERSION: 1.0.0
+        CURRENT_PROJECT_VERSION: 1
         
 packages:
   SnapKit:

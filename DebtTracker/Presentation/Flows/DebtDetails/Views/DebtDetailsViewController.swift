@@ -7,6 +7,20 @@ import UIKit
 final class DebtDetailsViewController: UIViewController {
     // MARK: UI Components
 
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(
+            ofSize: UIFont.preferredFont(
+                forTextStyle: .subheadline
+            ).pointSize
+        )
+        label.textColor = .white
+        label.textAlignment = .center
+        // TODO: - добавить сюда подтягивание данных с кредита
+        label.text = "Название кредита"
+        return label
+    }()
+
     let generalDebtInfo: DebtDetailsGeneralInfo = .init()
     let debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .percent,
@@ -70,6 +84,7 @@ final class DebtDetailsViewController: UIViewController {
         configureAddTransactionButton()
 
         [
+            titleLabel,
             generalDebtInfo,
             debtTermInfo,
             debtDateInfo,
@@ -106,9 +121,14 @@ final class DebtDetailsViewController: UIViewController {
     }
 
     private func setupConstraints() {
+        titleLabel.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Constants.topInset)
+        }
+
         generalDebtInfo.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.topInset)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(Constants.topInset)
         }
 
         debtTermInfo.snp.makeConstraints {

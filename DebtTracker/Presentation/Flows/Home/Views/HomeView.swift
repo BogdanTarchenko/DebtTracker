@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 // MARK: - HomeView
@@ -8,6 +9,9 @@ struct HomeView: View {
     @State private var selectedCategory: String?
     @State private var showingCategoryMenu = false
     @State private var isDebtDetailsPresented: Bool = false
+    @Environment(\.modelContext) private var modelContext
+    @Query private var credits: [CreditModel]
+    private let creditStorage: CreditStorage = .init()
 
     private let creditCategories = [
         LocalizedKey.AddDebt.consumerLoan,
@@ -19,9 +23,12 @@ struct HomeView: View {
     // MARK: - Body
 
     var body: some View {
+        var totalDebt: Double {
+            creditStorage.loadCredits().reduce(0) { $0 + $1.amount }
+        }
         ScrollView {
             VStack(spacing: Metrics.sectionSpacing) {
-                debtCardView(totalDebt: "$ 25 000")
+                debtCardView(totalDebt: "$ \(totalDebt)")
                 loanInfoView(activeLoans: 5, nextPayment: "$ 17 000", paymentDate: "Март 27")
                 creditsHeaderView
                 creditsGridView
@@ -109,42 +116,15 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            creditCardView(
-                title: "Iphone 13 Mini",
-                amount: 699,
-                paidAmount: 350,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Macbook Pro M1",
-                amount: 1499,
-                paidAmount: 750,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Car",
-                amount: 1499,
-                paidAmount: 1000,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "House",
-                amount: 1499,
-                paidAmount: 500,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Yandex",
-                amount: 1499,
-                paidAmount: 1200,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Watch",
-                amount: 1499,
-                paidAmount: 800,
-                progressColor: Color(UIColor.App.purple)
-            )
+            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .taken }) { credit in
+                creditCardView(
+                    id: credit.id,
+                    title: credit.name,
+                    amount: credit.amount,
+                    paidAmount: credit.depositedAmount,
+                    progressColor: Color(UIColor.App.purple)
+                )
+            }
         }
         .padding(.horizontal)
     }
@@ -169,30 +149,15 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            creditCardView(
-                title: "Саня",
-                amount: 500,
-                paidAmount: 100,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Коллега",
-                amount: 500,
-                paidAmount: 200,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Брат",
-                amount: 500,
-                paidAmount: 50,
-                progressColor: Color(UIColor.App.purple)
-            )
-            creditCardView(
-                title: "Игорь",
-                amount: 3000,
-                paidAmount: 100,
-                progressColor: Color(UIColor.App.purple)
-            )
+            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .given }) { credit in
+                creditCardView(
+                    id: credit.id,
+                    title: credit.name,
+                    amount: credit.amount,
+                    paidAmount: credit.depositedAmount,
+                    progressColor: Color(UIColor.App.purple)
+                )
+            }
         }
         .padding(.horizontal)
     }
@@ -292,22 +257,29 @@ private extension HomeView {
                 .foregroundColor(Color(UIColor.App.white))
 
             HStack(spacing: Metrics.loanInfoSpacing) {
+                let creditsList = creditStorage.loadCredits()
+                var takenAmount: Double {
+                    creditsList.filter { $0.creditTarget == .taken }.reduce(0) { $0 + $1.amount }
+                }
                 loanTypeView(
                     icon: "creditcard.fill",
                     title: LocalizedKey.Home.takenLoans,
-                    count: activeLoans,
-                    amount: formatAmount(25000)
+                    count: creditStorage.loadCredits().filter { $0.creditTarget == .taken }.count,
+                    amount: formatAmount(takenAmount)
                 )
 
                 Rectangle()
                     .fill(Color.white.opacity(0.2))
                     .frame(width: Metrics.dividerWidth, height: Metrics.dividerHeight)
 
+                var givenAmount: Double {
+                    creditsList.filter { $0.creditTarget == .given }.reduce(0) { $0 + $1.amount }
+                }
                 loanTypeView(
                     icon: "person.2.fill",
                     title: LocalizedKey.Home.givenLoans,
-                    count: 3,
-                    amount: formatAmount(15000)
+                    count: creditStorage.loadCredits().filter { $0.creditTarget == .given }.count,
+                    amount: formatAmount(givenAmount)
                 )
             }
         }
@@ -359,6 +331,7 @@ private extension HomeView {
 
     @ViewBuilder
     func creditCardView(
+        id: String,
         title: String,
         amount: Double,
         paidAmount: Double,

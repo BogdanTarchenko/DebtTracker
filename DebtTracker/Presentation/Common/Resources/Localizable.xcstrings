@@ -455,13 +455,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Credits"
+            "value" : "Taken"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Кредиты"
+            "state" : "translated",
+            "value" : "Взятые"
           }
         }
       }
@@ -472,13 +472,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debts"
+            "value" : "Given"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Займы"
+            "state" : "translated",
+            "value" : "Выданные"
           }
         }
       }

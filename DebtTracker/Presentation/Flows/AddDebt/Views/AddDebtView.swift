@@ -49,7 +49,6 @@ private extension AddDebtView {
     var headerView: some View {
         HStack {
             Spacer()
-
             Text(LocalizedKey.AddDebt.title)
                 .font(.subheadline)
                 .bold()

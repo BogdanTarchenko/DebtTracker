@@ -60,7 +60,7 @@ struct HomeView: View {
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .sheet(item: $selectedDebtId) {
-            DebtDetailsView(debtId: $0)
+            DebtDetailsView(credit: $0)
                 .background(.black)
         }
     }
@@ -119,7 +119,6 @@ private extension HomeView {
             ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .taken }) { credit in
                 creditCardView(
                     credit: credit,
-                    id: credit.id,
                     title: credit.name,
                     amount: credit.amount,
                     paidAmount: credit.depositedAmount,
@@ -153,7 +152,6 @@ private extension HomeView {
             ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .given }) { credit in
                 creditCardView(
                     credit: credit,
-                    id: credit.id,
                     title: credit.name,
                     amount: credit.amount,
                     paidAmount: credit.depositedAmount,
@@ -334,7 +332,6 @@ private extension HomeView {
     @ViewBuilder
     func creditCardView(
         credit: CreditModel,
-        id: String,
         title: String,
         amount: Double,
         paidAmount: Double,

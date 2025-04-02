@@ -271,7 +271,11 @@ extension DebtDetailsViewController: UIPickerViewDataSource, UIPickerViewDelegat
         paymentTypes.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        titleForRow row: Int,
+        forComponent component: Int
+    ) -> String? {
         paymentTypes[row]
     }
 

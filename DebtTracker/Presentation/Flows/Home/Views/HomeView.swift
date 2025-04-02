@@ -9,6 +9,9 @@ struct HomeView: View {
     @State private var selectedCategory: String?
     @State private var showingCategoryMenu = false
     @State private var isDebtDetailsPresented: Bool = false
+    @State private var selectedDebtId: CreditModel?
+    @Query private var credits: [CreditModel]
+
     private let creditStorage: CreditStorage = .init()
 
     private let creditCategories = [
@@ -58,8 +61,8 @@ struct HomeView: View {
         }
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .sheet(isPresented: $isDebtDetailsPresented) {
-            DebtDetailsView()
+        .sheet(item: $selectedDebtId) {
+            DebtDetailsView(credit: $0)
                 .background(.black)
         }
     }
@@ -117,7 +120,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .taken }) { credit in
                 creditCardView(
-                    id: credit.id,
+                    credit: credit,
                     title: credit.name,
                     amount: credit.amount,
                     paidAmount: credit.depositedAmount,
@@ -150,7 +153,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .given }) { credit in
                 creditCardView(
-                    id: credit.id,
+                    credit: credit,
                     title: credit.name,
                     amount: credit.amount,
                     paidAmount: credit.depositedAmount,
@@ -358,7 +361,7 @@ private extension HomeView {
 
     @ViewBuilder
     func creditCardView(
-        id: String,
+        credit: CreditModel,
         title: String,
         amount: Double,
         paidAmount: Double,
@@ -366,6 +369,7 @@ private extension HomeView {
     ) -> some View {
         Button(action: {
             isDebtDetailsPresented = true
+            selectedDebtId = credit
         }) {
             VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
                 HStack {

@@ -11,6 +11,7 @@ struct HomeView: View {
     @State private var isDebtDetailsPresented: Bool = false
     @State private var selectedDebtId: CreditModel?
     @Query private var credits: [CreditModel]
+
     private let creditStorage: CreditStorage = .init()
 
     private let creditCategories = [
@@ -26,6 +27,7 @@ struct HomeView: View {
         var totalDebt: Double {
             creditStorage.loadCredits().reduce(0) { $0 + $1.amount }
         }
+
         ScrollView {
             VStack(spacing: Metrics.sectionSpacing) {
                 debtCardView(totalDebt: "$ " + formatAmount(totalDebt))
@@ -226,19 +228,47 @@ private extension HomeView {
 
     @ViewBuilder
     private var nextPaymentView: some View {
+        var nextPaymentInfo: (amount: Double, date: String) {
+            let currentDate = Date()
+            let calendar = Calendar.current
+
+            let futureCredits = creditStorage.loadCredits()
+                .compactMap { credit -> (amount: Double, paymentDate: Date)? in
+                    var nextPaymentDate = credit.startDate
+                    while nextPaymentDate <= currentDate {
+                        let newDate = calendar.date(byAdding: .month, value: 1, to: nextPaymentDate)
+                        nextPaymentDate = newDate ?? Date.now
+                    }
+                    return (amount: credit.amount, paymentDate: nextPaymentDate)
+                }
+                .sorted {
+                    $0.paymentDate < $1.paymentDate
+                }
+
+            if let nextPayment = futureCredits.first {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d"
+                dateFormatter.locale = Locale(identifier: "ru_RU")
+                let dateString = dateFormatter.string(from: nextPayment.paymentDate)
+
+                return (nextPayment.amount, dateString)
+            }
+            return (0, "")
+        }
+
         VStack(alignment: .leading, spacing: Metrics.textSpacing) {
             Text(LocalizedKey.Home.nextPaymentDate)
                 .font(.caption)
                 .foregroundColor(.white.opacity(0.7))
             HStack(spacing: Metrics.textSpacing) {
-                Text("$ 17 000")
+                Text("\(formatAmount(nextPaymentInfo.amount))")
                     .font(.subheadline)
                     .bold()
                     .foregroundColor(Color(UIColor.App.white))
                 Text("•")
                     .font(.subheadline)
                     .foregroundColor(Color(UIColor.App.purple))
-                Text("27 марта")
+                Text(nextPaymentInfo.date)
                     .font(.subheadline)
                     .foregroundColor(Color(UIColor.App.purple))
             }

@@ -47,6 +47,14 @@ final class DIContainer: DIContainerProtocol {
     func makeAddDebtViewController() -> AddDebtViewController {
         AddDebtViewController()
     }
+
+    func makePasswordInputViewController(
+        mode: PasswordInputMode,
+        completion: (() -> Void)?
+    ) -> PasswordInputViewController {
+        let viewModel = PasswordInputViewModel(mode: mode, completion: completion)
+        return PasswordInputViewController(viewModel: viewModel)
+    }
 }
 
 // MARK: - DefaultMainViewFactory
@@ -80,5 +88,12 @@ private final class DefaultMainViewFactory: MainViewFactory {
 
     func makeAddDebtViewController() -> AddDebtViewController {
         container.makeAddDebtViewController()
+    }
+
+    func makePasswordInputViewController(
+        mode: PasswordInputMode,
+        completion: (() -> Void)?
+    ) -> PasswordInputViewController {
+        container.makePasswordInputViewController(mode: mode, completion: completion)
     }
 }

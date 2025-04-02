@@ -63,7 +63,12 @@ final class SettingsViewController: UIViewController {
     @objc
     func changePasswordButtonTapped() {
         let passwordInputViewController =
-            PasswordInputViewController(viewModel: PasswordInputViewModel(mode: .changePassword))
+            PasswordInputViewController(
+                viewModel: PasswordInputViewModel(
+                    mode: .changePassword,
+                    completion: nil
+                )
+            )
         passwordInputViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(passwordInputViewController, animated: true)
     }
@@ -81,15 +86,23 @@ extension SettingsViewController: SettingsGroupDelegate {
     }
 
     func turnOffPassword() {
-        let passwordInputViewController =
-            PasswordInputViewController(viewModel: PasswordInputViewModel(mode: .disablePassword))
+        let passwordInputViewController = PasswordInputViewController(
+            viewModel: PasswordInputViewModel(
+                mode: .disablePassword,
+                completion: nil
+            )
+        )
         passwordInputViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(passwordInputViewController, animated: true)
     }
 
     func createPassword() {
-        let passwordInputViewController =
-            PasswordInputViewController(viewModel: PasswordInputViewModel(mode: .createPassword))
+        let passwordInputViewController = PasswordInputViewController(
+            viewModel: PasswordInputViewModel(
+                mode: .createPassword,
+                completion: nil
+            )
+        )
         passwordInputViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(passwordInputViewController, animated: true)
     }

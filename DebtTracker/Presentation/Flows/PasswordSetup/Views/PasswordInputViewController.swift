@@ -19,7 +19,10 @@ final class PasswordInputViewController: UIViewController {
 
     init(viewModel: PasswordInputViewModel) {
         self.viewModel = viewModel
-        keyboardView = KeyboardView(frame: .zero, isFaceIDEnabled: viewModel.isFaceIDEnabled)
+        keyboardView = KeyboardView(
+            frame: .zero,
+            isFaceIDEnabled: UserDefaults.standard.bool(forKey: "isFaceIDEnabled")
+        )
         super.init(nibName: nil, bundle: nil)
     }
 

@@ -3,7 +3,7 @@ import SwiftData
 
 @Model
 final class PaymentModel {
-    var id: String
+    @Attribute(.unique) var id: String
     var amount: Double
     var date: Date
     var paymentType: PaymentTypeDTO

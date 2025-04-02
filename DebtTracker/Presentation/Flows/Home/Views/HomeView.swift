@@ -9,7 +9,6 @@ struct HomeView: View {
     @State private var selectedCategory: String?
     @State private var showingCategoryMenu = false
     @State private var isDebtDetailsPresented: Bool = false
-    @Environment(\.modelContext) private var modelContext
     @Query private var credits: [CreditModel]
     private let creditStorage: CreditStorage = .init()
 
@@ -28,7 +27,7 @@ struct HomeView: View {
         }
         ScrollView {
             VStack(spacing: Metrics.sectionSpacing) {
-                debtCardView(totalDebt: "$ \(totalDebt)")
+                debtCardView(totalDebt: "$ " + formatAmount(totalDebt))
                 loanInfoView(activeLoans: 5, nextPayment: "$ 17 000", paymentDate: "Март 27")
                 creditsHeaderView
                 creditsGridView

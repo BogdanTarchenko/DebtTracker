@@ -3,7 +3,7 @@ import SwiftData
 
 @Model
 final class CreditModel {
-    var id: String
+    @Attribute(.unique) var id: String
     var name: String
     var amount: Double
     var depositedAmount: Double

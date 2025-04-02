@@ -1,13 +1,16 @@
+import _SwiftData_SwiftUI
 import SnapKit
-import SwiftUICore
+import SwiftUI
 import UIKit
 
 // MARK: - DebtDetailsViewController
 
 final class DebtDetailsViewController: UIViewController {
+    var credit: CreditModel
+
     // MARK: UI Components
 
-    let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(
             ofSize: UIFont.preferredFont(
@@ -16,30 +19,44 @@ final class DebtDetailsViewController: UIViewController {
         )
         label.textColor = .white
         label.textAlignment = .center
-        // TODO: - добавить сюда подтягивание данных с кредита
-        label.text = "Название кредита"
+        label.text = credit.name
         return label
     }()
 
-    let generalDebtInfo: DebtDetailsGeneralInfo = .init()
-    let debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
+    lazy var generalDebtInfo: DebtDetailsGeneralInfo = .init(frame: .zero, amount: credit.amount)
+    lazy var debtTermInfo: DebtDetailsBlock = .init(frame: .zero, .init(
         leftImage: .percent,
         rightImage: .clock,
         leftTitle: LocalizedKey.DebtDetails.loanRate,
         rightTitle: LocalizedKey.DebtDetails.loanTerm,
-        leftAmount: "12.5%",
-        rightAmount: "36 месяцев"
+        leftAmount: "\(credit.percentage)%",
+        rightAmount: "\(credit.period) месяцев"
     ))
-    let debtDateInfo: DebtDetailsBlock = .init(frame: .zero, .init(
-        leftImage: .calendar,
-        rightImage: .dollarsign,
-        leftTitle: LocalizedKey.DebtDetails.openedDate,
-        rightTitle: LocalizedKey.DebtDetails.nextPayment,
-        leftAmount: "25.04.2025",
-        rightAmount: "25.05.2025"
-    ))
+    lazy var debtDateInfo: DebtDetailsBlock = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale.current // или явно указать нужную локаль
+
+        let leftAmount = dateFormatter.string(from: credit.startDate)
+        let rightAmount = dateFormatter
+            .string(from: credit.startDate) // предполагается, что такое поле есть в модели
+
+        return DebtDetailsBlock(
+            frame: .zero,
+            .init(
+                leftImage: .calendar,
+                rightImage: .dollarsign,
+                leftTitle: LocalizedKey.DebtDetails.openedDate,
+                rightTitle: LocalizedKey.DebtDetails.nextPayment,
+                leftAmount: leftAmount,
+                rightAmount: rightAmount
+            )
+        )
+    }()
+
     let debtProgressInfo: DebtDetailsProgressInfo = .init()
-    let debtPaymentsHistory: DebtDetailsPaymentHistory = .init()
+    lazy var debtPaymentsHistory: DebtDetailsPaymentHistory = .init(data: credit.payments)
     let addTransactionButton: UIButton = {
         let button = UIButton(type: .system)
 
@@ -51,13 +68,19 @@ final class DebtDetailsViewController: UIViewController {
         config.imagePadding = 8
         config.imagePlacement = .leading
 
-        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
-        config
-            .titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+        config.contentInsets = NSDirectionalEdgeInsets(
+            top: 8,
+            leading: 16,
+            bottom: 8,
+            trailing: 16
+        )
+        config.titleTextAttributesTransformer =
+            UIConfigurationTextAttributesTransformer { incoming in
                 var outgoing = incoming
                 outgoing.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
                 return outgoing
             }
+
         config.baseForegroundColor = UIColor.App.white
         config.baseBackgroundColor = UIColor.App.black
 
@@ -74,14 +97,25 @@ final class DebtDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        configureAddTransactionButton()
         setupConstraints()
+    }
+
+    init(for credit: CreditModel) {
+        self.credit = credit
+        print(credit.payments.count)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Private Methods
 
     private func configureView() {
         view.backgroundColor = .black
-        configureAddTransactionButton()
 
         [
             titleLabel,
@@ -118,6 +152,64 @@ final class DebtDetailsViewController: UIViewController {
         addTransactionButton.configuration = config
         addTransactionButton.layer.cornerRadius = Constants.cornerRadius
         addTransactionButton.layer.masksToBounds = true
+        addTransactionButton
+            .addTarget(
+                self,
+                action: #selector(
+                    addTransactionButtonTapped
+                ),
+                for: .touchUpInside
+            )
+    }
+
+    @objc func addTransactionButtonTapped() {
+        let alert = UIAlertController(
+            title: "Добавить платеж",
+            message: "\n\n\n\n\n\n", // Место для пикера
+            preferredStyle: .alert
+        )
+
+        // Поле для ввода суммы
+        alert.addTextField { textField in
+            textField.placeholder = "Сумма"
+            textField.keyboardType = .decimalPad
+        }
+
+        // PickerView для выбора типа
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: 260, height: 100))
+        pickerView.dataSource = self
+        pickerView.delegate = self
+
+        alert.view.addSubview(pickerView)
+
+        // Действия
+        alert.addAction(UIAlertAction(title: "Добавить", style: .default) { [weak self] _ in
+            guard let self,
+                  let amountText = alert.textFields?.first?.text,
+                  let amount = Double(amountText)
+            else {
+                return
+            }
+
+            let selectedType = paymentTypes[pickerView.selectedRow(inComponent: 0)]
+            handlePaymentCreation(amount: amount, type: selectedType)
+        })
+
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+
+        present(alert, animated: true)
+    }
+
+    private func handlePaymentCreation(amount: Double, type: String) {
+        print("Создаем платеж: \(amount), тип: \(type)")
+        let payment = PaymentModel(
+            id: UUID().uuidString,
+            amount: amount,
+            date: Date.now,
+            paymentType: PaymentTypeDTO(rawValue: type) ?? .monthlyAnnuity
+        )
+        let creditStorage: CreditStorage = .init()
+        creditStorage.addPayment(for: credit.id, with: payment)
     }
 
     private func setupConstraints() {
@@ -157,6 +249,47 @@ final class DebtDetailsViewController: UIViewController {
             $0.top.equalTo(debtProgressInfo).inset(Constants.verticalSpacing)
             $0.bottom.equalTo(addTransactionButton.snp.top).offset(-Constants.verticalSpacing)
         }
+    }
+}
+
+// MARK: UIPickerViewDataSource, UIPickerViewDelegate
+
+extension DebtDetailsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    var paymentTypes: [String] {
+        var arr = [String]()
+        for type in PaymentTypeDTO.allCases {
+            arr.append(type.rawValue)
+        }
+        return arr
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        paymentTypes.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        paymentTypes[row]
+    }
+
+    func pickerView(
+        _ pickerView: UIPickerView,
+        viewForRow row: Int,
+        forComponent component: Int,
+        reusing view: UIView?
+    ) -> UIView {
+        let label = UILabel()
+        label.text = paymentTypes[row]
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }
+
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        30
     }
 }
 

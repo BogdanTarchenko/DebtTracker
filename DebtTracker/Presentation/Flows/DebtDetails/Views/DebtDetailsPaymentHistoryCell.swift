@@ -90,9 +90,9 @@ final class DebtDetailsPaymentHistoryCell: UICollectionViewCell {
         }
     }
 
-    func configure(with item: PaymentHistoryItem) {
-        paymentTypeLabel.text = item.paymentType
-        paymentDateLabel.text = item.paymentDate
-        amountLabel.text = item.amount
+    func configure(with item: PaymentModel) {
+        paymentTypeLabel.text = item.paymentType.rawValue
+        paymentDateLabel.text = item.date.formatted()
+        amountLabel.text = item.amount.formatted()
     }
 }

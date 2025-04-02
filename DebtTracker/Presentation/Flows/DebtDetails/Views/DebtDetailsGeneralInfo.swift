@@ -1,6 +1,8 @@
 import UIKit
 
 final class DebtDetailsGeneralInfo: UIView {
+    var amount: Double
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = LocalizedKey.DebtDetails.creditAmount
@@ -9,22 +11,23 @@ final class DebtDetailsGeneralInfo: UIView {
         return label
     }()
 
-    private let amountLabel: UILabel = {
+    private lazy var amountLabel: UILabel = {
         let label = UILabel()
-        label.text = "2500000.00 ₽"
+        label.text = "\(amount) $"
         label.font = .systemFont(ofSize: 32, weight: .semibold)
         label.textColor = UIColor.App.white
         return label
     }()
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    init(frame: CGRect, amount: Double) {
+        self.amount = amount
+        super.init(frame: frame)
         setupView()
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func setupView() {

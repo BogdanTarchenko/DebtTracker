@@ -4,63 +4,7 @@ import UIKit
 // MARK: - DebtDetailsPaymentHistory
 
 final class DebtDetailsPaymentHistory: UICollectionView {
-    private var paymentHistoryItems: [PaymentHistoryItem] = [
-        PaymentHistoryItem(
-            paymentType: "Ежемесячный платеж",
-            paymentDate: "01.03.2025",
-            amount: "-8500 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Доп. погашение",
-            paymentDate: "15.03.2025",
-            amount: "-15000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Погашение",
-            paymentDate: "20.03.2025",
-            amount: "-10000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Доп. погашение",
-            paymentDate: "15.03.2025",
-            amount: "-15000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Погашение",
-            paymentDate: "20.03.2025",
-            amount: "-10000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Доп. погашение",
-            paymentDate: "15.03.2025",
-            amount: "-15000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Погашение",
-            paymentDate: "20.03.2025",
-            amount: "-10000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Доп. погашение",
-            paymentDate: "15.03.2025",
-            amount: "-15000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Погашение",
-            paymentDate: "20.03.2025",
-            amount: "-10000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Доп. погашение",
-            paymentDate: "15.03.2025",
-            amount: "-15000 ₽"
-        ),
-        PaymentHistoryItem(
-            paymentType: "Погашение",
-            paymentDate: "20.03.2025",
-            amount: "-10000 ₽"
-        )
-    ]
+    private var paymentHistoryItems: [PaymentModel] = []
 
     private enum Constants {
         static let cellHeight: CGFloat = 64
@@ -71,7 +15,8 @@ final class DebtDetailsPaymentHistory: UICollectionView {
         static let interitemSpacing: CGFloat = 0
     }
 
-    init() {
+    init(data: [PaymentModel]) {
+        paymentHistoryItems = data
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = Constants.separatorHeight

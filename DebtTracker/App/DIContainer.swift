@@ -36,8 +36,8 @@ final class DIContainer: DIContainerProtocol {
         StatsView()
     }
 
-    func makeDebtDetailsViewController() -> DebtDetailsViewController {
-        DebtDetailsViewController()
+    func makeDebtDetailsViewController(credit: CreditModel) -> DebtDetailsViewController {
+        DebtDetailsViewController(for: credit)
     }
 
     func makeSettingsViewController() -> SettingsViewController {
@@ -78,8 +78,8 @@ private final class DefaultMainViewFactory: MainViewFactory {
         container.makeStatsView()
     }
 
-    func makeDebtDetailsViewController() -> DebtDetailsViewController {
-        container.makeDebtDetailsViewController()
+    func makeDebtDetailsViewController(credit: CreditModel) -> DebtDetailsViewController {
+        container.makeDebtDetailsViewController(credit: credit)
     }
 
     func makeSettingsViewController() -> SettingsViewController {

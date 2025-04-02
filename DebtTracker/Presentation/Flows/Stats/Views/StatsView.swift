@@ -1,17 +1,33 @@
 import Charts
+import SwiftData
 import SwiftUI
 
 // MARK: - StatsView
 
 struct StatsView: View {
+    private let creditStorage: CreditStorage = .init()
+
     // MARK: - Private Properties
 
-    private let creditTypes = [
-        (LocalizedKey.AddDebt.consumerLoan, 150_000, Color(UIColor.App.purple)),
-        (LocalizedKey.AddDebt.autoLoan, 250_000, Color(UIColor.App.blue)),
-        (LocalizedKey.AddDebt.mortgageLoan, 500_000, Color(UIColor.App.green)),
-        (LocalizedKey.AddDebt.microLoan, 50000, Color(UIColor.App.orange))
-    ]
+    private var credits: [CreditModel] {
+        creditStorage.loadCredits()
+    }
+
+    private func amount(for type: CreditTypeDTO) -> Double {
+        credits.filter { $0.creditType == type }.reduce(0) { $0 + $1.amount }
+    }
+
+    // swiftlint:disable large_tuple
+    private var creditTypes: [(title: String, amount: Double, color: Color)] {
+        [
+            (LocalizedKey.AddDebt.consumerLoan, amount(for: .consumer), Color(UIColor.App.purple)),
+            (LocalizedKey.AddDebt.autoLoan, amount(for: .car), Color(UIColor.App.blue)),
+            (LocalizedKey.AddDebt.mortgageLoan, amount(for: .mortgage), Color(UIColor.App.green)),
+            (LocalizedKey.AddDebt.microLoan, amount(for: .microloan), Color(UIColor.App.orange))
+        ]
+    }
+
+    // swiftlint:enable large_tuple
 
     private var totalAmount: Double {
         creditTypes.reduce(0) { sum, creditType in
@@ -25,7 +41,7 @@ struct StatsView: View {
     }
 
     private var minAmount: Double {
-        let amounts = creditTypes.map(\.1)
+        let amounts = creditStorage.loadCredits().map(\.amount)
         return Double(amounts.min() ?? 0)
     }
 
@@ -163,7 +179,7 @@ private extension StatsView {
             VStack(alignment: .leading, spacing: Metrics.statsSpacing) {
                 StatRow(
                     title: LocalizedKey.Stats.creditsAmount,
-                    value: "\(creditTypes.count)"
+                    value: "\(credits.count)"
                 )
                 StatRow(
                     title: LocalizedKey.Stats.maxCredit,

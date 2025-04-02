@@ -327,13 +327,26 @@ private extension AddDebtView {
             return
         }
 
+        let creditType: CreditTypeDTO = switch selectedCreditType {
+        case LocalizedKey.AddDebt.consumerLoan:
+            .consumer
+        case LocalizedKey.AddDebt.autoLoan:
+            .car
+        case LocalizedKey.AddDebt.mortgageLoan:
+            .mortgage
+        case LocalizedKey.AddDebt.microLoan:
+            .microloan
+        default:
+            .consumer
+        }
+
         let credit = CreditModel(
             id: UUID().uuidString,
             name: creditName,
             amount: amount,
             depositedAmount: paidAmount ?? 0.0,
             percentage: interestRate ?? 0.0,
-            creditType: .consumer,
+            creditType: creditType,
             creditTarget: isBorrowed ? .taken : .given,
             startDate: startDate,
             period: Int(termMonths ?? 0),
@@ -343,7 +356,6 @@ private extension AddDebtView {
         let storage = CreditStorage()
         storage.saveCredit(credit)
 
-        print(storage.loadCredits())
         dismiss()
     }
 }

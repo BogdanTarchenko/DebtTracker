@@ -14,4 +14,6 @@ protocol DIContainerProtocol {
     func makeDebtDetailsViewController() -> DebtDetailsViewController
     func makeSettingsViewController() -> SettingsViewController
     func makeAddDebtViewController() -> AddDebtViewController
+    func makePasswordInputViewController(mode: PasswordInputMode, completion: (() -> Void)?)
+        -> PasswordInputViewController
 }

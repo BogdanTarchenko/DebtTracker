@@ -43,10 +43,13 @@ final class PasswordInputViewModel {
     var onSuccess: (() -> Void)?
     var onFailure: ((String) -> Void)?
 
+    var completion: (() -> Void)?
+
     // MARK: - Init
 
-    init(mode: PasswordInputMode) {
+    init(mode: PasswordInputMode, completion: (() -> Void)?) {
         self.mode = mode
+        self.completion = completion
         configureInitialState()
     }
 
@@ -143,6 +146,10 @@ final class PasswordInputViewModel {
                 highlightColor = UIColor.App.green
                 updateUI()
                 startNewPasswordFlow()
+            } else if mode == .verifyPassword {
+                highlightColor = UIColor.App.green
+                updateUI()
+                handleSuccess()
             } else {
                 _ = KeychainService.disablePassword()
                 handleSuccess()
@@ -198,7 +205,21 @@ final class PasswordInputViewModel {
     private func handleSuccess() {
         highlightColor = .green
         updateUI()
-        onSuccess?()
+
+        Task {
+            try await Task.sleep(for: .seconds(0.3))
+
+            await MainActor.run {
+                self.onSuccess?()
+
+                if self.mode == .verifyPassword {
+                    self.completion?()
+                }
+
+                self.highlightColor = nil
+                self.updateUI()
+            }
+        }
     }
 
     private func handleFailure(_ message: String) {

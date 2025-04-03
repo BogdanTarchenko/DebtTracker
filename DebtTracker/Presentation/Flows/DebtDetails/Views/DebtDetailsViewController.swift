@@ -235,7 +235,9 @@ final class DebtDetailsViewController: UIViewController {
             animations: { self.debtPaymentsHistory.reloadData() }
         )
     }
+}
 
+extension DebtDetailsViewController {
     private func setupConstraints() {
         titleLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()

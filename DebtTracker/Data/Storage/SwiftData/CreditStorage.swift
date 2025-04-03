@@ -5,8 +5,9 @@ import SwiftData
 final class CreditStorage: ObservableObject {
     private let modelContainer: ModelContainer
     private let modelContext: ModelContext
+    private var needsUpdate: Bool = true
 
-    @Published private(set) var credits: [CreditModel] = []
+    @Published var credits: [CreditModel] = []
 
     init() {
         do {
@@ -15,7 +16,8 @@ final class CreditStorage: ObservableObject {
                 configurations: ModelConfiguration()
             )
             modelContext = modelContainer.mainContext
-            _ = loadCredits()
+
+            Task { await updateCredits() }
         } catch {
             fatalError("Failed to initialize ModelContainer: \(error)")
         }
@@ -25,7 +27,11 @@ final class CreditStorage: ObservableObject {
         modelContext.insert(credit)
         do {
             try modelContext.save()
-            DispatchQueue.main.async { _ = self.loadCredits() }
+
+            needsUpdate = true
+            Task { await updateCredits() }
+
+            NotificationCenter.default.post(name: .creditAdded, object: nil)
             print("Credit saved successfully: \(credit)")
         } catch {
             print("Error saving credit: \(error.localizedDescription)")
@@ -34,8 +40,15 @@ final class CreditStorage: ObservableObject {
 
     func loadCredits() -> [CreditModel] {
         do {
-            let loadedCredits = try modelContext.fetch(FetchDescriptor<CreditModel>())
-            DispatchQueue.main.async { self.credits = loadedCredits }
+            let descriptor = FetchDescriptor<CreditModel>(
+                sortBy: [SortDescriptor(\.startDate, order: .reverse)]
+            )
+            let loadedCredits = try modelContext.fetch(descriptor)
+
+            if needsUpdate {
+                Task { await updateCredits() }
+            }
+
             return loadedCredits
         } catch {
             print("Error loading credits: \(error.localizedDescription)")
@@ -63,11 +76,49 @@ final class CreditStorage: ObservableObject {
             credit.depositedAmount += payment.amount
 
             try modelContext.save()
-            DispatchQueue.main.async { _ = self.loadCredits() }
+
+            if let index = credits.firstIndex(where: { $0.id == creditId }) {
+                credits[index] = credit
+            }
+
+            needsUpdate = true
+            if needsUpdate {
+                Task { await updateCredits() }
+            }
+
+            NotificationCenter.default.post(name: .creditAdded, object: nil)
 
             print("Payment added successfully to credit: \(credit.name)")
         } catch {
             print("Error adding payment: \(error.localizedDescription)")
+        }
+    }
+
+    func deleteCredit(for id: String) {
+        do {
+            let descriptor = FetchDescriptor<CreditModel>(
+                predicate: #Predicate { $0.id == id }
+            )
+
+            guard let credit = try modelContext.fetch(descriptor).first else {
+                print("Credit with id \(id) not found")
+                return
+            }
+
+            modelContext.delete(credit)
+            try modelContext.save()
+
+            credits.removeAll { $0.id == id }
+
+            let descriptorAfter = FetchDescriptor<CreditModel>(
+                sortBy: [SortDescriptor(\.startDate, order: .reverse)]
+            )
+            credits = try modelContext.fetch(descriptorAfter)
+
+            NotificationCenter.default.post(name: .creditAdded, object: nil)
+            print("Credit deleted successfully: \(credit.name)")
+        } catch {
+            print("Error deleting credit: \(error.localizedDescription)")
         }
     }
 
@@ -77,9 +128,23 @@ final class CreditStorage: ObservableObject {
                 modelContext.delete(credit)
             }
             try modelContext.save()
-            DispatchQueue.main.async { self.credits.removeAll() }
+            credits.removeAll()
+            print("clear")
         } catch {
             print("Error clearing credits: \(error.localizedDescription)")
+        }
+    }
+
+    func updateCredits() async {
+        do {
+            let descriptor = FetchDescriptor<CreditModel>(
+                sortBy: [SortDescriptor(\.startDate, order: .reverse)]
+            )
+            credits = try modelContext.fetch(descriptor)
+            needsUpdate = false
+        } catch {
+            print("Error updating credits: \(error.localizedDescription)")
+            credits = []
         }
     }
 

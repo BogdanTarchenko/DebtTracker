@@ -55,6 +55,28 @@ final class DebtDetailsViewController: UIViewController {
         )
     }()
 
+    private lazy var deleteButton: UIButton = {
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 16,
+            weight: .medium
+        )
+
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "trash.fill", withConfiguration: config), for: .normal)
+        button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
+    @objc private func deleteButtonTapped() {
+        CreditStorage().deleteCredit(for: credit.id)
+
+        if let navigationController {
+            navigationController.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
     lazy var debtProgressInfo: DebtDetailsProgressInfo = {
         let view = DebtDetailsProgressInfo()
         view.configure(with: credit)
@@ -130,7 +152,8 @@ final class DebtDetailsViewController: UIViewController {
             debtDateInfo,
             debtProgressInfo,
             debtPaymentsHistory,
-            addTransactionButton
+            addTransactionButton,
+            deleteButton
         ].forEach { customView in
             view.addSubview(customView)
         }
@@ -267,6 +290,11 @@ extension DebtDetailsViewController {
             $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
             $0.top.equalTo(debtProgressInfo.snp.bottom).offset(Constants.verticalSpacing)
             $0.bottom.equalTo(addTransactionButton.snp.top).offset(-Constants.verticalSpacing)
+        }
+
+        deleteButton.snp.remakeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Constants.topInset)
+            $0.trailing.equalToSuperview().inset(Constants.horizontalInset)
         }
     }
 }

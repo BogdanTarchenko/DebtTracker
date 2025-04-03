@@ -13,8 +13,6 @@ struct HomeView: View {
     @State private var refreshTrigger = false
     @StateObject private var creditStorage: CreditStorage = .init()
 
-//    @StateObject private var creditStorage: [CreditModel] = CreditStorage.init().loadCredits()
-
     private let creditCategories = [
         LocalizedKey.AddDebt.consumerLoan,
         LocalizedKey.AddDebt.autoLoan,
@@ -194,7 +192,6 @@ private extension HomeView {
             }
 
             HStack(spacing: Metrics.debtInfoSpacing) {
-                debtChangeView
                 nextPaymentView
             }
         }

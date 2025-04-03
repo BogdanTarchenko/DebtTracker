@@ -5,7 +5,8 @@ import SwiftUI
 // MARK: - StatsView
 
 struct StatsView: View {
-    private let creditStorage: CreditStorage = .init()
+    @StateObject private var creditStorage = CreditStorage()
+    @State private var refreshTrigger = false
 
     // MARK: - Private Properties
 
@@ -69,6 +70,9 @@ struct StatsView: View {
         }
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
+        .onAppear {
+            _ = creditStorage.loadCredits()
+        }
     }
 }
 
@@ -105,6 +109,9 @@ private extension StatsView {
         )
         .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         .padding(.horizontal)
+        .onReceive(NotificationCenter.default.publisher(for: .creditAdded)) { _ in
+            refreshTrigger.toggle()
+        }
     }
 
     @ViewBuilder

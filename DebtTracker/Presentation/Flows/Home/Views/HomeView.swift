@@ -16,7 +16,6 @@ struct HomeView: View {
     
     private let creditCategories: [CreditTypeDTO] = [.consumer, .car, .mortgage, .microloan]
 
-
     // MARK: - Body
 
     var body: some View {

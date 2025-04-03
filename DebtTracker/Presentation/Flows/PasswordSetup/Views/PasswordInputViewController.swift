@@ -51,7 +51,6 @@ final class PasswordInputViewController: UIViewController {
             guard let self else { return }
             Task {
                 updateUI()
-                try await Task.sleep(for: .seconds(0.3))
                 dismiss(animated: true)
             }
         }

@@ -293,7 +293,7 @@ extension DebtDetailsViewController {
         addTransactionButton.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
             $0.height.equalTo(Constants.buttonHeight)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.bottomInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.bottomInset)
         }
 
         debtPaymentsHistory.snp.makeConstraints {

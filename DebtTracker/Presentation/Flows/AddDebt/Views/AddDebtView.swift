@@ -356,8 +356,14 @@ private extension AddDebtView {
         let storage = CreditStorage()
         storage.saveCredit(credit)
 
+        NotificationCenter.default.post(name: .creditAdded, object: nil)
+
         dismiss()
     }
+}
+
+extension Notification.Name {
+    static let creditAdded = Notification.Name("creditAdded")
 }
 
 // MARK: - Constants

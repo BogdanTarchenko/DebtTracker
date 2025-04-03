@@ -2,9 +2,11 @@ import Foundation
 import SwiftData
 
 @MainActor
-final class CreditStorage {
+final class CreditStorage: ObservableObject {
     private let modelContainer: ModelContainer
     private let modelContext: ModelContext
+
+    @Published private(set) var credits: [CreditModel] = []
 
     init() {
         do {
@@ -13,6 +15,7 @@ final class CreditStorage {
                 configurations: ModelConfiguration()
             )
             modelContext = modelContainer.mainContext
+            _ = loadCredits()
         } catch {
             fatalError("Failed to initialize ModelContainer: \(error)")
         }
@@ -22,6 +25,7 @@ final class CreditStorage {
         modelContext.insert(credit)
         do {
             try modelContext.save()
+            DispatchQueue.main.async { _ = self.loadCredits() }
             print("Credit saved successfully: \(credit)")
         } catch {
             print("Error saving credit: \(error.localizedDescription)")
@@ -30,23 +34,18 @@ final class CreditStorage {
 
     func loadCredits() -> [CreditModel] {
         do {
-            return try modelContext.fetch(FetchDescriptor<CreditModel>())
+            let loadedCredits = try modelContext.fetch(FetchDescriptor<CreditModel>())
+            DispatchQueue.main.async { self.credits = loadedCredits }
+            return loadedCredits
         } catch {
             print("Error loading credits: \(error.localizedDescription)")
+            credits = []
             return []
         }
     }
 
     func loadCredit(by id: String) -> CreditModel? {
-        do {
-            let descriptor = FetchDescriptor<CreditModel>(
-                predicate: #Predicate { $0.id == id }
-            )
-            return try modelContext.fetch(descriptor).first
-        } catch {
-            print("Error loading credit by ID: \(error.localizedDescription)")
-            return nil
-        }
+        credits.first { $0.id == id }
     }
 
     func addPayment(for creditId: String, with payment: PaymentModel) {
@@ -61,14 +60,12 @@ final class CreditStorage {
             }
 
             credit.payments.append(payment)
-            print(credit.payments)
-
             credit.depositedAmount += payment.amount
 
             try modelContext.save()
+            DispatchQueue.main.async { _ = self.loadCredits() }
 
             print("Payment added successfully to credit: \(credit.name)")
-
         } catch {
             print("Error adding payment: \(error.localizedDescription)")
         }
@@ -76,11 +73,11 @@ final class CreditStorage {
 
     func clearAllCredits() {
         do {
-            let credits = try modelContext.fetch(FetchDescriptor<CreditModel>())
             for credit in credits {
                 modelContext.delete(credit)
             }
             try modelContext.save()
+            DispatchQueue.main.async { self.credits.removeAll() }
         } catch {
             print("Error clearing credits: \(error.localizedDescription)")
         }
@@ -105,6 +102,7 @@ final class CreditStorage {
 
         do {
             try modelContext.save()
+            DispatchQueue.main.async { _ = self.loadCredits() }
         } catch {
             print("Error saving updated credit: \(error.localizedDescription)")
         }

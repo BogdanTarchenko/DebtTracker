@@ -13,8 +13,9 @@ struct HomeView: View {
     @State private var selectedDebtId: CreditModel?
     @State private var refreshTrigger = false
     @StateObject private var creditStorage: CreditStorage = .init()
-
+    
     private let creditCategories: [CreditTypeDTO] = [.consumer, .car, .mortgage, .microloan]
+
 
     // MARK: - Body
 
@@ -119,7 +120,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter {
                 $0.creditTarget == .taken &&
-                    (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
+                (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
             }) { credit in
                 creditCardView(
                     credit: credit,
@@ -136,7 +137,7 @@ private extension HomeView {
     @ViewBuilder
     var loansHeaderView: some View {
         HStack {
-            Text(LocalizedKey.Home.loans)
+            Text(LocalizedKey.Home.givenLoans)
                 .font(.title2)
                 .bold()
                 .foregroundColor(Color(UIColor.App.white))
@@ -173,7 +174,7 @@ private extension HomeView {
             }
         }
     }
-
+    
     @ViewBuilder
     var loansGridView: some View {
         LazyVGrid(
@@ -182,7 +183,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter {
                 $0.creditTarget == .given &&
-                    (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
+                (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
             }) { credit in
                 creditCardView(
                     credit: credit,

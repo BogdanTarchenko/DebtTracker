@@ -31,7 +31,10 @@ struct CalculatorView: View {
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            UIApplication
+                .shared
+                .sendAction(#selector(UIResponder.resignFirstResponder),
+                            to: nil, from: nil, for: nil)
         }
     }
 }

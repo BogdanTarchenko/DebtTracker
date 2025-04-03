@@ -10,9 +10,9 @@ struct HomeView: View {
     @State private var showingCategoryMenu = false
     @State private var isDebtDetailsPresented: Bool = false
     @State private var selectedDebtId: CreditModel?
-    @Query private var credits: [CreditModel]
+    @State private var refreshTrigger = false
 
-    private let creditStorage: CreditStorage = .init()
+    @StateObject private var creditStorage = CreditStorage()
 
     private let creditCategories = [
         LocalizedKey.AddDebt.consumerLoan,
@@ -31,7 +31,6 @@ struct HomeView: View {
         ScrollView {
             VStack(spacing: Metrics.sectionSpacing) {
                 debtCardView(totalDebt: "$ " + formatAmount(totalDebt))
-                loanInfoView(activeLoans: 5, nextPayment: "$ 17 000", paymentDate: "Март 27")
                 creditsHeaderView
                 creditsGridView
                 loansHeaderView
@@ -40,6 +39,9 @@ struct HomeView: View {
             }
             .padding(.vertical)
             .padding(.bottom, Metrics.bottomPadding)
+        }
+        .onAppear {
+            _ = creditStorage.loadCredits()
         }
         .background(.black)
         .navigationBarTitleDisplayMode(.inline)
@@ -61,6 +63,9 @@ struct HomeView: View {
         }
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
+        .onReceive(NotificationCenter.default.publisher(for: .creditAdded)) { _ in
+            refreshTrigger.toggle()
+        }
         .sheet(item: $selectedDebtId) {
             DebtDetailsView(credit: $0)
                 .background(.black)
@@ -118,13 +123,13 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .taken }) { credit in
+            ForEach(creditStorage.credits.filter { $0.creditTarget == .taken }) { credit in
                 creditCardView(
                     credit: credit,
                     title: credit.name,
                     amount: credit.amount,
                     paidAmount: credit.depositedAmount,
-                    progressColor: Color(UIColor.App.purple)
+                    progressColor: .purple
                 )
             }
         }
@@ -151,13 +156,13 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .given }) { credit in
+            ForEach(creditStorage.credits.filter { $0.creditTarget == .given }) { credit in
                 creditCardView(
                     credit: credit,
                     title: credit.name,
                     amount: credit.amount,
                     paidAmount: credit.depositedAmount,
-                    progressColor: Color(UIColor.App.purple)
+                    progressColor: .purple
                 )
             }
         }

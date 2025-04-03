@@ -1,7 +1,11 @@
 import SnapKit
 import UIKit
 
+// MARK: - DebtDetailsProgressInfo
+
 final class DebtDetailsProgressInfo: UIView {
+    // MARK: - UI Components
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = LocalizedKey.DebtDetails.paymentProgress
@@ -12,7 +16,6 @@ final class DebtDetailsProgressInfo: UIView {
 
     private let percentLabel: UILabel = {
         let label = UILabel()
-        label.text = "50%"
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = UIColor.App.white
         label.textAlignment = .right
@@ -21,9 +24,8 @@ final class DebtDetailsProgressInfo: UIView {
 
     private let progressBar: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.setProgress(0.5, animated: false)
         progressView.trackTintColor = UIColor.App.gray
-        progressView.progressTintColor = UIColor.App.white
+        progressView.progressTintColor = UIColor.App.purple
         return progressView
     }()
 
@@ -37,7 +39,6 @@ final class DebtDetailsProgressInfo: UIView {
 
     private let leftAmount: UILabel = {
         let label = UILabel()
-        label.text = "137500.00 ₽"
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = UIColor.App.white
         return label
@@ -54,12 +55,13 @@ final class DebtDetailsProgressInfo: UIView {
 
     private let rightAmount: UILabel = {
         let label = UILabel()
-        label.text = "112500.00 ₽"
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = UIColor.App.white
         label.textAlignment = .right
         return label
     }()
+
+    // MARK: - Initialization
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -70,6 +72,25 @@ final class DebtDetailsProgressInfo: UIView {
         super.init(frame: frame)
         setupView()
     }
+
+    // MARK: - Configuration
+
+    func configure(with credit: CreditModel) {
+        let paidAmount = credit.depositedAmount
+        let totalAmount = credit.amount
+        let remainingAmount = totalAmount - paidAmount
+        let progress = Float(paidAmount / totalAmount)
+
+        progressBar.setProgress(progress, animated: true)
+
+        let percentValue = Int(progress * 100)
+        percentLabel.text = "\(percentValue)%"
+
+        leftAmount.text = remainingAmount.formattedAsCurrency()
+        rightAmount.text = paidAmount.formattedAsCurrency()
+    }
+
+    // MARK: - Private Methods
 
     private func setupView() {
         backgroundColor = UIColor.App.black
@@ -119,5 +140,20 @@ final class DebtDetailsProgressInfo: UIView {
             make.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(16)
         }
+    }
+}
+
+extension Double {
+    func formattedAsCurrency() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 2
+        formatter.currencySymbol = "$"
+        formatter.decimalSeparator = "."
+        formatter.groupingSeparator = ""
+        formatter.positiveSuffix = " $"
+        formatter.negativeSuffix = " $"
+
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
     }
 }

@@ -36,11 +36,11 @@ final class DebtDetailsViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale.current // или явно указать нужную локаль
+        dateFormatter.locale = Locale.current
 
         let leftAmount = dateFormatter.string(from: credit.startDate)
         let rightAmount = dateFormatter
-            .string(from: credit.startDate) // предполагается, что такое поле есть в модели
+            .string(from: credit.startDate)
 
         return DebtDetailsBlock(
             frame: .zero,
@@ -55,8 +55,14 @@ final class DebtDetailsViewController: UIViewController {
         )
     }()
 
-    let debtProgressInfo: DebtDetailsProgressInfo = .init()
+    lazy var debtProgressInfo: DebtDetailsProgressInfo = {
+        let view = DebtDetailsProgressInfo()
+        view.configure(with: credit)
+        return view
+    }()
+
     lazy var debtPaymentsHistory: DebtDetailsPaymentHistory = .init(data: credit.payments)
+
     let addTransactionButton: UIButton = {
         let button = UIButton(type: .system)
 
@@ -103,8 +109,8 @@ final class DebtDetailsViewController: UIViewController {
 
     init(for credit: CreditModel) {
         self.credit = credit
-        print(credit.payments.count)
         super.init(nibName: nil, bundle: nil)
+        debtPaymentsHistory = DebtDetailsPaymentHistory(data: credit.payments)
     }
 
     @available(*, unavailable)
@@ -165,24 +171,21 @@ final class DebtDetailsViewController: UIViewController {
     @objc func addTransactionButtonTapped() {
         let alert = UIAlertController(
             title: "Добавить платеж",
-            message: "\n\n\n\n\n\n", // Место для пикера
+            message: "\n\n\n\n\n\n",
             preferredStyle: .alert
         )
 
-        // Поле для ввода суммы
         alert.addTextField { textField in
             textField.placeholder = "Сумма"
             textField.keyboardType = .decimalPad
         }
 
-        // PickerView для выбора типа
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: 260, height: 100))
         pickerView.dataSource = self
         pickerView.delegate = self
 
         alert.view.addSubview(pickerView)
 
-        // Действия
         alert.addAction(UIAlertAction(title: "Добавить", style: .default) { [weak self] _ in
             guard let self,
                   let amountText = alert.textFields?.first?.text,
@@ -208,10 +211,26 @@ final class DebtDetailsViewController: UIViewController {
             date: Date.now,
             paymentType: PaymentTypeDTO(rawValue: type) ?? .monthlyAnnuity
         )
+
         let creditStorage: CreditStorage = .init()
         creditStorage.addPayment(for: credit.id, with: payment)
-    }
 
+        credit.payments.append(payment)
+        credit.depositedAmount += amount
+
+        debtPaymentsHistory.paymentHistoryItems = credit.payments
+        debtProgressInfo.configure(with: credit)
+
+        UIView.transition(
+            with: debtPaymentsHistory,
+            duration: 0.3,
+            options: .transitionCrossDissolve,
+            animations: { self.debtPaymentsHistory.reloadData() }
+        )
+    }
+}
+
+extension DebtDetailsViewController {
     private func setupConstraints() {
         titleLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
@@ -246,7 +265,7 @@ final class DebtDetailsViewController: UIViewController {
 
         debtPaymentsHistory.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
-            $0.top.equalTo(debtProgressInfo).inset(Constants.verticalSpacing)
+            $0.top.equalTo(debtProgressInfo.snp.bottom).offset(Constants.verticalSpacing)
             $0.bottom.equalTo(addTransactionButton.snp.top).offset(-Constants.verticalSpacing)
         }
     }

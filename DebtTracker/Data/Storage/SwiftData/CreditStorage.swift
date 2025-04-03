@@ -50,7 +50,11 @@ final class CreditStorage: ObservableObject {
 
     func addPayment(for creditId: String, with payment: PaymentModel) {
         do {
-            guard let credit = loadCredit(by: creditId) else {
+            let descriptor = FetchDescriptor<CreditModel>(
+                predicate: #Predicate { $0.id == creditId }
+            )
+
+            guard let credit = try modelContext.fetch(descriptor).first else {
                 print("Credit with id \(creditId) not found")
                 return
             }

@@ -1,3 +1,4 @@
+import AppMetricaCore
 import UIKit
 
 @main
@@ -7,7 +8,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // Override point for customization after application launch.
-        true
+        if let configuration = AppMetricaConfiguration(
+            apiKey: "e71612a8-3669-4f61-a0d9-4f8364771028"
+        ) {
+            AppMetrica.activate(with: configuration)
+        }
+        return true
     }
 
     // MARK: UISceneSession Lifecycle

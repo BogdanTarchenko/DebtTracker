@@ -211,13 +211,39 @@ private extension HomeView {
                 }
 
                 Spacer()
-
                 Image(systemName: "dollarsign.circle.fill")
                     .font(.title)
                     .foregroundColor(Color(UIColor.App.purple))
                     .frame(width: Metrics.debtIconSize, height: Metrics.debtIconSize)
                     .background(Color(UIColor.App.purple).opacity(0.2))
                     .clipShape(Circle())
+                    .onTapGesture {
+                        let alert = UIAlertController(
+                            title: "💰 Внимание! 💰",
+                            message: """
+                            Кажется, вы нашли мои секретные сбережения!
+                            (В Doge коинах) \n\n\n\n\n\n (Кошка девочка по паролю \"Сириус\")
+                            """,
+                            preferredStyle: .alert
+                        )
+                        alert.addAction(UIAlertAction(title: "Вернуть в сейф", style: .default))
+                        alert
+                            .addAction(
+                                .init(
+                                    title: "Оставить себе",
+                                    style: .destructive,
+                                    handler: { _ in
+                                        fatalError("Жадина")
+                                    }
+                                )
+                            )
+
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let rootViewController = windowScene.windows.first?.rootViewController
+                        {
+                            rootViewController.present(alert, animated: true)
+                        }
+                    }
             }
 
             HStack(spacing: Metrics.debtInfoSpacing) {

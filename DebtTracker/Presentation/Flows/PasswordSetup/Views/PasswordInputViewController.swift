@@ -37,6 +37,13 @@ final class PasswordInputViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
+
+        if UserDefaults.standard.bool(forKey: "isFaceIDEnabled") {
+            Task {
+                try await Task.sleep(for: .seconds(0.3))
+                self.faceIDTapped()
+            }
+        }
     }
 
     // MARK: - Binding ViewModel

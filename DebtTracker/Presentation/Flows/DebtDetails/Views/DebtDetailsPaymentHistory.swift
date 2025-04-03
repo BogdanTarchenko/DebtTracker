@@ -12,7 +12,7 @@ final class DebtDetailsPaymentHistory: UICollectionView {
 
     private enum Constants {
         static let cellHeight: CGFloat = 64
-        static let headerHeight: CGFloat = 32
+        static let headerHeight: CGFloat = 40
         static let separatorHeight: CGFloat = 1
         static let horizontalInset: CGFloat = 16
         static let verticalInset: CGFloat = 8
@@ -157,7 +157,8 @@ class HeaderView: UICollectionReusableView {
 
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(Constants.horizontalInset)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().inset(8)
         }
 
         separatorView.snp.makeConstraints { make in

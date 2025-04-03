@@ -55,8 +55,14 @@ final class DebtDetailsViewController: UIViewController {
         )
     }()
 
-    let debtProgressInfo: DebtDetailsProgressInfo = .init()
+    lazy var debtProgressInfo: DebtDetailsProgressInfo = {
+        let view = DebtDetailsProgressInfo()
+        view.configure(with: credit)
+        return view
+    }()
+
     lazy var debtPaymentsHistory: DebtDetailsPaymentHistory = .init(data: credit.payments)
+
     let addTransactionButton: UIButton = {
         let button = UIButton(type: .system)
 
@@ -215,11 +221,13 @@ final class DebtDetailsViewController: UIViewController {
 
         // 2. Обновляем локальную копию
         credit.payments.append(payment)
+        credit.depositedAmount += amount // Важно обновить depositedAmount
 
-        // 3. Обновляем коллекцию
+        // 3. Обновляем UI
         debtPaymentsHistory.paymentHistoryItems = credit.payments
+        debtProgressInfo.configure(with: credit) // Обновляем прогресс
 
-        // 4. Если нужно, можно добавить анимацию:
+        // 4. Анимация обновления
         UIView.transition(
             with: debtPaymentsHistory,
             duration: 0.3,
@@ -262,7 +270,7 @@ final class DebtDetailsViewController: UIViewController {
 
         debtPaymentsHistory.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(Constants.horizontalInset)
-            $0.top.equalTo(debtProgressInfo).inset(Constants.verticalSpacing)
+            $0.top.equalTo(debtProgressInfo.snp.bottom).offset(Constants.verticalSpacing)
             $0.bottom.equalTo(addTransactionButton.snp.top).offset(-Constants.verticalSpacing)
         }
     }

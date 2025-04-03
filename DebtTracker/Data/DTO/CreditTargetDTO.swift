@@ -1,4 +1,4 @@
 enum CreditTargetDTO: String, Codable {
-    case given = "Взятый"
-    case taken = "Выданный"
+    case given = LocalizedKey.AddDebt.givenLoan
+    case taken = LocalizedKey.AddDebt.takenLoan
 }

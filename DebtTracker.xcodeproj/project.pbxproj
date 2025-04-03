@@ -121,7 +121,6 @@
 		3CCBD8CE2D980E0B00C19B8B /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		3CCBD8D02D98103300C19B8B /* PasswordDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDotsView.swift; sourceTree = "<group>"; };
 		3CCBD8D22D981BE200C19B8B /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
-		3CCBD9192D9A789500C19B8B /* DebtCalculationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtCalculationService.swift; sourceTree = "<group>"; };
 		3CF5C33D2D9AA9960077B16A /* PasswordInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewModel.swift; sourceTree = "<group>"; };
 		3CF5C3412D9ACE1F0077B16A /* BiometricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricService.swift; sourceTree = "<group>"; };
 		442D54BE85459D75F5A31A5A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -251,7 +250,6 @@
 			children = (
 				00128B49FFA2D986A612A72C /* StorageService.swift */,
 				3CCBD8CE2D980E0B00C19B8B /* KeychainService.swift */,
-				3CCBD9192D9A789500C19B8B /* DebtCalculationService.swift */,
 				3CF5C3412D9ACE1F0077B16A /* BiometricService.swift */,
 			);
 			path = Services;

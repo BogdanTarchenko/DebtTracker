@@ -11,8 +11,9 @@ struct HomeView: View {
     @State private var isDebtDetailsPresented: Bool = false
     @State private var selectedDebtId: CreditModel?
     @State private var refreshTrigger = false
+    @StateObject private var creditStorage: CreditStorage = .init()
 
-    @StateObject private var creditStorage = CreditStorage()
+//    @StateObject private var creditStorage: [CreditModel] = CreditStorage.init().loadCredits()
 
     private let creditCategories = [
         LocalizedKey.AddDebt.consumerLoan,
@@ -31,6 +32,7 @@ struct HomeView: View {
         ScrollView {
             VStack(spacing: Metrics.sectionSpacing) {
                 debtCardView(totalDebt: "$ " + formatAmount(totalDebt))
+                loanInfoView()
                 creditsHeaderView
                 creditsGridView
                 loansHeaderView
@@ -39,9 +41,6 @@ struct HomeView: View {
             }
             .padding(.vertical)
             .padding(.bottom, Metrics.bottomPadding)
-        }
-        .onAppear {
-            _ = creditStorage.loadCredits()
         }
         .background(.black)
         .navigationBarTitleDisplayMode(.inline)
@@ -64,7 +63,8 @@ struct HomeView: View {
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .onReceive(NotificationCenter.default.publisher(for: .creditAdded)) { _ in
-            refreshTrigger.toggle()
+            refreshTrigger = refreshTrigger == false ? true : false
+            Task { await creditStorage.updateCredits() }
         }
         .sheet(item: $selectedDebtId) {
             DebtDetailsView(credit: $0)
@@ -123,7 +123,7 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            ForEach(creditStorage.credits.filter { $0.creditTarget == .taken }) { credit in
+            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .taken }) { credit in
                 creditCardView(
                     credit: credit,
                     title: credit.name,
@@ -156,7 +156,7 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            ForEach(creditStorage.credits.filter { $0.creditTarget == .given }) { credit in
+            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .given }) { credit in
                 creditCardView(
                     credit: credit,
                     title: credit.name,
@@ -281,11 +281,7 @@ private extension HomeView {
     }
 
     @ViewBuilder
-    func loanInfoView(
-        activeLoans: Int,
-        nextPayment: String,
-        paymentDate: String
-    ) -> some View {
+    func loanInfoView() -> some View {
         VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
             Text(LocalizedKey.Home.debts)
                 .font(.headline)
@@ -397,7 +393,7 @@ private extension HomeView {
                         .foregroundColor(.white.opacity(0.7))
                 }
 
-                ProgressView(value: paidAmount / amount)
+                ProgressView(value: min(max(paidAmount / amount, 0), 1))
                     .tint(progressColor)
                     .frame(height: Metrics.progressHeight)
                     .background(Color.white.opacity(0.2))

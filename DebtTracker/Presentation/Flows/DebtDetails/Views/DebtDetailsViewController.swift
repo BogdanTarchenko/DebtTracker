@@ -36,11 +36,11 @@ final class DebtDetailsViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale.current // или явно указать нужную локаль
+        dateFormatter.locale = Locale.current
 
         let leftAmount = dateFormatter.string(from: credit.startDate)
         let rightAmount = dateFormatter
-            .string(from: credit.startDate) // предполагается, что такое поле есть в модели
+            .string(from: credit.startDate)
 
         return DebtDetailsBlock(
             frame: .zero,
@@ -171,24 +171,21 @@ final class DebtDetailsViewController: UIViewController {
     @objc func addTransactionButtonTapped() {
         let alert = UIAlertController(
             title: "Добавить платеж",
-            message: "\n\n\n\n\n\n", // Место для пикера
+            message: "\n\n\n\n\n\n",
             preferredStyle: .alert
         )
 
-        // Поле для ввода суммы
         alert.addTextField { textField in
             textField.placeholder = "Сумма"
             textField.keyboardType = .decimalPad
         }
 
-        // PickerView для выбора типа
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: 260, height: 100))
         pickerView.dataSource = self
         pickerView.delegate = self
 
         alert.view.addSubview(pickerView)
 
-        // Действия
         alert.addAction(UIAlertAction(title: "Добавить", style: .default) { [weak self] _ in
             guard let self,
                   let amountText = alert.textFields?.first?.text,
@@ -215,19 +212,15 @@ final class DebtDetailsViewController: UIViewController {
             paymentType: PaymentTypeDTO(rawValue: type) ?? .monthlyAnnuity
         )
 
-        // 1. Добавляем платеж в хранилище
         let creditStorage: CreditStorage = .init()
         creditStorage.addPayment(for: credit.id, with: payment)
 
-        // 2. Обновляем локальную копию
         credit.payments.append(payment)
-        credit.depositedAmount += amount // Важно обновить depositedAmount
+        credit.depositedAmount += amount
 
-        // 3. Обновляем UI
         debtPaymentsHistory.paymentHistoryItems = credit.payments
-        debtProgressInfo.configure(with: credit) // Обновляем прогресс
+        debtProgressInfo.configure(with: credit)
 
-        // 4. Анимация обновления
         UIView.transition(
             with: debtPaymentsHistory,
             duration: 0.3,

@@ -51,7 +51,6 @@ final class CreditStorage {
 
     func addPayment(for creditId: String, with payment: PaymentModel) {
         do {
-            // 1. Находим кредит по ID
             let descriptor = FetchDescriptor<CreditModel>(
                 predicate: #Predicate { $0.id == creditId }
             )
@@ -61,14 +60,11 @@ final class CreditStorage {
                 return
             }
 
-            // 2. Добавляем платеж в массив payments кредита
             credit.payments.append(payment)
             print(credit.payments)
 
-            // 3. Обновляем сумму внесенных платежей
             credit.depositedAmount += payment.amount
 
-            // 4. Сохраняем изменения
             try modelContext.save()
 
             print("Payment added successfully to credit: \(credit.name)")

@@ -81,14 +81,11 @@ final class DebtDetailsProgressInfo: UIView {
         let remainingAmount = totalAmount - paidAmount
         let progress = Float(paidAmount / totalAmount)
 
-        // Обновляем прогресс бар
         progressBar.setProgress(progress, animated: true)
 
-        // Обновляем проценты
         let percentValue = Int(progress * 100)
         percentLabel.text = "\(percentValue)%"
 
-        // Обновляем суммы
         leftAmount.text = remainingAmount.formattedAsCurrency()
         rightAmount.text = paidAmount.formattedAsCurrency()
     }

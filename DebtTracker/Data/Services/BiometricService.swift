@@ -30,7 +30,6 @@ enum BiometricError: Error {
 final class BiometricService {
     private let context = LAContext()
 
-    /// Тип доступной биометрии
     var biometryType: LABiometryType {
         var error: NSError?
         return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
@@ -38,16 +37,13 @@ final class BiometricService {
             : .none
     }
 
-    /// Проверяет доступность Face ID
     var isFaceIDAvailable: Bool {
         biometryType == .faceID
     }
 
-    /// Выполняет аутентификацию
     func authenticate(reason: String = "Аутентификация") async -> Result<Void, BiometricError> {
         var error: NSError?
 
-        // Проверка доступности биометрии
         guard context
             .canEvaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,
@@ -69,7 +65,6 @@ final class BiometricService {
             return .failure(.notAvailable)
         }
 
-        // Выполнение аутентификации
         do {
             let success = try await context.evaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,

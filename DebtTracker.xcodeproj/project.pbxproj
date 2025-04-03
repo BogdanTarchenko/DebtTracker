@@ -23,6 +23,7 @@
 		38239F3D60CB3F70825B65B5 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E377DDB024C15BC179307D6 /* DIContainer.swift */; };
 		3A3FE69E414D63A1A3802A1B /* DebtDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EC42CBCF7E77F645AD3803 /* DebtDetailsCoordinator.swift */; };
 		3C22218C2D9D62EF0078EAA2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22218B2D9D62EF0078EAA2 /* String+Extensions.swift */; };
+		3C85BE342D9EF4F400221DB6 /* HomeView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C85BE332D9EF4F400221DB6 /* HomeView+Ext.swift */; };
 		3CCBD7102D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD70F2D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift */; };
 		3CCBD7142D94298B00C19B8B /* DebtDetailsInfoBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7132D94298B00C19B8B /* DebtDetailsInfoBlock.swift */; };
 		3CCBD7242D9439F900C19B8B /* DebtDetailsProgressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBD7232D9439F900C19B8B /* DebtDetailsProgressInfo.swift */; };
@@ -106,6 +107,7 @@
 		2E377DDB024C15BC179307D6 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		2E9EE2807BD02CA4B7D8A324 /* DebtDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsViewModel.swift; sourceTree = "<group>"; };
 		3C22218B2D9D62EF0078EAA2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		3C85BE332D9EF4F400221DB6 /* HomeView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+Ext.swift"; sourceTree = "<group>"; };
 		3CCBD70F2D941A7F00C19B8B /* DebtDetailsGeneralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsGeneralInfo.swift; sourceTree = "<group>"; };
 		3CCBD7132D94298B00C19B8B /* DebtDetailsInfoBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsInfoBlock.swift; sourceTree = "<group>"; };
 		3CCBD7232D9439F900C19B8B /* DebtDetailsProgressInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtDetailsProgressInfo.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			children = (
 				8F24C8402D957D3C00AB7EC0 /* Components */,
 				8F24C83E2D9576F900AB7EC0 /* HomeView.swift */,
+				3C85BE332D9EF4F400221DB6 /* HomeView+Ext.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -934,6 +937,7 @@
 				72CB3F062D9ADDAB00B4BF84 /* PaymentModel.swift in Sources */,
 				3CCBD7A52D95753400C19B8B /* SettingsViewController.swift in Sources */,
 				26B9F1C1CD6F45778C935D6F /* MainCoordinator.swift in Sources */,
+				3C85BE342D9EF4F400221DB6 /* HomeView+Ext.swift in Sources */,
 				3CCBD7262D943EDC00C19B8B /* DebtDetailsBlock.swift in Sources */,
 				8F24C84E2D95949300AB7EC0 /* AddDebtView.swift in Sources */,
 				8F24C86E2D95D66A00AB7EC0 /* StatsView.swift in Sources */,
@@ -1006,8 +1010,12 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tarchenko.DebtTracker;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1199,8 +1207,12 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tarchenko.DebtTracker;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};

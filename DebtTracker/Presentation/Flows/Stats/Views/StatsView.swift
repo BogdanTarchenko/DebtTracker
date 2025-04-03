@@ -49,7 +49,9 @@ struct StatsView: View {
         ScrollView {
             VStack(spacing: Metrics.sectionSpacing) {
                 totalAmountView
-                pieChartView
+                if !creditStorage.loadCredits().isEmpty {
+                    pieChartView
+                }
                 additionalStatsView
             }
             .padding(.vertical)

@@ -61,6 +61,10 @@ final class DebtDetailsProgressInfo: UIView {
         return label
     }()
 
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: UIView.noIntrinsicMetric, height: 120)
+    }
+
     // MARK: - Initialization
 
     required init?(coder: NSCoder) {
@@ -78,14 +82,20 @@ final class DebtDetailsProgressInfo: UIView {
     func configure(with credit: CreditModel) {
         let paidAmount = credit.depositedAmount
         let totalAmount = credit.amount
-        let remainingAmount = totalAmount - paidAmount
-        let progress = Float(paidAmount / totalAmount)
+
+        guard totalAmount > 0 else {
+            progressBar.progress = 0
+            percentLabel.text = "0%"
+            leftAmount.text = 0.formattedAsCurrency()
+            rightAmount.text = 0.formattedAsCurrency()
+            return
+        }
+
+        let remainingAmount = max(0, totalAmount - paidAmount)
+        let progress = Float(min(max(0, paidAmount / totalAmount), 1))
 
         progressBar.setProgress(progress, animated: true)
-
-        let percentValue = Int(progress * 100)
-        percentLabel.text = "\(percentValue)%"
-
+        percentLabel.text = "\(Int(progress * 100))%"
         leftAmount.text = remainingAmount.formattedAsCurrency()
         rightAmount.text = paidAmount.formattedAsCurrency()
     }
@@ -105,40 +115,48 @@ final class DebtDetailsProgressInfo: UIView {
         addSubview(rightTitle)
         addSubview(rightAmount)
 
+        setupConstraints()
+    }
+
+    private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.lessThanOrEqualTo(percentLabel.snp.leading).offset(-8)
         }
 
         percentLabel.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
 
         progressBar.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(4)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8).priority(.high)
+            make.leading.equalToSuperview().offset(16).priority(.high)
+            make.trailing.equalToSuperview().offset(-16).priority(.high)
+            make.height.equalTo(4).priority(.high)
         }
 
         leftTitle.snp.makeConstraints { make in
-            make.top.equalTo(progressBar.snp.bottom).offset(12)
-            make.leading.equalToSuperview().inset(16)
+            make.top.equalTo(progressBar.snp.bottom).offset(12).priority(.high)
+            make.leading.equalToSuperview().offset(16)
         }
 
         rightTitle.snp.makeConstraints { make in
-            make.top.equalTo(progressBar.snp.bottom).offset(12)
-            make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(progressBar.snp.bottom).offset(12).priority(.high)
+            make.trailing.equalToSuperview().offset(-16)
         }
 
         leftAmount.snp.makeConstraints { make in
             make.top.equalTo(leftTitle.snp.bottom).offset(4)
-            make.leading.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-16).priority(.high)
         }
 
         rightAmount.snp.makeConstraints { make in
             make.top.equalTo(rightTitle.snp.bottom).offset(4)
-            make.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-16).priority(.high)
         }
     }
 }

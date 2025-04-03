@@ -202,6 +202,7 @@ private extension HomeView {
         .padding(.horizontal)
     }
 
+    // swiftlint:disable function_body_length
     @ViewBuilder
     func debtCardView(totalDebt: String) -> some View {
         VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
@@ -217,13 +218,40 @@ private extension HomeView {
                 }
 
                 Spacer()
-
                 Image(systemName: "dollarsign.circle.fill")
                     .font(.title)
                     .foregroundColor(Color(UIColor.App.purple))
                     .frame(width: Metrics.debtIconSize, height: Metrics.debtIconSize)
                     .background(Color(UIColor.App.purple).opacity(0.2))
                     .clipShape(Circle())
+                    .onTapGesture {
+                        let alert = UIAlertController(
+                            title: "💰 Внимание! 💰",
+                            message: """
+                            Кажется, вы нашли мои секретные сбережения!
+                            (В Doge коинах) \n\n\n\n\n\n (Кошка девочка по паролю \"Сириус\")
+                            """,
+                            preferredStyle: .alert
+                        )
+                        alert.addAction(UIAlertAction(title: "Вернуть в сейф", style: .default))
+                        alert
+                            .addAction(
+                                .init(
+                                    title: "Оставить себе",
+                                    style: .destructive,
+                                    handler: { _ in
+                                        fatalError("Жадина")
+                                    }
+                                )
+                            )
+                        // swiftlint:disable:next line_length
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            // swiftlint:disable:next line_length
+                            if let rootViewController = windowScene.windows.first?.rootViewController {
+                                rootViewController.present(alert, animated: true)
+                            }
+                        }
+                    }
             }
 
             HStack(spacing: Metrics.debtInfoSpacing) {
@@ -245,6 +273,8 @@ private extension HomeView {
         .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         .padding(.horizontal)
     }
+
+    // swiftlint:enable function_body_length
 
     @ViewBuilder
     private var debtChangeView: some View {
@@ -437,37 +467,5 @@ private extension HomeView {
             .background(Color(UIColor.App.black))
             .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         }
-    }
-}
-
-// MARK: HomeView.Metrics
-
-private extension HomeView {
-    enum Metrics {
-        static let bottomPadding: CGFloat = 64
-        static let sectionSpacing: CGFloat = 16
-        static let gridSpacing: CGFloat = 16
-        static let cardContentSpacing: CGFloat = 12
-        static let textSpacing: CGFloat = 4
-        static let iconSpacing: CGFloat = 6
-        static let menuIconSpacing: CGFloat = 4
-        static let menuIconSize: CGFloat = 12
-        static let debtIconSize: CGFloat = 48
-        static let debtInfoSpacing: CGFloat = 16
-        static let loanInfoSpacing: CGFloat = 16
-        static let loanTypeSpacing: CGFloat = 6
-        static let loanIconSize: CGFloat = 14
-        static let loanCountSize: CGFloat = 22
-        static let loanAmountSize: CGFloat = 18
-        static let dividerWidth: CGFloat = 1
-        static let dividerHeight: CGFloat = 32
-        static let loanInfoHorizontalPadding: CGFloat = 16
-        static let loanInfoVerticalPadding: CGFloat = 12
-        static let totalDebtSize: CGFloat = 32
-        static let progressHeight: CGFloat = 4
-        static let progressCornerRadius: CGFloat = 2
-        static let creditCardHeight: CGFloat = 120
-        static let cardPadding: CGFloat = 20
-        static let cornerRadius: CGFloat = 16
     }
 }

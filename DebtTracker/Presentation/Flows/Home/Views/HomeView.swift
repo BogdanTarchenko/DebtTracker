@@ -196,6 +196,7 @@ private extension HomeView {
         .padding(.horizontal)
     }
 
+    // swiftlint:disable function_body_length
     @ViewBuilder
     func debtCardView(totalDebt: String) -> some View {
         VStack(alignment: .leading, spacing: Metrics.cardContentSpacing) {
@@ -237,11 +238,12 @@ private extension HomeView {
                                     }
                                 )
                             )
-
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                           let rootViewController = windowScene.windows.first?.rootViewController
-                        {
-                            rootViewController.present(alert, animated: true)
+                        // swiftlint:disable:next line_length
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            // swiftlint:disable:next line_length
+                            if let rootViewController = windowScene.windows.first?.rootViewController {
+                                rootViewController.present(alert, animated: true)
+                            }
                         }
                     }
             }
@@ -266,6 +268,8 @@ private extension HomeView {
         .clipShape(.rect(cornerRadius: Metrics.cornerRadius))
         .padding(.horizontal)
     }
+
+    // swiftlint:enable function_body_length
 
     @ViewBuilder
     private var debtChangeView: some View {

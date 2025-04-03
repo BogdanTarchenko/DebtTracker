@@ -6,21 +6,15 @@ import SwiftUI
 struct HomeView: View {
     // MARK: - Private Properties
 
-    @State private var selectedCategory: String?
+    @State private var selectedCreditCategory: CreditTypeDTO?
+    @State private var selectedLoanCategory: CreditTypeDTO?
     @State private var showingCategoryMenu = false
     @State private var isDebtDetailsPresented: Bool = false
     @State private var selectedDebtId: CreditModel?
     @State private var refreshTrigger = false
     @StateObject private var creditStorage: CreditStorage = .init()
 
-//    @StateObject private var creditStorage: [CreditModel] = CreditStorage.init().loadCredits()
-
-    private let creditCategories = [
-        LocalizedKey.AddDebt.consumerLoan,
-        LocalizedKey.AddDebt.autoLoan,
-        LocalizedKey.AddDebt.mortgageLoan,
-        LocalizedKey.AddDebt.microLoan
-    ]
+    private let creditCategories: [CreditTypeDTO] = [.consumer, .car, .mortgage, .microloan]
 
     // MARK: - Body
 
@@ -84,22 +78,22 @@ private extension HomeView {
                 .bold()
                 .foregroundColor(Color(UIColor.App.white))
             Spacer()
-            categoryMenuView
+            creditCategoryMenuView
         }
         .padding(.top)
         .padding(.horizontal)
     }
 
     @ViewBuilder
-    var categoryMenuView: some View {
+    var creditCategoryMenuView: some View {
         Menu {
             ForEach(creditCategories, id: \.self) { category in
                 Button(action: {
-                    selectedCategory = category
+                    selectedCreditCategory = category
                 }) {
                     HStack {
-                        Text(category)
-                        if selectedCategory == category {
+                        Text(category.rawValue)
+                        if selectedCreditCategory == category {
                             Image(systemName: "checkmark")
                         }
                     }
@@ -107,7 +101,7 @@ private extension HomeView {
             }
         } label: {
             HStack(spacing: Metrics.menuIconSpacing) {
-                Text(selectedCategory ?? LocalizedKey.Home.pickType)
+                Text(selectedCreditCategory?.rawValue ?? LocalizedKey.Home.pickType)
                     .font(.subheadline)
                     .foregroundColor(Color(UIColor.App.purple))
                 Image(systemName: "chevron.down")
@@ -123,7 +117,10 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .taken }) { credit in
+            ForEach(creditStorage.loadCredits().filter {
+                $0.creditTarget == .taken &&
+                    (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
+            }) { credit in
                 creditCardView(
                     credit: credit,
                     title: credit.name,
@@ -139,15 +136,42 @@ private extension HomeView {
     @ViewBuilder
     var loansHeaderView: some View {
         HStack {
-            Text(LocalizedKey.Home.loans)
+            Text(LocalizedKey.Home.givenLoans)
                 .font(.title2)
                 .bold()
                 .foregroundColor(Color(UIColor.App.white))
             Spacer()
-            categoryMenuView
+            loanCategoryMenuView
         }
         .padding(.top)
         .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    var loanCategoryMenuView: some View {
+        Menu {
+            ForEach(creditCategories, id: \.self) { category in
+                Button(action: {
+                    selectedLoanCategory = category
+                }) {
+                    HStack {
+                        Text(category.rawValue)
+                        if selectedLoanCategory == category {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        } label: {
+            HStack(spacing: Metrics.menuIconSpacing) {
+                Text(selectedLoanCategory?.rawValue ?? LocalizedKey.Home.pickType)
+                    .font(.subheadline)
+                    .foregroundColor(Color(UIColor.App.purple))
+                Image(systemName: "chevron.down")
+                    .font(.system(size: Metrics.menuIconSize))
+                    .foregroundColor(Color(UIColor.App.purple))
+            }
+        }
     }
 
     @ViewBuilder
@@ -156,7 +180,10 @@ private extension HomeView {
             columns: [GridItem(.flexible()), GridItem(.flexible())],
             spacing: Metrics.gridSpacing
         ) {
-            ForEach(creditStorage.loadCredits().filter { $0.creditTarget == .given }) { credit in
+            ForEach(creditStorage.loadCredits().filter {
+                $0.creditTarget == .given &&
+                    (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
+            }) { credit in
                 creditCardView(
                     credit: credit,
                     title: credit.name,

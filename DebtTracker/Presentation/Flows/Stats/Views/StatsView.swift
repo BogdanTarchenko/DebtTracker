@@ -10,12 +10,9 @@ struct StatsView: View {
 
     // MARK: - Private Properties
 
-    private var credits: [CreditModel] {
-        creditStorage.loadCredits()
-    }
-
     private func amount(for type: CreditTypeDTO) -> Double {
-        credits.filter { $0.creditType == type }.reduce(0) { $0 + $1.amount }
+        let credits = creditStorage.loadCredits()
+        return credits.filter { $0.creditType == type }.reduce(0) { $0 + $1.amount }
     }
 
     // swiftlint:disable large_tuple
@@ -173,6 +170,7 @@ private extension StatsView {
 
     @ViewBuilder
     var additionalStatsView: some View {
+        let credits = creditStorage.loadCredits()
         VStack(alignment: .leading, spacing: Metrics.contentSpacing) {
             HStack(spacing: Metrics.iconSpacing) {
                 Image(systemName: "chart.bar.fill")

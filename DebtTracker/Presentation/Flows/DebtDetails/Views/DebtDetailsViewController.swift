@@ -5,6 +5,7 @@ import UIKit
 
 // MARK: - DebtDetailsViewController
 
+// swiftlint:disable type_body_length
 final class DebtDetailsViewController: UIViewController {
     var credit: CreditModel
 
@@ -32,15 +33,22 @@ final class DebtDetailsViewController: UIViewController {
         leftAmount: "\(credit.percentage)%",
         rightAmount: "\(credit.period) месяцев"
     ))
+
     lazy var debtDateInfo: DebtDetailsBlock = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale.current
 
+        let creditStorage: CreditStorage = .init()
+        let futureCredit = creditStorage.loadCredit(by: credit.id)
+        let calendar = Calendar.current
+
+        let baseDate = futureCredit?.startDate ?? credit.startDate
+        let newDate = calendar.date(byAdding: .month, value: 1, to: baseDate)
+
         let leftAmount = dateFormatter.string(from: credit.startDate)
-        let rightAmount = dateFormatter
-            .string(from: credit.startDate)
+        let rightAmount = dateFormatter.string(from: newDate ?? baseDate)
 
         return DebtDetailsBlock(
             frame: .zero,
@@ -252,6 +260,8 @@ final class DebtDetailsViewController: UIViewController {
         )
     }
 }
+
+// swiftlint:enable type_body_length
 
 extension DebtDetailsViewController {
     private func setupConstraints() {

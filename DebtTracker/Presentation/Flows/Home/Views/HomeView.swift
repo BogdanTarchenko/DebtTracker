@@ -10,7 +10,6 @@ struct HomeView: View {
     @State private var showingCategoryMenu = false
     @State private var isDebtDetailsPresented: Bool = false
     @State private var selectedDebtId: CreditModel?
-    @Query private var credits: [CreditModel]
 
     private let creditStorage: CreditStorage = .init()
 

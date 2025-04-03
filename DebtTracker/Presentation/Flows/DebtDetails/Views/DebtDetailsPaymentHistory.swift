@@ -4,7 +4,11 @@ import UIKit
 // MARK: - DebtDetailsPaymentHistory
 
 final class DebtDetailsPaymentHistory: UICollectionView {
-    private var paymentHistoryItems: [PaymentModel] = []
+    var paymentHistoryItems: [PaymentModel] = [] {
+        didSet {
+            reloadData()
+        }
+    }
 
     private enum Constants {
         static let cellHeight: CGFloat = 64

@@ -103,8 +103,8 @@ final class DebtDetailsViewController: UIViewController {
 
     init(for credit: CreditModel) {
         self.credit = credit
-        print(credit.payments.count)
         super.init(nibName: nil, bundle: nil)
+        debtPaymentsHistory = DebtDetailsPaymentHistory(data: credit.payments)
     }
 
     @available(*, unavailable)
@@ -208,8 +208,24 @@ final class DebtDetailsViewController: UIViewController {
             date: Date.now,
             paymentType: PaymentTypeDTO(rawValue: type) ?? .monthlyAnnuity
         )
+
+        // 1. Добавляем платеж в хранилище
         let creditStorage: CreditStorage = .init()
         creditStorage.addPayment(for: credit.id, with: payment)
+
+        // 2. Обновляем локальную копию
+        credit.payments.append(payment)
+
+        // 3. Обновляем коллекцию
+        debtPaymentsHistory.paymentHistoryItems = credit.payments
+
+        // 4. Если нужно, можно добавить анимацию:
+        UIView.transition(
+            with: debtPaymentsHistory,
+            duration: 0.3,
+            options: .transitionCrossDissolve,
+            animations: { self.debtPaymentsHistory.reloadData() }
+        )
     }
 
     private func setupConstraints() {

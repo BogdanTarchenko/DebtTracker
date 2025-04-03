@@ -13,7 +13,7 @@ struct HomeView: View {
     @State private var selectedDebtId: CreditModel?
     @State private var refreshTrigger = false
     @StateObject private var creditStorage: CreditStorage = .init()
-
+    
     private let creditCategories: [CreditTypeDTO] = [.consumer, .car, .mortgage, .microloan]
 
     // MARK: - Body
@@ -56,6 +56,12 @@ struct HomeView: View {
         }
         .toolbarBackground(Color(UIColor.App.black), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
+        .onTapGesture {
+            UIApplication
+                .shared
+                .sendAction(#selector(UIResponder.resignFirstResponder),
+                            to: nil, from: nil, for: nil)
+        }
         .onReceive(NotificationCenter.default.publisher(for: .creditAdded)) { _ in
             refreshTrigger = refreshTrigger == false ? true : false
             Task { await creditStorage.updateCredits() }
@@ -119,7 +125,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter {
                 $0.creditTarget == .taken &&
-                    (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
+                (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
             }) { credit in
                 creditCardView(
                     credit: credit,
@@ -173,7 +179,7 @@ private extension HomeView {
             }
         }
     }
-
+    
     @ViewBuilder
     var loansGridView: some View {
         LazyVGrid(
@@ -182,7 +188,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter {
                 $0.creditTarget == .given &&
-                    (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
+                (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
             }) { credit in
                 creditCardView(
                     credit: credit,
@@ -221,7 +227,6 @@ private extension HomeView {
             }
 
             HStack(spacing: Metrics.debtInfoSpacing) {
-                debtChangeView
                 nextPaymentView
             }
         }

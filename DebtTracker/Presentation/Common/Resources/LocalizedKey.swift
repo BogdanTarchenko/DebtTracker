@@ -182,10 +182,6 @@ extension LocalizedKey {
             rawValue: "add_debt_debt_name"
         ).localized
 
-        static let enterDebtNamePlaceholder = LocalizedKey(
-            rawValue: "add_debt_enter_debt_name_placeholder"
-        ).localized
-
         static let debtType = LocalizedKey(
             rawValue: "add_debt_debt_type"
         ).localized

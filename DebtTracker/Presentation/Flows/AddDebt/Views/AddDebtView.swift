@@ -39,6 +39,9 @@ struct AddDebtView: View {
             .background(Color.black)
         }
         .background(Color.black)
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
     }
 }
 
@@ -156,7 +159,7 @@ private extension AddDebtView {
                     .foregroundColor(.white.opacity(0.7))
             }
 
-            TextField(LocalizedKey.AddDebt.enterDebtNamePlaceholder, text: $creditName)
+            TextField("", text: $creditName)
                 .font(.system(size: Metrics.inputFontSize))
                 .foregroundColor(.white)
                 .padding()

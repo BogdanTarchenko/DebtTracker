@@ -221,7 +221,6 @@ private extension HomeView {
             }
 
             HStack(spacing: Metrics.debtInfoSpacing) {
-                debtChangeView
                 nextPaymentView
             }
         }

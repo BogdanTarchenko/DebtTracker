@@ -13,7 +13,7 @@ struct HomeView: View {
     @State private var selectedDebtId: CreditModel?
     @State private var refreshTrigger = false
     @StateObject private var creditStorage: CreditStorage = .init()
-    
+
     private let creditCategories: [CreditTypeDTO] = [.consumer, .car, .mortgage, .microloan]
 
     // MARK: - Body
@@ -59,8 +59,12 @@ struct HomeView: View {
         .onTapGesture {
             UIApplication
                 .shared
-                .sendAction(#selector(UIResponder.resignFirstResponder),
-                            to: nil, from: nil, for: nil)
+                .sendAction(
+                    #selector(UIResponder.resignFirstResponder),
+                    to: nil,
+                    from: nil,
+                    for: nil
+                )
         }
         .onReceive(NotificationCenter.default.publisher(for: .creditAdded)) { _ in
             refreshTrigger = refreshTrigger == false ? true : false
@@ -125,7 +129,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter {
                 $0.creditTarget == .taken &&
-                (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
+                    (selectedCreditCategory == nil || $0.creditType == selectedCreditCategory)
             }) { credit in
                 creditCardView(
                     credit: credit,
@@ -179,7 +183,7 @@ private extension HomeView {
             }
         }
     }
-    
+
     @ViewBuilder
     var loansGridView: some View {
         LazyVGrid(
@@ -188,7 +192,7 @@ private extension HomeView {
         ) {
             ForEach(creditStorage.loadCredits().filter {
                 $0.creditTarget == .given &&
-                (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
+                    (selectedLoanCategory == nil || $0.creditType == selectedLoanCategory)
             }) { credit in
                 creditCardView(
                     credit: credit,
@@ -229,7 +233,8 @@ private extension HomeView {
                             title: "💰 Внимание! 💰",
                             message: """
                             Кажется, вы нашли мои секретные сбережения!
-                            (В Doge коинах) \n\n\n\n\n\n (Кошка девочка по паролю \"Сириус\")
+                            (В ливанских фунтах*) \n\n\n\n\n\n (Кошко-девочка по паролю \"Сириус\")
+                            (* – ливанский фунт — самая дешёвая валюта в мире)
                             """,
                             preferredStyle: .alert
                         )

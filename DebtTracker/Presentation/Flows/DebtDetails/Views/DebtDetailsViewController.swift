@@ -76,13 +76,25 @@ final class DebtDetailsViewController: UIViewController {
     }()
 
     @objc private func deleteButtonTapped() {
-        CreditStorage().deleteCredit(for: credit.id)
+        let alert = UIAlertController(
+            title: "Deleting credit",
+            message: "Are you sure you want to delete this credit? This action cannot be undone.",
+            preferredStyle: .alert
+        )
 
-        if let navigationController {
-            navigationController.popViewController(animated: true)
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            guard let self else { return }
+            CreditStorage().deleteCredit(for: credit.id)
+
+            if let navigationController {
+                navigationController.popViewController(animated: true)
+            } else {
+                dismiss(animated: true, completion: nil)
+            }
+        })
+
+        present(alert, animated: true)
     }
 
     lazy var debtProgressInfo: DebtDetailsProgressInfo = {

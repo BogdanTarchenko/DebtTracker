@@ -2,6 +2,8 @@
 ![Build](https://github.com/BogdanTarchenko/DebtTracker/actions/workflows/build.yml/badge.svg)
 ![Lint](https://github.com/BogdanTarchenko/DebtTracker/actions/workflows/lint.yml/badge.svg)
 
+Swift 6, UIKit, SwiftUI, SwiftData, Swift Testing и другое.
+
 🛠️ Инструменты
 Установите необходимые инструменты:
 ```
